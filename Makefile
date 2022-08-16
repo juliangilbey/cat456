@@ -7,7 +7,7 @@ clean:
 	latexmk -c solutions
 	rm -f *.thm
 
-veryclean:
+veryclean: clean
 	rm -f solutions.pdf
 
 .PHONY: clean veryclean
