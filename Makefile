@@ -1,7 +1,7 @@
 all: solutions.pdf
 
 solutions.pdf: intro.tex solutions.tex ch*/ch*.tex ch*/sec*/*.tex
-	latexmk --pdf solutions
+	latexmk -pdf -interaction=nonstopmode solutions
 
 clean:
 	latexmk -c solutions
