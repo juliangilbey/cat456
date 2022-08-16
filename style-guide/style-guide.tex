@@ -1,0 +1,82 @@
+\documentclass{article}
+\usepackage{cat456}
+\title{Style Guide}
+\author{Julian Gilbey}
+
+% Matthew's hack...
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist
+
+\begin{document}
+\maketitle
+
+This document is an addendum to
+\href{https://github.com/madkous/math490/blob/master/style-guide/style-guide.tex}{Matthew
+  Kousoulas's style guide}.  A PDF version of his guide is available
+\href{https://github.com/juliangilbey/math490/blob/minor-latex-fixes/style-guide/style-guide.pdf}{here}.
+
+\section*{Changes from Matthew's guide}
+
+\begin{itemize}
+\item The `Installation' section can be ignored.  (Also, the style
+  file has been renamed as \verb+cat456.sty+ in this repository.)
+\item `Preamble' section: the preambles have been pre-populated for
+  ease.  Please don't add anything new before \verb+\begin{document}+
+  as it will not be included in the main file.  If you would like to
+  add a macro to the style file, include this in your pull request.
+\item The `Naming Scheme' section can be ignored.
+\end{itemize}
+
+\section*{Additional formatting guidelines}
+
+\begin{itemize}
+\item Labels and references: \verb+\label{eqn1}+ defines the label
+  \verb+eqn1+ throughout the entire set of solutions.  This will
+  obviously cause problems if two different solutions use the same
+  label name!  So we will always prefix label names with the exercise
+  number, for example: \verb+\label{2-3-6-eqn1}+.  It's a bit of a
+  pain, but will potentially save trouble later.
+\end{itemize}
+
+\section*{Examples}
+
+Please read \verb+cat456.sty+ to see the full list of macros defined.
+Here is a small sample of them.
+
+\begin{changemargin}{-1in}{-1in}
+  \begin{center}
+    \begin{tabular}{l|L|l}
+      Command & Output & Notes \\ \hline
+      \verb|\sC, \sD, \sE, \dots| & \sC, \sD, \sE, \dots & generic categories \\
+      \verb|\Top| & \Top & works in text mode and math mode\\
+      \verb|\Setp| & \Setp & works in text mode and math mode\\
+      \verb|\Mod{R}| & \Mod{R} & \\
+      \verb|\zero, \dots, \nine, \com| & \zero, \dots, \nine, \com & \\
+      \verb|\CC, \QQ, \ZZ| & \CC, \QQ, \ZZ & and a few others \\
+      \verb|\func{f}{A}{B}| & \func{f}{A}{B} & functions\\
+      \verb|\func{\inv{f}}{PB}{PA}| & \func{\inv{f}}{PB}{PA} & inverse functions\\
+      \verb|\mono{g}{A}{B}| & \mono{g}{A_{/\ker{f}}}{B} & monomorphisms \\
+      \verb|\epic{h}{A}{B}| & \epic{h}{A}{\range(A)} & epimorphisms \\
+      \verb|\Func{F}{\sC^\op}{\cat{D}}| & \Func{F}{\sC^\op}{\cat{D}} & \\
+      \verb|\pfunc{f,g}{x}{y}| & \pfunc{f,g}{x}{y} & \\
+      \verb|\incl{\io}{S^1}{\RR^2}| & \incl{\io}{S^1}{\RR^2} & inclusions \\
+      \verb|\idfunc{\NN}| & \idfunc{\NN} & identities \\
+      \verb|\oper{+}{\RR}| & \oper{+}{\RR} & operations \\
+      \verb|\angl{\lst{x}{n}}| & \angl{\lst{x}{n}} & optional argument changes the first index \\
+      \verb|\lst[3]{x}{n}| & \angl{\lst[3]{x}{n}} & \\
+      \verb|\fm{y}{\nil}| & \fm{y}{\nil} & optional argument changes the index \\
+      \verb|\fm[j]{y}{\sJ}| & \fm[j]{y}{\sJ} & \\
+      \verb|\el F| & \el F & category of elements \\
+      \verb|F\ladj G, G\radj F| & F\ladj G, G\radj F & there are also rotated versions\\
+      \verb|\nper{\norm{\cdot}}{\CC}{n}| & \nper{\norm{\cdot}}{\CC}{n} & $n$-ary operations \\
+      \verb|\de\defeq\recip{\ep}| & \de\defeq\recip{\ep} \\
+      \verb|\ZZ\fps{x}| & \ZZ\fps{x} & automatically inserts \verb1\left1 \& \verb1\right1 \\
+      \verb|2\isinvb3| & 2\isinvb3 & everyone's favourite relation \\
+      \verb|\qty{\frac{\len f}{\rtwo}}| & \qty{\frac{\len f}{\rtwo}} \\
+      \verb|\inlnmat{\al&\be\\\gm&\de}| & \inlnmat{\al&\be\\\gm&\de} & useful for typesetting permutations \\
+    \end{tabular}
+  \end{center}
+\end{changemargin}
+
+\end{document}
+
