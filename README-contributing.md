@@ -3,14 +3,9 @@ Guidelines for contributing
 
 Thank you for your interest in contributing!
 
-Please read Matthew Kousoulas's style-guide.tex
-[here](https://github.com/madkous/math490/blob/master/style-guide/style-guide.tex)
-for guidance on how to write solutions.  If you would like to compile
-the style guide for ease of readability, please clone my
-[patched version](https://github.com/juliangilbey/math490) of the
-repository and use the minor-latex-fixes branch instead (provided as a
-PR to the original repository); there are some problems with the
-original version.
+Please read Matthew Kousoulas's style guide
+[here](https://github.com/juliangilbey/math490/blob/minor-latex-fixes/style-guide/style-guide.pdf)
+for guidance on how to write solutions.
 
 I have provided template files for each exercise in chapters 4-6.
 They have a slightly different naming scheme.
