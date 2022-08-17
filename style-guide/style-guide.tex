@@ -38,6 +38,18 @@ This document is an addendum to
   pain, but will potentially save trouble later.
 \end{itemize}
 
+\section*{Packages}
+
+In addition to the packages listed in the original style guide, there
+is a choice of commutative diagram drawing tools:
+
+\begin{description}
+\item[\Xy-pic] This is installed with the version 2 compatibility
+  macros active.
+\item[tikz-cd] Ti\emph{k}Z is installed, along with the \verb+tikz-cd+
+  library, so this is an alternative way to draw diagrams.
+\end{description}
+
 \section*{Examples}
 
 Please read \verb+cat456.sty+ to see the full list of macros defined.
@@ -62,10 +74,10 @@ Here is a small sample of them.
       \verb|\incl{\io}{S^1}{\RR^2}| & \incl{\io}{S^1}{\RR^2} & inclusions \\
       \verb|\idfunc{\NN}| & \idfunc{\NN} & identities \\
       \verb|\oper{+}{\RR}| & \oper{+}{\RR} & operations \\
-      \verb|\angl{\lst{x}{n}}| & \angl{\lst{x}{n}} & optional argument changes the first index \\
-      \verb|\lst[3]{x}{n}| & \angl{\lst[3]{x}{n}} & \\
-      \verb|\fm{y}{\nil}| & \fm{y}{\nil} & optional argument changes the index \\
-      \verb|\fm[j]{y}{\sJ}| & \fm[j]{y}{\sJ} & \\
+      \verb|\angl{\lst{x}{n}}| & \angl{\lst{x}{n}} & \\
+      \verb|\qty{\lst[3]{x}{n}}| & \qty{\lst[3]{x}{n}} & optional argument changes the first index \\
+      \verb|\fm{y}{\nil}| & \fm{y}{\nil} & \\
+      \verb|\fm[j]{y}{\sJ}| & \fm[j]{y}{\sJ} & optional argument changes the index \\
       \verb|\el F| & \el F & category of elements \\
       \verb|F\ladj G, G\radj F| & F\ladj G, G\radj F & there are also rotated versions\\
       \verb|\nper{\norm{\cdot}}{\CC}{n}| & \nper{\norm{\cdot}}{\CC}{n} & $n$-ary operations \\
