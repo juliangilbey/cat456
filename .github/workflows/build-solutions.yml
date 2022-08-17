@@ -1,4 +1,4 @@
-name: Build solutions
+name: Compile LaTeX files
 
 on:
   push:
@@ -18,5 +18,5 @@ jobs:
           sudo apt-get dist-upgrade
           sudo apt-get install latexmk texlive-latex-extra texlive-fonts-extra
 
-      - name: Build PDF
-        run: make solutions.pdf
+      - name: Build PDFs
+        run: make all
