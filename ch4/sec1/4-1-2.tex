@@ -1,22 +1,82 @@
 \documentclass[../../solutions]{subfiles}
 \title{Template}
-\author{}
+\author{Julian Gilbey}
 \begin{document}
 \maketitle
 
-% \settheorem{1}{2}{3}
-% \begin{lemma}
-%   
-% \end{lemma}
-% \popthm
-
 \setexercise{4}{1}{2}
 \begin{exercise}
-  
+  Define left and right adjoints to
+  \begin{enumerate}[(i)]
+  \item $\func{\ob}{\Cat}{\Set}$,
+  \item $\func{\text{Vert}}{\cat{Graph}}{\Set}$, and
+  \item $\func{\text{Vert}}{\cat{DirGraph}}{\Set}$.
+  \end{enumerate}
 \end{exercise}
 
 \begin{proof}
-  
+  We write $L$ and $R$ for the left and right adjoints, respectively.
+  The arguments are very similar for all three cases, so we only give
+  full details for~(i).
+
+  \begin{enumerate}[(i)]
+  \item $\func{L}{\Set}{\Cat}$ sends a set $X$ to the category $LX$
+    with objects~$X$ and only the identity morphisms.  We must show
+    that we have a natural isomorphism
+    $$\Cat(LX, \sC) \cong \Set(X, \ob\sC).$$
+    Every functor $\func{F}{LX}{\sC}$ is completely determined by the
+    action on objects as there are no non-identity morphisms, so we
+    obtain a function in $\Set(X, \ob\sC)$.  Every function in this
+    set is obtained from a unique functor, so these sets are
+    isomorphic.
+
+    This is also a natural isomorphism: a function $\func{f}{X}{Y}$
+    sends a functor $\func{F}{LY}{\sC}$ to $F.Lf$, which sends the
+    object $x\in X$ to $F(fx)$.  The underlying object morphism
+    $\ob F$ is sent to $(\ob F).f$, and this also sends $x$ to
+    $F(fx)$, so the isomorphism is natural in~$X$.  It is likewise
+    natural in~$\sC$ by similar reasoning.  Thus $L$~is a left
+    adjoint.
+
+    We now define $\func{R}{\Set}{\Cat}$ to send a set $X$ to the
+    category $RX$ with objects~$X$ and a unique morphism $x\to y$ for
+    each $x,y\in X$.  We must show that we have a natural isomorphism
+    $$\Set(\ob\sC, X) \cong \Cat(\sC, RX).$$
+    Every functor $\func{F}{\sC}{RX}$ is completely determined by the
+    action on objects, as every morphism $x\to y$ in~$\sC$ is sent to
+    the unique morphism $Fx\to Fy$ in~$RX$.  This gives a function in
+    $\Set(\ob\sC, X)$, and every such function gives rise to a unique
+    functor.  So these sets are isomorphic.  In the same way as
+    before, this collection of isomorphisms is natural in $X$
+    and~$\sC$, so $R$~is a right adjoint for~$\ob$.
+
+  \item We recall that a graph homomorphism $\func{\phi}{G_1}{G_2}$ is
+    a function sending every vertex of~$G_1$ to a vertex of~$G_2$
+    preserving incidence relations (so if $xy$ is an edge in~$G_1$,
+    then $\phi(x)\phi(y)$ is an edge in~$G_2$, and we may have $x=y$);
+    see page~4.  We let $\func{L}{\Set}{\cat{Graph}}$ send a set~$X$
+    to the empty graph with vertex set~$X$.  In the same way as
+    before, we have a natural isomorphism
+    $$\cat{Graph}(LX, G) \cong \Set(X, \text{Vert}(G));$$
+    a graph homomorphism $\func{\phi}{LX}{G}$ is completely determined
+    by the action on vertices, and as $LX$~has no edges, every
+    function from~$X$ to the vertices of~$G$ gives a homomorphism.
+
+    Likewise, we define $\func{R}{\Set}{\cat{Graph}}$ to send a set
+    $X$ to the complete graph with vertex set~$X$ (including a loop at
+    every vertex).  We then have a natural isomorphism
+    $$\Set(\text{vert}(G), X) \cong \cat{Graph}(G, RX),$$
+    as every possible function from the vertices of~$G$ to~$X$ gives a
+    graph homomorphism, as every pair $x,y\in X$ is connected by an
+    edge.
+
+  \item This case is almost identical to~(ii): we again let
+    $\func{L}{\Set}{\cat{DirGraph}}$ send a set~$X$ to the empty
+    directed graph with vertex set~$X$, and we now let
+    $\func{R}{\Set}{\cat{DirGraph}}$ send a set $X$ to the complete
+    directed graph with vertex set~$X$: for every pair of vertices
+    $x,y\in X$, we let $(x,y)$ be a directed edge in $RX$.
+  \end{enumerate}
 \end{proof}
 
 \end{document}
