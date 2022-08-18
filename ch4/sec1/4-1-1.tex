@@ -12,21 +12,21 @@
 
 \setexercise{4}{1}{1}
 \begin{exercise}
-Show that functors $F : C \to D$ and $G : D \to C$ and bijections $D(Fc, d) \cong C(c, Gd)$ for each $c \in C$ and $d \in D$ define an adjunction if and only if these bijections induce a bijection between commutative squares (4.1.4). That is, prove Lemma 4.1.3.
+Show that functors $\func{F}{\sC}{\sD}$ and $\func{G}{\sD}{\sC}$ and bijections $\sD(Fc, d) \cong \sC(c, Gd)$ for each $c \in \sC$ and $d \in \sD$ define an adjunction if and only if these bijections induce a bijection between commutative squares (4.1.4). That is, prove Lemma 4.1.3.
 \end{exercise}
 
 \begin{proof}
 
-Let $C$ and $D$ be categories and let $F : C \to D , G : D \to C$ be functors.
+Let $\sC$ and $\sD$ be categories and let $\func{F}{\sC}{\sD} , \func{G}{\sD}{\sC}$ be functors.
 
-Suppose that we are given, for any $c\in C, d \in D$, a bijection \[ \varphi_{c,d}: D(Fc, d) \cong C(c, Gd) \]
+Suppose that we are given, for any $c\in \sC, d \in \sD$, a bijection \[ \varphi_{c,d}: \sD(Fc, d) \cong \sC(c, Gd) \]
 Denote its inverse by $\psi_{c,d}$. We will omit the subscripts if they are understood.
 
-Recall that this collection of bijections forms an adjunction (i.e. is natural in $C$ and $D$) if and only if the following identities hold:
-\begin{equation} \label{adj1}
+Recall that this collection of bijections forms an adjunction (i.e. is natural in $\sC$ and $\sD$) if and only if the following identities hold:
+\begin{equation} \label{4-1-1-adj1}
 \varphi(k\cdot f^\sharp) = Gk \cdot f^\flat
 \end{equation}
-for any $c \in C, d, d' \in D$, $k : d\to d'$ and morphisms as pictured below
+for any $c \in \sC, d, d' \in \sD$, $k : d\to d'$ and morphisms as pictured below
 \[
 \xymatrix{
  Fc\ar[dr] \ar[r]^{f^\sharp} & d \ar[d]^{k}\\
@@ -38,10 +38,10 @@ for any $c \in C, d, d' \in D$, $k : d\to d'$ and morphisms as pictured below
 } 
 \]
 where $(f^\sharp, f^\flat)$ is an adjoint pair; and similarly
-\begin{equation} \label{adj2}
+\begin{equation} \label{4-1-1-adj2}
 \psi(g^\flat  h) = g^\sharp \cdot Fh
 \end{equation}
-for any $c,c'\in C, d \in D$, $h : c \to c'$ and morphisms as pictured below
+for any $c,c'\in \sC, d \in \sD$, $h : c \to c'$ and morphisms as pictured below
 \[
 \xymatrix{
  Fc\ar[d]^{Fh} \ar[dr] & \\
@@ -54,7 +54,7 @@ for any $c,c'\in C, d \in D$, $h : c \to c'$ and morphisms as pictured below
 \]
 where $(g^\sharp, g^\flat)$ is an adjoint pair.
 
-Our goal is to show that the equations in (\ref{adj1}) and (\ref{adj2}) hold if and only if the left square below commutes precisely when the right square commutes:
+Our goal, as per Lemma 4.1.3, is to show that the equations in (\ref{4-1-1-adj1}) and (\ref{4-1-1-adj2}) hold if and only if the left square below commutes precisely when the right square commutes:
 \[
 \xymatrix{
  Fc\ar[d]^{Fh} \ar[r]^{f^\sharp} & d \ar[d]^{k}\\
@@ -65,14 +65,14 @@ Our goal is to show that the equations in (\ref{adj1}) and (\ref{adj2}) hold if 
  c'\ar[r]^{g^\flat} & Gd'
 } 
 \]
-Indeed, suppose first that the equations in (\ref{adj1}) and (\ref{adj2}) hold.
+Indeed, suppose first that the equations in (\ref{4-1-1-adj1}) and (\ref{4-1-1-adj2}) hold.
 
 Suppose that the left square commutes. Then we have
 
 \[
 Gk \cdot f^\flat = \varphi(k \cdot f^\sharp) = \varphi(g^\sharp Fh) = g^\flat h 
 \]
-Where we use commutativity of the left square and the identities in (\ref{adj1}), (\ref{adj2}). So the right square commutes. 
+Where we use commutativity of the left square and the identities in (\ref{4-1-1-adj1}), (\ref{4-1-1-adj2}). So the right square commutes. 
 
 Similarly, if the right square commutes, then we have
 \[
@@ -80,9 +80,9 @@ k \cdot f^\sharp = \psi(Gk \cdot f^\flat) = \psi (g^\flat h) = g^\sharp \cdot Fh
 \]
 so the left square commutes.
 
-Conversely, suppose that the left square commutes exactly when the right square commutes. Then in particular, in the context of (\ref{adj1}) we can choose $c' = c, h = 1_{c}, g^\flat =Gk \cdot f^\flat$, making the right square commute by construction. Then the left square commutes as well. But $F(1_c)=1_{Fc}$ and $g^\sharp = \psi(g^\flat)=\psi(Gk\cdot f^\flat)$, so commutativity of the left square means $\psi(Gk\cdot f) = k\cdot f^\sharp$. Since $\varphi$ is an inverse of $\psi$, this yields equation (\ref{adj1}). 
+Conversely, suppose that the left square commutes exactly when the right square commutes. Then in particular, in the context of (\ref{4-1-1-adj1}) we can choose $c' = c, h = 1_{c}, g^\flat =Gk \cdot f^\flat$, making the right square commute by construction. Then the left square commutes as well. But $F(1_c)=1_{Fc}$ and $g^\sharp = \psi(g^\flat)=\psi(Gk\cdot f^\flat)$, so commutativity of the left square means $\psi(Gk\cdot f) = k\cdot f^\sharp$. Since $\varphi$ is an inverse of $\psi$, this yields equation (\ref{4-1-1-adj1}). 
 
-Similarly, in the context of (\ref{adj2}) we can choose $d = d', k = 1_d$ and $f^\sharp = g^\sharp \cdot Fh$. Then the left square commutes by construction, hence the right square commutes, which precisely amounts to equation (\ref{adj2})
+Similarly, in the context of (\ref{4-1-1-adj2}) we can choose $d = d', k = 1_d$ and $f^\sharp = g^\sharp \cdot Fh$. Then the left square commutes by construction, hence the right square commutes, which precisely amounts to equation (\ref{4-1-1-adj2})
 \end{proof}
 
 \end{document}
