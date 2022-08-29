@@ -1,23 +1,53 @@
 \documentclass[../../solutions]{subfiles}
 \title{Template}
-\author{}
+\author{Julian Gilbey}
 \begin{document}
 \maketitle
 
 % \settheorem{1}{2}{3}
 % \begin{lemma}
-%   
+%
 % \end{lemma}
 % \popthm
 
 \setexercise{4}{1}{3}
 \begin{exercise}
-  
+  Show that any triple of adjoint functors
+  \[\begin{tikzcd}[column sep=2cm]
+      \sC \ar[r, "U"{description}] & \sD
+      \ar[l, "L", swap, bend right=40, "\tadj"{below=0.1cm}]
+      \ar[l, "R", bend left=40, "\tadj"{above=0.1cm}]
+  \end{tikzcd}\]
+  gives rise to a canonical adjunction $LU\ladj RU$ between the
+  induced endofunctors of $\sC$.
 \end{exercise}
 
 \begin{proof}
-  
+  We wish to show that $\sC(LUx, y)\cong \sC(x, RUy)$ for any pair
+  $x,y\in\sC$, with the isomorphism natural in $x$ and~$y$.
+
+  We have
+  \[\sC(LUx, y) \cong \sD(Ux, Uy) \cong \sC(x, RUy).\]
+  The first isomorphism is natural in $y$ and the second is natural
+  in~$x$.  To show that the first isomorphism is natural in~$x$,
+  suppose that $\func{h}{x}{x'}$ in~$\sC$ and consider the following
+  diagram, where $\alpha_{-,-}$ is the transposition isomorphism:
+
+  \[\begin{tikzcd}
+      \sC(LUx', y)
+        \ar[r, "\alpha_{Ux',y}"]
+        \ar[d, "(LUh)^*", swap]
+      & \sD(Ux',Uy)
+        \ar[d, "(Uh)^*"] \\
+      \sC(LUx, y)
+        \ar[r, "\alpha_{Ux,y}"]
+      & \sD(Ux,Uy)
+  \end{tikzcd}\]
+
+  As $\alpha_{c,d}$ is natural in $c$ and $\func{Uh}{Ux}{Ux'}$ is a
+  morphism in~$\sD$, this square is commutative as required.  A
+  similar argument shows that the second isomorphism is natural
+  in~$y$, and we are done.
 \end{proof}
 
 \end{document}
-
