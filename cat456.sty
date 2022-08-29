@@ -17,7 +17,8 @@
 \RequirePackage{hyperref}
 \RequirePackage[shortlabels]{enumitem}
 \RequirePackage[margin=1.75in]{geometry}
-\RequirePackage[thmmarks,amsmath,hyperref]{ntheorem}
+\RequirePackage{amsthm}
+% \RequirePackage[thmmarks,amsmath,hyperref]{ntheorem}
 \RequirePackage[T1]{fontenc}
 \RequirePackage{newtxtext}
 \RequirePackage{newtxmath}
@@ -40,46 +41,55 @@
 
 \setlist{nolistsep}
 
-\newtoks\theoremheaderfont
-\def\theorem@numberfont{\normalfont}
-\def\theorem@notefont{\normalfont}
-\newtheoremstyle{basic}%
-	{\item[\hskip\labelsep \theorem@headerfont ##1\ \theorem@numberfont ##2\theorem@separator]}%
-	{\item[\hskip\labelsep \theorem@headerfont ##1\ \theorem@numberfont ##2\ \theorem@notefont (##3)\theorem@separator]}
-\newtheoremstyle{nonumberbasic}%
-	{\item[\theorem@headerfont\hskip\labelsep ##1\theorem@separator]}%
-	{\item[\theorem@headerfont\hskip \labelsep ##1\ \theorem@notefont (##3)\theorem@separator]}
+\newtheoremstyle{basicitalic}%
+  {3pt}%
+  {3pt}%
+  {\itshape}%
+  {}%
+  {\upshape\scshape}%
+  {.}%
+  { }%
+  {}
 
-\theoremstyle{basic}
-\theoremseparator{.}
-\theoremheaderfont{\upshape\scshape}
-\theorembodyfont{\itshape}
+\theoremstyle{basicitalic}
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem*{mtheorem}{Theorem}[section]
+\newtheorem*{mtheorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
-\newtheorem*{mlemma}[theorem]{Lemma}
+\newtheorem*{mlemma}{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
-\newtheorem*{mcorollary}[theorem]{Corollary}
+\newtheorem*{mcorollary}{Corollary}
 \newtheorem{proposition}[theorem]{Proposition}
-\newtheorem*{mproposition}[theorem]{Proposition}
-\theorembodyfont{\normalfont}
+\newtheorem*{mproposition}{Proposition}
+
+\newtheoremstyle{basicnormal}%
+  {3pt}%
+  {3pt}%
+  {\normalfont}%
+  {}%
+  {\upshape\scshape}%
+  {.}%
+  { }%
+  {}
+
+\theoremstyle{basicnormal}
 \newtheorem{example}[theorem]{Example}
-\newtheorem*{mexample}[theorem]{Example}
+\newtheorem*{mexample}{Example}
 \newtheorem{definition}[theorem]{Definition}
-\newtheorem*{mdefinition}[theorem]{Definition}
+\newtheorem*{mdefinition}{Definition}
 \newtheorem{remark}[theorem]{Remark}
-\newtheorem*{mremark}[theorem]{Remark}
-\theoremnumbering{roman}
-\theoremsymbol{\(\square\)}
-\newtheorem*{proof}{\indent Proof}
-\theoremsymbol{}
-\theorempostwork{ \addcontentsline{toc}{subsection}{Exercise {\theexercise}}}%
-\newtheorem{exercise}{Exercise}[section]
+\newtheorem*{mremark}{Remark}
+
+\newtheorem{catexercise}{Exercise}[section]
+\newenvironment{exercise}
+  {\begin{catexercise}%
+      \addcontentsline{toc}{subsection}{Exercise {\thecatexercise}}}%
+  {\end{catexercise}}
 
 \newcommand{\setexercise}[3]{%
 	\setcounter{chapter}{#1}
 	\setcounter{section}{#2}
-\setcounter{exercise}{#3-1}}
+\setcounter{catexercise}{#3-1}}
+\renewcommand{\thecatexercise}{\thesection.\roman{catexercise}}
 
 \newcounter{tmpchp}
 \newcounter{tmpsec}
@@ -94,6 +104,18 @@
 	\setcounter{chapter}{\thetmpchp}
 	\setcounter{section}{\thetmpsec}
 }
+
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist
+  \item[\hskip\labelsep
+        \upshape\scshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+
 
 \renewenvironment{quote}%
 	{\list{}{\topsep=3pt\leftmargin=0.60in\rightmargin=0.60in}\item[]\relax}%
