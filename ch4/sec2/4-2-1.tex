@@ -1,6 +1,6 @@
 \documentclass[../../solutions]{subfiles}
 \title{Template}
-\author{}
+\author{Julian Gilbey}
 \begin{document}
 \maketitle
 
@@ -12,11 +12,41 @@
 
 \setexercise{4}{2}{1}
 \begin{exercise}
-  
+  Prove that any pair of adjoint functors $\afunc{F}{G}{\sC}{\sD}$
+  restrict to define an equivalence between the full subcategories
+  spanned by those objects $c\in\sC$ and $d\in\sD$ for which the
+  components of the unit $\eta_c$ and of the counit $\epsilon_d$,
+  respectively, are isomorphisms.
 \end{exercise}
 
 \begin{proof}
-  
+  Let $\sC'$ and $\sD'$ be the respective full subcategories.
+
+  We must first show that $Fc\in\sD'$ whenever $c\in\sC'$ and
+  $Gd\in\sC'$ whenever $d\in\sD'$.  Suppose $c\in\sC'$, so
+  $\func{\eta_c}{c}{GFc}$ is an isomorphism.  We must show that
+  $\func{\epsilon_{Fc}}{FGFc}{Fc}$ is an isomorphism.  We have
+  $\epsilon_{Fc}.F\eta_c=1_{Fc}$ by the triangle identities, and
+  $F\eta_c$ is an isomorphism (as functors preserve isomorphisms), so
+  $\epsilon_{Fc}=(F\eta_c)^{-1}$ is also an isomorphism.  Thus
+  $Fc\in\sD'$ as required.
+
+  Similarly, assume that $d\in\sD'$ so that
+  $\func{\epsilon_d}{FGd}{d}$ is an isomorphism; we must show that
+  $\eta_{Gd}$ is an isomorphism.  We have
+  $G\epsilon_d.\eta_{Gd}=1_{Gd}$ by the triangle identities, so
+  $\eta_{Gd}=(G\epsilon_d)^{-1}$ is an isomorphism.
+
+  Thus $F$ and $G$ restrict to functors $\sC'\leftrightarrows\sD'$; we
+  also denote these restricted functors by $F$ and~$G$.
+
+  Finally, we must show that $\afunc{F}{G}{\sC'}{\sD'}$ gives an
+  equivalence of categories.  We have the natural transformations
+  $\Func{\eta}{1_\sC}{GF}$ and $\Func{\epsilon}{FG}{1_\sD}$.  Since
+  every component of $\eta$ and~$\epsilon$ is an isomorphism, $\eta$
+  and~$\epsilon$ are natural isomorphisms, so the restriction of $F$
+  and~$G$ to these full subcategories defines an equivalence of
+  categories.
 \end{proof}
 
 \end{document}
