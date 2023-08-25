@@ -12,11 +12,59 @@
 
 \setexercise{4}{1}{5}
 \begin{exercise}
-  
+  Use Lemma 4.1.3 to show that if $\afunc{F}{G}{\sC}{\sD}$ are adjoint
+  functors, with $F\ladj G$, then the comma categories $F\downarrow
+  \sD$ and $\sC\downarrow G$, introduced in Exercise 1.3.vi, are
+  isomorphic, via an isomorphism that commutes with the forgetful
+  functors to $\sC\times\sD$.
 \end{exercise}
 
 \begin{proof}
-  
+  $F\downarrow\sD$ has objects
+  $(c\in\sC, d\in\sD, \func{f^\sharp}{Fc}{d})$, and a morphism
+  $(c,d,f^\sharp)\to(c',d',g^\sharp)$ is a pair of morphisms
+  $(\func{h}{c}{c'}, \func{k}{d}{d'})$ such that this square commutes
+  in~$\sD$:
+  \begin{center}
+    \begin{tikzcd}
+      Fc \ar[r, "f^\sharp"] \ar[d, "Fh"'] & d \ar[d, "k"] \\
+      Fc' \ar[r, "g^\sharp"'] & d'
+    \end{tikzcd}
+  \end{center}
+
+  Similarly, $\sC\downarrow G$ has objects
+  $(c\in\sC, d\in\sD, \func{f^\flat}{c}{Gd})$, and a morphism
+  $(c,d,f^\flat)\to(c',d',g^\flat)$ is a pair of morphisms
+  $(\func{h}{c}{c'}, \func{k}{d}{d'})$ such that this square commutes
+  in~$\sC$:
+  \begin{center}
+    \begin{tikzcd}
+      c \ar[r, "f^\flat"] \ar[d, "h"'] & Gd \ar[d, "Gk"] \\
+      c' \ar[r, "g^\flat"'] & Gd'
+    \end{tikzcd}
+  \end{center}
+
+  We define the isomorphism
+  $\isom{\eta}{F\downarrow\sD}{\sC\downarrow G}$ by
+  $\eta(c,d,f^\sharp)=(c,d,f^\flat)$ on objects, where $f^\flat$~is
+  the transpose of~$f^\sharp$ under the given adjunction $F\ladj G$,
+  and $\eta(h,k)=(h,k)$ on morphisms.  Then by Lemma 4.1.3,
+  $\func{(h,k)}{(c,d,f^\sharp)}{(c',d',g^\sharp)}$ is a morphism in
+  $F\downarrow\sD$ if and only if
+  $\func{(h,k)}{(c,d,f^\flat)}{(c',d',g^\flat)}$ is a morphism in
+  $\sD\downarrow G$, showing that $\eta$~is a well-defined functor.
+  It clearly has an inverse defined by
+  $\epsilon(c,d,f^\flat)=\epsilon(c,d,f^\sharp)$, where again
+  $f^\sharp$~is the transpose of~$f^\flat$, and this is well-defined
+  for the same reason.  Therefore $\eta$~is an isomorphism of
+  categories.
+
+  Finally, this isomorphism clearly commutes with the forgetful
+  functors to $\sC\times \sD$ (in the sense that the forgetful
+  functors~$U$ satisfy
+  $U_{\sC\downarrow G}\cdot\eta = \hat{\eta}\cdot U_{F\downarrow
+    \sD}$, where $\hat{\eta}$ is $\eta$ restricted to
+  $\sC\times \sD$).
 \end{proof}
 
 \end{document}
