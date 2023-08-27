@@ -180,8 +180,8 @@
 \newcommand{\isinvb}{\mathrel{\raisebox{1pt}{\scalebox{.85}{\(\is@invb\)}}}}
 
 % backward colon
-\newcommand{\noloc}{\nobreak\mskip5muplus1mu\mathpunct{}\nonscript
-  \mkern-\thinmuskip{:}\mskip3mu\relax}
+\newcommand{\noloc}{\nobreak\mskip0.5\thinmuskip\mathpunct{}%
+  \nonscript\mkern-\thinmuskip\colon}
 
 % blackboard bold shortcuts
 \renewcommand{\AA}{\mathbb{A}} % replaced Angstrom symbol Å
@@ -302,7 +302,7 @@
 \newcommand*{\func}[3]{\xfunc{\to}{#1}{#2}{#3}}
 \newcommand*{\Func}[3]{\xfunc{\To}{#1}{#2}{#3}}
 \newcommand*{\mono}[3]{\xfunc{\rightarrowtail}{#1}{#2}{#3}}
-\newcommand*{\afunc}[4]{\xfunc{\leftrightarrows}{#1}{#3}{#4}\noloc{#2}}
+\newcommand*{\afunc}[4]{\xfunc{\rightleftarrows}{#1}{#3}{#4}\noloc{#2}}
 \newcommand*{\epic}[3]{\xfunc{\twoheadrightarrow}{#1}{#2}{#3}}
 \newcommand*{\incl}[3]{\xfunc{\hookrightarrow}{#1}{#2}{#3}}
 \newcommand*{\pfunc}[3]{\xfunc{\rightrightarrows}{#1}{#2}{#3}}
