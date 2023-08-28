@@ -7,12 +7,31 @@
 \settheorem{4}{2}{6}
 \begin{proposition}
   \addcontentsline{toc}{subsection}{Proposition 4.2.6}%
-
+  Given a pair of functors $\afunc{F}{G}{\sC}{\sD}$, there exists a
+  natural isomorphism $\sD(Fc,d)\cong \sC(c,Gd)$ if and only if there
+  exists a pair of natural transformations $\Func{\eta}{1_\sC}{GF}$
+  and $\Func{\epsilon}{FG}{1_\sD}$ satisfying the triangle
+  identities.
 \end{proposition}
 \popthm
 
-\begin{proof}
-
+\begin{proof}[End of proof]
+  We show that the transpose of the transpose of
+  $\func{g^\flat}{c}{Gd}$ returns~$g^\flat$.  The transpose of the
+  transpose of~$g^\flat$ is equal to the top composite
+  \begin{center}
+    \begin{tikzcd}
+      c \ar[r, "\eta_c"] \ar[dr, "g^\flat"'] &
+      GFc \ar[r, "GFg^\flat"] &
+      GFGd \ar[r, "G\epsilon_d"] &
+      Gd \\
+      & Gd \ar[ur, "\eta_{Gd}"']
+      \ar[urr, bend right = 15, "1_{Gd}"']
+    \end{tikzcd}
+  \end{center}
+  The diagram commutes by the naturality of $\eta$ and one of the
+  triangle identities, showing that the top composite
+  equals~$g^\flat$.
 \end{proof}
 
 \end{document}
