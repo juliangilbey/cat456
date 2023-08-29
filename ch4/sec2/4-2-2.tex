@@ -6,18 +6,57 @@
 
 % \settheorem{1}{2}{3}
 % \begin{lemma}
-%   
+%
 % \end{lemma}
 % \popthm
 
 \setexercise{4}{2}{2}
 \begin{exercise}
-  
+  Explain each step needed to convert the statement of Lemma 4.2.2
+  into the statement of the dual Lemma 4.2.3.
 \end{exercise}
 
 \begin{proof}
-  
+  We state the essence of Lemma 4.2.2 as: Given an adjunction $F\ladj
+  G$, there is a natural transformation $\Func{\eta}{1_\sC}{GF}$ whose
+  component $\func{\eta_c}{c}{GFc}$ at~$c$ is defined to be the
+  transpose of the identity morphism~$1_{Fc}$.
+
+  We can write the adjoint explicitly as
+  $$
+  \begin{tikzcd}
+    \sC
+    \ar[r, shift left=1ex, "F"]
+    \ar[r, leftarrow, shift right=1ex, "G"']
+    \ar[r, phantom, "\scriptstyle\bot"]
+    & \sD
+  \end{tikzcd}
+  \qquad\qquad
+  \sD(Fc,d)\cong \sC(c,Gd)
+  $$
+  Dualising this, and writing $\func{F^{\op}}{\sC^\op}{\sD^\op}$ and
+  $\func{G^\op}{\sD^\op}{\sC^\op}$ for clarity, we have
+  $$
+  \begin{tikzcd}
+    \sC^\op
+    \ar[r, shift left=1ex, "F^\op"]
+    \ar[r, leftarrow, shift right=1ex, "G^\op"']
+    \ar[r, phantom, "\scriptstyle\top"]
+    & \sD^\op
+  \end{tikzcd}
+  \qquad\qquad
+  \sD^\op(d,F^\op c)\cong \sC^\op(G^\op d,c)
+  $$
+  Note that in this dualised form, we have $G^\op \ladj F^\op$.  By
+  Lemma 4.2.2 applied to this adjunction, there is a natural
+  transformation $\Func{\bar{\epsilon}}{1_{\sD^\op}}{F^\op G^\op}$
+  whose component $\func{\bar{\epsilon}}{d}{F^\op G^\op d}$ at~$d$ is
+  defined to be the transpose of the identity morphism~$1_{G^\op d}$.
+
+  Dualising this result back to our original setting, we obtain a
+  natural transformation $\Func{\epsilon}{FG}{1_\sD}$ whose component
+  $\func{\epsilon}{FGd}{d}$ at~$d$ is defined to be the transpose of
+  the identity morphism~$1_{Gd}$, which is Lemma 4.2.3.
 \end{proof}
 
 \end{document}
-
