@@ -2,7 +2,7 @@ The file `cat456.sty` is copyright by Matthew Kousoulas, Amarit
 Matharu and Julian Gilbey, and is licensed under the
 [LaTeX Project Public License version 1.3c](https://ctan.org/license/lppl1.3c).
 
-The rest of this repository is copyright (c) 2022 The authors and
+The rest of this repository is copyright (c) 2022-2023 The authors and
 contributors, and is licensed under the Creative Commons
 Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA
 4.0) License.
