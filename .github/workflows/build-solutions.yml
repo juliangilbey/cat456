@@ -20,3 +20,11 @@ jobs:
 
       - name: Build PDFs
         run: make all
+
+      - name: Archive production PDFs
+        uses: actions/upload-artifact@v3
+        with:
+          name: pdfs
+          path: |
+            style-guide/style-guide.pdf
+            solutions.pdf
