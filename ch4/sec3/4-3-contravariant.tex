@@ -7,5 +7,101 @@
 \subsection{More on contravariant adjoint functors}
 \label{ssec:contravariant-extension}
 
-\end{document}
+In Exercise 4.3.i, we dualised Definition 4.2.5 to define mutually
+left/right adjoint functors in terms of natural transformations and
+triangle identities.
 
+It may be useful to also translate Lemma 4.1.3 and the explicit
+formulas for transpositions in the proof of Proposition 4.2.6 to this
+setting.  All we need to do is replace $\sC$ by~$\sC^\op$ or $\sD$
+by~$\sD^\op$ in the statement of the lemma, and then translate it into
+the $\sC$ and~$\sD$ setting.
+
+Thus for mutually left adjoint functors $\func{F}{\sC^\op}{\sD}$ and
+$\func{G}{\sD^\op}{\sC}$, Lemma 4.1.3 becomes:
+\begingroup
+\renewcommand{\theHtheorem}{\theHsection.\arabic{theorem}.left}
+\settheorem{4}{1}{3}
+\begin{lemma}[mutually left adjoint version]
+  Consider a pair of functors $\func{F}{\sC^\op}{\sD}$ and
+  $\func{G}{\sD^\op}{\sC}$ equipped with isomorphisms
+  $\sD(Fc,d)\cong \sC(Gd,c)$ for all $c\in\sC$ and $d\in\sD$.
+  Naturality of this collection of isomorphisms is equivalent to the
+  assertion that for any morphisms with domains and codomains as
+  displayed below
+  \begin{center}
+    \begin{tikzcd}
+      Fc \ar[r, "f^\sharp"] \ar[d, "Fh"']
+      & d \ar[d, "k"]
+      & {}\ar[d, phantom, "\leftrightsquigarrow"]
+      & c \ar[r, leftarrow, "f^\flat"] \ar[d, leftarrow, "h"']
+      & Gd \ar[d, leftarrow, "Gk"] \\
+      Fc' \ar[r, "g^\sharp"']
+      & d'
+      & {}
+      & c' \ar[r, leftarrow, "g^\flat"']
+      & Gd'
+    \end{tikzcd}
+  \end{center}
+  the left-hand square commutes in $\sD$ if and only if the right-hand
+  square transposed commutes in~$\sC$.
+\end{lemma}
+\popthm
+\endgroup
+
+The explicit formulae for transpositions in Proposition 4.2.6 become
+the following.  Suppose that the counits of the adjunction are
+$\Func{\eta}{GF}{1_\sC}$ and $\Func{\epsilon}{FG}{1_\sD}$.  Then the
+adjuncts of $\func{f^\sharp}{Fc}{d}$ and $\func{g^\flat}{Gd}{c}$ are
+\begin{align*}
+  f^\flat &:= Gd \xrightarrow{Gf^\sharp} GFc \xrightarrow{\eta_c} c \\
+  g^\sharp &:= Fc \xrightarrow{Fg^\flat} FGd \xrightarrow{\epsilon_d} d.
+\end{align*}
+Note that this is symmetrical as expected: swapping all pairs $F$/$G$,
+$c$/$d$, $\eta$/$\epsilon$, $f^\sharp$/$g^\flat$ and
+$f^\flat$/$g^\sharp$ leaves everything unchanged.
+
+\bigskip
+
+Repeating this for mutually right adjoint functors, Lemma 4.1.3
+becomes:
+\begingroup
+\renewcommand{\theHtheorem}{\theHsection.\arabic{theorem}.right}
+\settheorem{4}{1}{3}
+\begin{lemma}[mutually right adjoint version]
+  Consider a pair of functors $\func{F}{\sC^\op}{\sD}$ and
+  $\func{G}{\sD^\op}{\sC}$ equipped with isomorphisms
+  $\sD(d,Fc)\cong \sC(c,Gd)$ for all $c\in\sC$ and $d\in\sD$.
+  Naturality of this collection of isomorphisms is equivalent to the
+  assertion that for any morphisms with domains and codomains as
+  displayed below
+  \begin{center}
+    \begin{tikzcd}
+      Fc \ar[r, leftarrow, "f^\sharp"] \ar[d, leftarrow, "Fh"']
+      & d \ar[d, leftarrow, "k"]
+      & {}\ar[d, phantom, "\leftrightsquigarrow"]
+      & c \ar[r, "f^\flat"] \ar[d, "h"']
+      & Gd \ar[d, "Gk"] \\
+      Fc' \ar[r, leftarrow, "g^\sharp"']
+      & d'
+      & {}
+      & c' \ar[r, "g^\flat"']
+      & Gd'
+    \end{tikzcd}
+  \end{center}
+  the left-hand square commutes in $\sD$ if and only if the
+  right-hand square transposed commutes in~$\sC$.
+\end{lemma}
+\popthm
+\endgroup
+
+The explicit formulae for transpositions in Proposition 4.2.6 become
+the following.  Suppose that the units of the adjunction are
+$\Func{\eta}{1_\sC}{GF}$ and $\Func{\epsilon}{1_\sD}{FG}$.  Then the
+adjuncts of $\func{f^\sharp}{d}{Fc}$ and $\func{g^\flat}{c}{Gd}$ are
+\begin{align*}
+  f^\flat &:= c \xrightarrow{\eta_c} GFc \xrightarrow{Gf^\sharp} Gd \\
+  g^\sharp &:= d \xrightarrow{\epsilon_d} FGd \xrightarrow{Fg^\flat} Fc.
+\end{align*}
+
+\end{document}
