@@ -12,12 +12,61 @@
 
 \setexercise{4}{4}{1}
 \begin{exercise}
-  
+  Complete the second proof of Proposition 4.4.4 by verifying the
+  triangle identities.
 \end{exercise}
 
 \begin{proof}
-  
+  The first triangle identity is
+  $$
+  \begin{tikzcd}
+    F'F \ar[r, Rightarrow, "F'F\bar\eta"]
+    \ar[dr, Rightarrow, "1_{F'F}"']
+    & F'FGG'F'F \ar[d, Rightarrow, "\bar\epsilon F'F"] \\
+    & F'F
+  \end{tikzcd}
+  $$
+  The composite
+  $$F'F \xRightarrow{F'F\bar\eta} F'FGG'F'F \xRightarrow{\bar\epsilon
+    F'F} F'F$$
+  expands to give
+  $$F'F \xRightarrow{F'F\eta} F'FGF \xRightarrow{F'FG\eta' F}
+  F'FGG'F'F \xRightarrow{F'\epsilon G'F'F} F'G'F'F
+  \xRightarrow{\epsilon' F'F} F'F.$$
+  By the naturality of $\epsilon$, the middle two natural
+  transformations can be replaced to give
+  $$F'F \xRightarrow{F'F\eta} F'FGF \xRightarrow{F'\epsilon F} F'F
+  \xRightarrow{F'\eta' F} F'G'F'F \xRightarrow{\epsilon' F'F} F'F.$$
+  Applying the triangle identities for both $\eta$, $\epsilon$ and
+  $\eta'$, $\epsilon'$, this is equal to
+  $$F'F \xRightarrow{F'1_F} F'F \xRightarrow{1_{F'} F} F'F,$$
+  which is just the identity $1_{F'F}$ as required.
+
+  Dually, for the other triangle identity
+  $$
+  \begin{tikzcd}
+    GG' \ar[r, Rightarrow, "\bar\eta GG'"]
+    \ar[dr, Rightarrow, "1_{GG'}"']
+    & GG'F'FGG' \ar[d, Rightarrow, "GG'\bar\epsilon"] \\
+    & GG'
+  \end{tikzcd}
+  $$
+  the composite
+  $$GG' \xRightarrow{\bar\eta GG'} GG'F'FGG' \xRightarrow{GG'
+    \bar\epsilon} GG'$$
+  expands to give
+  $$GG' \xRightarrow{\eta GG'} GFGG' \xRightarrow{G\eta' FGG'}
+  GG'F'FGG' \xRightarrow{GG'F'\epsilon G'} GG'F'G'
+  \xRightarrow{GG' \epsilon'} GG'.$$
+  By the naturality of $\eta'$, the middle two natural transformations
+  can be replaced to give
+  $$GG' \xRightarrow{\eta GG'} GFGG' \xRightarrow{G\epsilon G'}
+  GG' \xRightarrow{G\eta' G'} GG'F'G' \xRightarrow{GG' \epsilon'}
+  GG'.$$
+  By the triangle identities for $\eta$, $\epsilon$ and $\eta'$,
+  $\epsilon'$, this is equal to
+  $$GG' \xRightarrow{1_G G'} GG' \xRightarrow{G1_{G'}} GG',$$
+  which is just $1_{GG'}$.
 \end{proof}
 
 \end{document}
-
