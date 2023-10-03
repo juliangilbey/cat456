@@ -7,12 +7,87 @@
 \settheorem{4}{4}{1}
 \begin{proposition}
   \addcontentsline{toc}{subsection}{Proposition 4.4.1}%
-
+  If $F$ and $F'$ are left adjoint to $G$, then $F\cong F'$, and
+  moreover there is a unique natural isomorphism
+  $\isom{\theta}{F}{F'}$ commuting with the units and counits of the
+  adjunctions:
+  $$
+  \begin{tikzcd}
+    1_\sC
+    \ar[r, Rightarrow, "\eta"] \ar[dr, Rightarrow, "\eta'"']
+    & GF \ar[d, Rightarrow, "G\theta"] \\
+    & GF'
+  \end{tikzcd}
+  \hspace{2cm}
+  \begin{tikzcd}
+    FG
+    \ar[r, Rightarrow, "\epsilon"] \ar[d, Rightarrow, "\theta G"']
+    & 1_\sD \\
+    F'G \ar[ur, Rightarrow, "\epsilon'"']
+  \end{tikzcd}
+  $$
 \end{proposition}
 \popthm
 
-\begin{proof}
+\begin{proof}[Proof]
+  We complete the argument of Proof 1, and make a brief comment on the
+  end of Proof~2.
 
+  To complete Proof 1, we show that the triangles of natural
+  transformations displayed in the statement commute.  For the left
+  hand diagram, the composite path is
+  $$1_\sC \xRightarrow{\eta} GF \xRightarrow{G\theta} GF'.$$
+  By the definition of $\theta$, this expands to
+  $$1_\sC \xRightarrow{\eta} GF \xRightarrow{GF\eta'} GFGF'
+  \xRightarrow{G\epsilon F'} GF'.$$
+  By the naturality of $\eta$, this equals
+  $$1_\sC \xRightarrow{\eta'} GF' \xRightarrow{\eta GF'} GFGF'
+  \xRightarrow{G\epsilon F'} GF'.$$
+  Using the triangle identities for $\eta$ and $\epsilon$, this
+  reduces to
+  $$1_\sC \xRightarrow{\eta'} GF' \xRightarrow{1_G F'} GF'$$
+  which is just $\eta'$, as required.
+
+  The second diagram is similar:
+  $$FG \xRightarrow{\theta G} F'G \xRightarrow{\epsilon'}
+  1_\sD$$
+  expands to
+  $$FG \xRightarrow{F\eta' G} FGF'G \xRightarrow{\epsilon F'G} F'G
+  \xRightarrow{\epsilon'} 1_\sD$$
+  which, by the naturality of $\epsilon$, is equal to
+  $$FG \xRightarrow{F\eta' G} FGF'G \xRightarrow{FG\epsilon'} FG
+  \xRightarrow{\epsilon} 1_\sD$$
+  which simplifies to
+  $$FG \xRightarrow{F1_G} FG \xRightarrow{\epsilon} 1_\sD$$
+  using the triangle identities for $\eta'$ and $\epsilon'$, and this
+  is just $\epsilon$.
+
+  \bigskip
+
+  For Proof 2, we expand on the final sentence.  Setting $d=F'c$ gives
+  $$\sD(F'c,F'c)\cong \sC(c,GF'c) \cong \sD(Fc,F'c).$$
+  In this isomorphism, $1_{F'c}\in\sD(F'c,F'c)$ maps to
+  $\eta'_c\in\sC(c,GF'c)$ and to $\theta_c\in\sD(Fc,F'c)$.  Going back
+  from $\theta_c$ to $\eta'_c$ using Proposition 4.2.6 gives
+  $$\eta'_c = G\theta_c\cdot \eta_c,$$
+  which proves that the left diagram commutes.  For the other diagram,
+  setting $c=Gd$ gives
+  $$\sD(F'Gd,d)\cong \sC(Gd,Gd) \cong \sD(FGd,d).$$
+  Here $1_{Gd}\in\sC(Gd,Gd)$ maps to $\epsilon'_d\in\sD(F'Gd,d)$ and
+  $\epsilon_d\in\sD(FGd,d)$.  Using the naturality of isomorphism, we
+  have the commuting square
+  $$
+  \begin{tikzcd}
+    \sD(F'Gd, F'Gd) \ar[r, "\cong"] \ar[d, "(\epsilon'_d)_*"']
+    & \sD(FGd, F'Gd) \ar[d, "(\epsilon'_d)_*"] \\
+    \sD(F'Gd, d) \ar[r, "\cong"']
+    & \sD(FGd, d)
+  \end{tikzcd}
+  $$
+  The image of $1_{F'Gd}$ on the path via the top-right corner is
+  $\epsilon'_d\cdot \theta_{Gd}$ and via the bottom-left
+  is~$\epsilon_d$, as we showed above.  Therefore
+  $\epsilon_d=\epsilon'_d\cdot \theta_{Gd}$ as required.
 \end{proof}
 
 \end{document}
