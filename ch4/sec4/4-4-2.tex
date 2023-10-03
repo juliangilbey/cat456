@@ -6,18 +6,173 @@
 
 % \settheorem{1}{2}{3}
 % \begin{lemma}
-%   
+%
 % \end{lemma}
 % \popthm
 
 \setexercise{4}{4}{2}
 \begin{exercise}
-  
+  Use the unit and counit associated to an adjunction to prove
+  Proposition 4.4.6.
 \end{exercise}
 
 \begin{proof}
-  
+  Let $\Func{\eta}{1_\sC}{GF}$ and $\Func{\epsilon}{FG}{1_\sD}$ be the
+  unit and counit of the original adjunction $F\ladj G$.
+
+  For the post-composition statement, let $\sJ$ be a small category.
+  We define natural transformations
+  $$\Func{\bar\eta}{1_{\sC^\sJ}}{G_*F_*}\quad\text{and}\quad
+  \Func{\bar\epsilon}{F_*G_*}{1_{\sD^\sJ}};$$ by showing that these
+  satisfy the triangle identities, we prove that $F_*\ladj G_*$ (using
+  Definition 4.2.5).  Let $\func{K}{\sJ}{\sC}$ be a functor in
+  $\sC^\sJ$, so $\func{F_*K=FK}{\sJ}{\sD}$, and let
+  $\func{L}{\sJ}{\sD}$ be a functor in $\sD^\sJ$, so
+  $\func{G_*L=GL}{\sJ}{\sC}$.  We then define $\bar\eta$ and
+  $\bar\epsilon$ as follows:
+  \begin{alignat*}{2}
+    &\Func{\bar\eta_K}{K}{GFK} &&\quad\text{is defined as}\
+    \bar\eta_K:=\eta K\\
+    &\Func{\bar\epsilon_L}{FGL}{L} &&\quad\text{is defined as}\
+    \bar\epsilon_L:=\epsilon L\\
+  \end{alignat*}
+
+  We first show that $\bar\eta$ is a natural transformation.  Suppose
+  $\Func{\alpha}{K}{K'}$ is a morphism in~$\sC^\sJ$.  We then require
+  the following square to commute:
+  $$
+  \begin{tikzcd}
+    K \ar[r, Rightarrow, "\bar\eta_K"] \ar[d, Rightarrow, "\alpha"']
+    & GFK \ar[d, Rightarrow, "GF\alpha"] \\
+    K' \ar[r, Rightarrow, "\bar\eta_{K'}"']
+    & GFK'
+  \end{tikzcd}
+  $$
+  This commutes if it commutes for every component; for $j\in\sJ$, we
+  have
+  $$
+  \begin{tikzcd}
+    Kj \ar[r, "\eta_{Kj}"] \ar[d, "\alpha_j"']
+    & GFKj \ar[d, "GF\alpha_j"] \\
+    K'j \ar[r, "\eta_{K'j}"']
+    & GFK'j
+  \end{tikzcd}
+  $$
+  which commutes by the naturality of $\eta$.  The proof that
+  $\bar\epsilon$ is a natural transformation is identical.
+
+  We next show that the triangle identities hold.  The first triangle
+  identity is
+  $$
+  \begin{tikzcd}
+    F_*
+    \ar[r, Rightarrow, "F_*\bar\eta"] \ar[dr, Rightarrow, "1_{F_*}"']
+    & F_*G_*F_* \ar[d, Rightarrow, "\bar\epsilon F_*"] \\
+    & F_*
+  \end{tikzcd}
+  $$
+  We show that this commutes by showing that it commutes at every
+  component.  At $K\in\sC^\sJ$, the triangle becomes
+  $$
+  \begin{tikzcd}
+    FK
+    \ar[r, Rightarrow, "F\eta K"] \ar[dr, Rightarrow, "1_{FK}"']
+    & FGFK \ar[d, Rightarrow, "\epsilon_{FK}"] \\
+    & FK
+  \end{tikzcd}
+  $$
+  But for each $j\in\sJ$, this becomes
+  $$
+  \begin{tikzcd}
+    FKj
+    \ar[r, "F\eta_{Kj}"] \ar[dr, "1_{FKj}"']
+    & FGFKj \ar[d, "\epsilon_{FKj}"] \\
+    & FKj
+  \end{tikzcd}
+  $$
+  which commutes as it is the $Kj$ component of the first triangle
+  identity for $\eta$ and~$\epsilon$.  Alternatively, we could argue
+  that since $(F\eta)\cdot(\epsilon F)=1_F$, which is an identity
+  in~$\sD^\sC$, applying the functor $\func{K^*}{\sD^\sC}{\sD^\sJ}$
+  gives $(F\eta K)\cdot(\epsilon FK)=1_{FK}$.  Thus the first identity
+  holds for $\bar\eta$ and~$\bar\epsilon$.
+
+  The argument for the second triangle identity is very similar: at
+  $L\in\sD^\sJ$, the triangle
+  $$
+  \begin{tikzcd}
+    G_*
+    \ar[r, Rightarrow, "\bar\eta G_*"] \ar[dr, Rightarrow, "1_{G_*}"']
+    & G_*F_*G_* \ar[d, Rightarrow, "G_*\bar\epsilon"] \\
+    & G_*
+  \end{tikzcd}
+  $$
+  becomes
+  $$
+  \begin{tikzcd}
+    GL
+    \ar[r, Rightarrow, "\eta GL"] \ar[dr, Rightarrow, "1_{GL}"']
+    & GFGL \ar[d, Rightarrow, "G\epsilon L"] \\
+    & GL
+  \end{tikzcd}
+  $$
+  As $(G\epsilon)\cdot(\eta G)=1_G$, applying $L^*$ shows that this
+  commutes, and so the second identity holds for $\bar\eta$
+  and~$\bar\epsilon$.  Therefore both identities hold, and $F_*$~is
+  left adjoint to~$G_*$.
+
+  \bigskip
+
+  For the pre-composition statement, we define natural transformations
+  $\Func{\hat\eta}{1_{\sE^\sC}}{F^*G^*}$ and
+  $\Func{\hat\epsilon}{G^*F^*}{1_{\sE^\sD}}$ by $\hat\eta_K=K\eta$ and
+  $\hat\epsilon_L=L\epsilon$, where $K\in\sE^\sC$ and $L\in\sE^\sD$.
+  The proof that $\hat\eta$ and~$\hat\epsilon$ are natural
+  transformations is similar to the above argument for $\bar\eta$
+  and~$\bar\epsilon$.
+
+  The first triangle identity states that this triangle commutes:
+  $$
+  \begin{tikzcd}
+    G^*
+    \ar[r, Rightarrow, "G_*\hat\eta"] \ar[dr, Rightarrow, "1_{G^*}"']
+    & G^*F^*G^* \ar[d, Rightarrow, "\hat\epsilon G^*"] \\
+    & G^*
+  \end{tikzcd}
+  $$
+  At $K\in\sE^\sC$, this triangle becomes
+  $$
+  \begin{tikzcd}
+    KG
+    \ar[r, Rightarrow, "K\eta G"] \ar[dr, Rightarrow, "1_{KG}"']
+    & KGFG \ar[d, Rightarrow, "KG\epsilon"] \\
+    & KG
+  \end{tikzcd}
+  $$
+  and this commutes by applying $K$ to the triangle identity
+  $(G\epsilon)\cdot(\eta G)=1_G$, so the first triangle identity
+  holds.  Similarly, the second triangle identity requires this
+  triangle to commute:
+  $$
+  \begin{tikzcd}
+    F^*
+    \ar[r, Rightarrow, "\hat\eta F^*"] \ar[dr, Rightarrow, "1_{F^*}"']
+    & F^*G^*F^* \ar[d, Rightarrow, "F^*\hat\epsilon"] \\
+    & F^*
+  \end{tikzcd}
+  $$
+  At $L\in\sE^\sD$, this triangle becomes
+  $$
+  \begin{tikzcd}
+    LF
+    \ar[r, Rightarrow, "LF\eta"] \ar[dr, Rightarrow, "1_{LF}"']
+    & LFGF \ar[d, Rightarrow, "L\epsilon F"] \\
+    & LF
+  \end{tikzcd}
+  $$
+  which commutes by applying $L$ to the triangle identity $(\epsilon
+  F)\cdot(F\eta)=1_F$, so the second triangle identity also holds.  As
+  both triangle identities hold, $G^*$ is left adjoint to~$F^*$.
 \end{proof}
 
 \end{document}
-
