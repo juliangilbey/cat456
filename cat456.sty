@@ -82,7 +82,8 @@
 \newtheorem{catexercise}{Exercise}[section]
 \newenvironment{exercise}
   {\begin{catexercise}%
-      \addcontentsline{toc}{subsection}{Exercise {\thecatexercise}}}%
+      \addcontentsline{toc}{subsection}{Exercise {\thecatexercise}}%
+      \label{ex:\thecatexercise}}%
   {\end{catexercise}}
 
 \newcommand{\setexercise}[3]{%
