@@ -7,5 +7,47 @@
 \subsection{Contravariant adjoint functors, limits and colimits}
 \label{ssec:contravariant-adjoints-limits}
 
-\end{document}
+Using the results in Section \ref{ssec:contravariant-calculus} in
+these solutions, we can adapt Theorems 4.5.2 and 4.5.3 (RAPL, LAPC)
+for the case of mutually left/right adjoint functors.  This will
+justify the first sentence of the proof of Corollary 4.5.6 about the
+mutually right adjoint functor~$A^-$ (and which was the reason for
+writing all of this extra material!).
 
+\begingroup
+\renewcommand{\theHtheorem}{\theHsection.\arabic{theorem}.mutual}
+\settheorem{4}{5}{2}
+\begin{proposition}[mutually left/right adjoint version]
+  If $\func{F}{\sC^\op}{\sD}$ and $\func{G}{\sD^\op}{\sC}$ are
+  mutually left adjoint, then they send limits over~$\sJ$ to colimits
+  over~$\sJ^\op$.  Dually, if they are mutually right adjoint, then
+  they send colimits over~$\sJ$ to limits over~$\sJ^\op$.
+\end{proposition}
+\popthm
+\endgroup
+
+\begin{proof}[Proof]
+  Using the mutually left adjoint post-composition version of
+  Proposition~\ref{prop:4.4.6.mutual.post} from
+  Section~\ref{ssec:contravariant-calculus} above, and writing
+  $\func{\bar\Delta_\sC}{\sC}{\sC^{\sJ^\op}}$ to mean the constant
+  diagram functor to diagrams valued in~$\sC$ indexed by~$\sJ^\op$, we
+  have the sequence of natural isomorphisms
+  $$\sC^{\sJ^\op}(GK,\bar\Delta_\sC c) \cong
+  \sD^\sJ(F\bar\Delta_\sC c, K) \cong \sD^\sJ(\Delta_\sD Fc, K) \cong
+  \sD(Fc, \lim\nolimits_\sJ K) \cong \sC(G \lim\nolimits_\sJ K, c).$$
+  But
+  $\sC^{\sJ^\op}(GK,\bar\Delta_\sC c)\cong \sC(\colim_{\sJ^\op} GK,
+  c)$ by definition, so $G\lim_\sJ K\cong \colim_{\sJ^\op} GK$.
+
+  For the mutually right adjoint case, we have similarly
+  $$\sC^{\sJ^\op}(\bar\Delta_\sC c,GK) \cong
+  \sD^\sJ(K, F\bar\Delta_\sC c) \cong \sD^\sJ(K, \Delta_\sD Fc) \cong
+  \sD(\colim\nolimits_\sJ K, Fc) \cong
+  \sC(c, G \colim\nolimits_\sJ K).$$
+  But
+  $\sC^{\sJ^\op}(\bar\Delta_\sC c, GK)\cong \sC(c, \lim_{\sJ^\op} GK)$
+  by definition, so $G\colim_\sJ K\cong \lim_{\sJ^\op} GK$.
+\end{proof}
+
+\end{document}
