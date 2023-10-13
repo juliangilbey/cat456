@@ -7,5 +7,343 @@
 \subsection{The calculus of contravariant adjoint functors}
 \label{ssec:contravariant-calculus}
 
-\end{document}
+Following on from the discussion in Exercise~\ref{ex:4.3.i} and
+Section~\ref{ssec:contravariant-extension} in these solutions, we show
+how the results of Section~4.4 can be adapted to the case of mutually
+left or mutually right adjoint functors.
 
+\begingroup
+\renewcommand{\theHtheorem}{\theHsection.\arabic{theorem}.mutual}
+\settheorem{4}{4}{1}
+\begin{proposition}[mutually left/right adjoint version]
+  If $\pfunc{F,F'}{\sC^\op}{\sD}$ are both mutually left adjoint
+  to~$\func{G}{\sD^\op}{\sC}$ or both mutually right adjoint to~$G$,
+  then $F\cong F'$, and moreover there is a unique natural isomorphism
+  $\isom{\theta}{F}{F'}$ commuting with the (co)units of the
+  adjunctions.  In the mutually left adjoint case, with
+  $\Func{\eta}{GF}{1_\sC}$ and $\Func{\epsilon}{FG}{1_\sD}$ being the
+  counits, the following triangles commute:
+  $$
+  \begin{tikzcd}
+    1_\sC \ar[r, Leftarrow, "\eta"] \ar[dr, Leftarrow, "\eta'"']
+    & GF \ar[d, Leftarrow, "G\theta"]
+    & FG
+      \ar[r, Rightarrow, "\epsilon"] \ar[d, Rightarrow, "\theta G"']
+    & 1_\sD \\
+    & GF'
+    & F'G \ar[ur, Rightarrow, "\epsilon'"']
+  \end{tikzcd}
+  $$
+  In the mutually right adjoint case, with $\Func{\eta}{1_\sC}{GF}$
+  and $\Func{\epsilon}{1_\sD}{FG}$ being the units, the following
+  triangles commute:
+  $$
+  \begin{tikzcd}
+    1_\sC \ar[r, Rightarrow, "\eta"] \ar[dr, Rightarrow, "\eta'"']
+    & GF \ar[d, Leftarrow, "G\theta"]
+    & FG
+      \ar[r, Leftarrow, "\epsilon"] \ar[d, Rightarrow, "\theta G"']
+    & 1_\sD \\
+    & GF'
+    & F'G \ar[ur, Leftarrow, "\epsilon'"']
+  \end{tikzcd}
+  $$
+\end{proposition}
+\popthm
+\endgroup
+
+\begin{proof}[Proof]
+  For the mutually left adjoint case, we can simply replace $\sC$ by
+  $\sC^\op$ in the proof of Proposition 4.4.1 and then translate back
+  to~$\sC$; this reverses all the arrows in the first triangle.
+  Alternatively, we can repeat Proof~2 in this context: we have
+  $$\sD(Fc,d)\cong \sC(Gd,c)\cong \sD(F'c,d).$$
+  Then we have $\isom{\theta}{F}{F'}$ where the component $\theta_c$
+  is defined to be the image of $1_{Fc}$ under this bijection.
+  Setting $d=Fc$ gives the first identity, and setting $c=Gd$ gives
+  the second.
+\end{proof}
+
+There are several ways to adapt Proposition 4.4.4 for the case of
+mutually left/right adjoint functors.  Here are a couple; other
+possibilities (for example where one pair are normal adjoints) can be
+deduced in the same way.
+
+\begingroup
+\renewcommand{\theHtheorem}{\theHsection.\arabic{theorem}.mutual}
+\settheorem{4}{4}{4}
+\begin{proposition}[a mutually left/right adjoint version]
+  If $\func{F}{\sC^\op}{\sD}$ and $\func{G}{\sD^\op}{\sC}$ are
+  mutually left adjoint and $\func{F'}{\sD^\op}{\sE}$ and
+  $\func{G'}{\sE^\op}{\sD}$ are mutually right adjoint, then $GG'\ladj
+  F'F$.  If $F$ and~$G$ are mutually right adjoint and $F'$ and~$G'$
+  are mutually left adjoint, then $F'F\ladj GG'$.
+\end{proposition}
+\popthm
+\endgroup
+
+\begin{proof}[Proof]
+  We can prove this using natural isomorphisms.  For the first case,
+  we have
+  $$\sC(GG'e,c)\cong \sD(Fc,G'e) \cong \sE(e,F'Fc)$$
+  while for the second case
+  \[\sE(F'Fc,e)\cong \sD(G'e,Fc) \cong \sC(c,GG'e).\qedhere\]
+\end{proof}
+
+It is clear from this proof why we cannot say anything interesting if
+$F$ and~$G$ are mutually left adjoint and $F'$ and~$G'$ are also
+mutually left adjoint.
+
+\bigskip
+
+Adapting Proposition 4.4.6 for the case of mutually left/right
+adjoints (say $\func{F}{\sC^\op}{\sD}$ and $\func{G}{\sD^\op}{\sC}$)
+has an interesting twist: although the definition is symmetrical in
+$F$ and~$G$ (swapping $\sC$ and~$\sD$ at the same time), to consider
+the adjoint nature of the pre- and post-composition functors requires
+symmetry-breaking: we must select one of $\sC$ and~$\sD$ (or something
+related to it) to be ``replaced'' by its opposite.  We arbitrarily
+choose~$\sC$ for this role.  We break the proposition into two
+separate parts here: the post- and pre-composition parts.
+
+\begingroup
+\renewcommand{\theHtheorem}{\theHsection.\arabic{theorem}.mutual.post}
+\settheorem{4}{4}{6}
+\begin{proposition}[mutually left/right adjoint post-composition
+  version]
+  \label{prop:4.4.6.mutual.post}
+  If $\func{F}{\sC^\op}{\sD}$ and $\func{G}{\sD^\op}{\sC}$ are
+  mutually left adjoint, then the post-composition functors
+  $$\func{F_*}{(\sC^{\sJ^\op})^\op}{\sD^\sJ} \quad \text{and} \quad
+  \func{G_*}{(\sD^\sJ)^\op}{\sC^{\sJ^\op}}$$
+  are mutually left adjoint.
+
+  Dually, if $F$ and~$G$ are mutually right adjoint, then $F_*$
+  and~$G_*$ are mutually right adjoint.
+\end{proposition}
+\popthm
+\endgroup
+
+\begin{proof}[Proof]
+  We prove the mutually left adjoint case first.  Let
+  $\Func{\eta}{GF}{1_\sC}$ and $\Func{\epsilon}{FG}{1_\sD}$ be the
+  counits of the given adjunction; recall from Exercise~\ref{ex:4.3.i}
+  that these satisfy the mutually left adjoint triangle identities, so
+  $\epsilon_{Fc}\cdot (F\eta_c)=1_{Fc}$ and
+  $\eta_{Gd}\cdot(G\epsilon_d)=1_{Gd}$ for every $c\in\sC$ and
+  $d\in\sD$.
+
+  We define natural transformations
+  $\Func{\bar\eta}{G_*F_*}{1_{\sC^{\sJ^\op}}}$ and
+  $\Func{\bar\epsilon}{F_*G_*}{1_{\sD^\sJ}}$ as follows:
+  \begin{alignat*}{4}
+    &\text{For $K\in\sC^{\sJ^\op}$,}&\quad&\Func{\bar\eta_K}{GFK}{K} &
+    \quad & \text{is defined by}& \quad \bar\eta_K&:=\eta K \\
+    &\text{For $L\in\sD^\sJ$,}&\quad&\Func{\bar\epsilon_L}{FGL}{L} &
+    \quad & \text{is defined by}& \bar\epsilon_L&:=\epsilon L
+  \end{alignat*}
+  It is straightforward to show that these do define natural
+  transformations: suppose $\Func{\alpha}{K}{K'}$ with
+  $K,K'\in\sC^{\sJ^\op}$.  Then the diagram
+  $$
+  \begin{tikzcd}
+    GFK
+    \ar[r, Rightarrow, "\bar\eta_K"] \ar[d, Rightarrow, "GF\alpha"']
+    & K \ar[d, Rightarrow, "\alpha"] \\
+    GFK' \ar[r, Rightarrow, "\bar\eta_{K'}"']
+    & K'
+  \end{tikzcd}
+  $$
+  commutes if and only if it commutes at each $j\in\sJ$; at $j$, the
+  diagram is
+  $$
+  \begin{tikzcd}
+    GFKj \ar[r, "\eta_{Kj}"] \ar[d, "GF\alpha_j"']
+    & Kj \ar[d, "\alpha_j"] \\
+    GFK'j \ar[r, "\eta_{K'j}"']
+    & K'j
+  \end{tikzcd}
+  $$
+  and this commutes by naturality of $\eta$.  The proof for
+  $\bar\epsilon$ is identical.
+
+  We now show that the (mutually left adjoint) triangle identities
+  hold for $\bar\eta$ and $\bar\epsilon$.  They are
+  $$
+  \begin{tikzcd}
+    F_*
+    \ar[r, Rightarrow, "F_*\bar\eta"] \ar[dr, Rightarrow, "1_{F_*}"']
+    & F_*G_*F_* \ar[d, Rightarrow, "\bar\epsilon F_*"]
+    & G_*
+    \ar[r, Leftarrow, "\bar\eta G_*"] \ar[dr, Leftarrow, "1_{G_*}"']
+    & G_*F_*G_* \ar[d, Leftarrow, "G_*\bar\epsilon"] \\
+    & F_*
+    && G_*
+  \end{tikzcd}
+  $$
+  These commute if and only if they commute at each
+  $K\in\sC^{\sJ^\op}$ and $L\in\sD^\sJ$, respectively:
+  $$
+  \begin{tikzcd}
+    FK
+    \ar[r, Rightarrow, "F_*\bar\eta_K"] \ar[dr, Rightarrow, "1_{FK}"']
+    & FGFK \ar[d, Rightarrow, "\bar\epsilon_{FK}"]
+    & GL
+    \ar[r, Leftarrow, "\bar\eta_{GL}"] \ar[dr, Leftarrow, "1_{GL}"']
+    & GFGL \ar[d, Leftarrow, "G_*\bar\epsilon_L"] \\
+    & FK
+    && GL
+  \end{tikzcd}
+  $$
+  In turn, these commute if and only if they commute at each
+  $j\in\sJ$:
+  $$
+  \begin{tikzcd}
+    FKj
+    \ar[r, "F\eta_{Kj}"] \ar[dr, "1_{FKj}"']
+    & FGFKj \ar[d, "\epsilon_{FKj}"]
+    & GLj
+    \ar[r, leftarrow, "\eta_{GLj}"] \ar[dr, leftarrow, "1_{GLj}"']
+    & GFGLj \ar[d, leftarrow, "G\epsilon_{Lj}"] \\
+    & FKj
+    && GLj
+  \end{tikzcd}
+  $$
+  These commute by the triangle identities for $\eta$ and $\epsilon$,
+  so $\bar\eta$ and~$\bar\epsilon$ themselves satisfy the triangle
+  identities.  Therefore $F_*$ and~$G_*$ are mutually left adjoint
+  functors.
+
+  The mutually right adjoint case is almost identical.  We take the
+  same definitions of $\bar\eta$ and~$\bar\epsilon$ (where
+  $\Func{\eta}{1_\sC}{GF}$ and $\Func{\epsilon}{1_\sD}{FG}$ are now
+  the units), and we require the opposite triangle identities to hold:
+  $$
+  \begin{tikzcd}
+    F_*
+    \ar[r, Leftarrow, "F_*\bar\eta"] \ar[dr, Leftarrow, "1_{F_*}"']
+    & F_*G_*F_* \ar[d, Leftarrow, "\bar\epsilon F_*"]
+    & G_*
+    \ar[r, Rightarrow, "\bar\eta G_*"] \ar[dr, Rightarrow, "1_{G_*}"']
+    & G_*F_*G_* \ar[d, Rightarrow, "G_*\bar\epsilon"] \\
+    & F_*
+    && G_*
+  \end{tikzcd}
+  $$
+  At $K\in\sC^{\sJ^\op}$, $L\in\sD^\sJ$ and $j\in\sJ$, these become
+  $$
+  \begin{tikzcd}
+    FKj
+    \ar[r, leftarrow, "F\eta_{Kj}"] \ar[dr, leftarrow, "1_{FKj}"']
+    & FGFKj \ar[d, leftarrow, "\epsilon_{FKj}"]
+    & GLj
+    \ar[r, "\eta_{GLj}"] \ar[dr, "1_{GLj}"']
+    & GFGLj \ar[d, "G\epsilon_{Lj}"] \\
+    & FKj
+    && GLj
+  \end{tikzcd}
+  $$
+  and these commute by the mutually right adjoint triangle identities
+  for $\eta$ and~$\epsilon$.  Hence $F_*$ and~$G_*$ are mutually right
+  adjoint.
+\end{proof}
+
+The pre-composition case is more surprising: $F^*$ and $G^*$ are both
+covariant functors and they are normal adjoints.  Which is the left
+adjoint and which is the right depends on our choice of how to break
+the symmetry when we define $F^*$ and $G^*$.  (We can define them
+symmetrically, but then they would be functors between incompatible
+categories.)
+
+\begingroup
+\renewcommand{\theHtheorem}{\theHsection.\arabic{theorem}.mutual.pre}
+\settheorem{4}{4}{6}
+\begin{proposition}[mutually left/right adjoint pre-composition version]
+  Suppose $\func{F}{\sC^\op}{\sD}$ and $\func{G}{\sD^\op}{\sC}$ are
+  mutually left adjoint.  Then pre-composition with $F$ and~$G$
+  defines an adjunction
+  $$
+  \begin{tikzcd}
+    \sE^{\sC^\op}
+    \ar[r, shift left = 1ex, "G^*"]
+    \ar[r, phantom, "\scriptstyle\bot"]
+    \ar[r, leftarrow, shift right = 1ex, "F^*"']
+    & \sE^{\sD}
+  \end{tikzcd}
+  $$
+
+  Dually, if $F$ and~$G$ are mutually right adjoint, then
+  pre-composition defines an adjunction
+  $$
+  \begin{tikzcd}
+    \sE^{\sD}
+    \ar[r, shift left = 1ex, "F^*"]
+    \ar[r, phantom, "\scriptstyle\bot"]
+    \ar[r, leftarrow, shift right = 1ex, "G^*"']
+    & \sE^{\sC^\op}
+  \end{tikzcd}
+  $$
+\end{proposition}
+\popthm
+\endgroup
+
+\begin{proof}[Proof]
+  The proof is very similar to the previous one.  Again we prove the
+  mutually left adjoint case first.  Letting $\Func{\eta}{GF}{1_\sC}$
+  and $\Func{\epsilon}{FG}{1_\sD}$ be the counits of the given
+  adjunction, we define natural transformations
+  $\Func{\bar\eta}{1_{\sE^{\sC^\op}}}{F^*G^*}$ and
+  $\Func{\bar\epsilon}{G^*F^*}{1_{\sE^\sD}}$ as follows:
+  \begin{alignat*}{4}
+    &\text{For $K\in\sE^{\sC^\op}$,}&\quad&\Func{\bar\eta_K}{K}{KGF} &
+    \quad & \text{is defined by}& \quad \bar\eta_K&:=K\eta \\
+    &\text{For $L\in\sE^\sD$,}&\quad&\Func{\bar\epsilon_L}{LFG}{L} &
+    \quad & \text{is defined by}& \bar\epsilon_L&:=L\epsilon
+  \end{alignat*}
+  Note that these definitions make sense because $K$ is contravariant
+  but $L$~is covariant.
+  
+  We show that the triangle identities hold for $\bar\eta$ and
+  $\bar\epsilon$.  They are
+  $$
+  \begin{tikzcd}
+    G^*
+    \ar[r, Rightarrow, "G^*\bar\eta"] \ar[dr, Rightarrow, "1_{G^*}"']
+    & G^*F^*G^* \ar[d, Rightarrow, "\bar\epsilon G^*"]
+    & F^*
+    \ar[r, Rightarrow, "\bar\eta F^*"] \ar[dr, Rightarrow, "1_{F^*}"']
+    & F^*G^*F^* \ar[d, Rightarrow, "F^*\bar\epsilon"] \\
+    & G^*
+    && F^*
+  \end{tikzcd}
+  $$
+  These commute if and only if they commute at each
+  $K\in\sE^{\sC^\op}$ and $d\in\sD$, or at each $L\in\sE^\sD$ and
+  $c\in\sC$, respectively giving:
+  $$
+  \begin{tikzcd}
+    KGd
+    \ar[r, "(\bar\eta_K)_{Gd}"] \ar[dr, "1_{KGd}"']
+    & KGFGd \ar[d, "(\bar\epsilon_{KG})_d"]
+    & LFc
+    \ar[r, "(\bar\eta_{LF})_c"] \ar[dr, "1_{LFc}"']
+    & LFGFc \ar[d, "(\bar\epsilon_L)_{Fc}"] \\
+    & KGd
+    && LFc
+  \end{tikzcd}
+  $$
+  Using the definitions of $\bar\eta$ and $\bar\epsilon$, the first
+  triangle commutes if $(KG\epsilon_d)\cdot (K\eta_{Gd})=1_{KGd}$.  As
+  $(\eta_{Gd})\cdot (G\epsilon_d)=1_{Gd}$ by the triangle identities
+  for the mutually left adjoint $F$ and~$G$, and $K$~is contravariant,
+  this shows that the first triangle commutes.  For the second
+  triangle, we require $(L\epsilon_{Fc})\cdot (LF\eta_c)=1_{LFc}$.  As
+  $(\epsilon_{Fc})\cdot (F\eta_c)=1_{Fc}$ by the triangle identities
+  for $F$ and~$G$, and $L$~is covariant, the second triangle also
+  commutes.  Therefore $G^*\ladj F^*$.
+
+  The case of mutually right adjoint functors follows in an identical
+  fashion.
+\end{proof}
+
+\end{document}
