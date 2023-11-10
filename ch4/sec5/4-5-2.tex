@@ -12,11 +12,33 @@
 
 \setexercise{4}{5}{2}
 \begin{exercise}
-  
+  Suppose the diagonal functor $\func{\Delta}{\sC}{\sC^\sJ}$ admits
+  both left and right adjoints.  Describe the units and counits of
+  these adjunctions.
 \end{exercise}
 
 \begin{proof}
-  
+  For the right adjoint, $\Delta\ladj\lim$, we have the natural
+  isomorphism $\sC^\sJ(\Delta c, F) \cong \sC(c, \lim F)$.  This takes
+  a cone~$\mu$ over~$F$ with summit~$c$ to the unique morphism
+  $c\to\lim F$ through which the cone factorises through the limit
+  cone $\Func{\lambda}{\lim F}{F}$.
+
+  The unit of this adjunction, $\eta$, has $\func{\eta_c}{c}{\lim
+    \Delta c}$ being the transpose of $1_{\Delta c}$.  If we take
+  $\lim \Delta c$ to be~$c$ with limit cone $1_{\Delta c}$, then
+  $\eta_c=1_c$.  (We could take $\lim \Delta c$ to be any object
+  isomorphic to~$c$, but that would make the answer much messier for
+  little benefit.)
+
+  The counit of this adjunction, $\epsilon$, has
+  $\Func{\epsilon_F}{\Delta \lim F}{F}$ being the transpose of
+  $1_{\lim F}$.  This is the limit cone associated with $\lim F$.
+
+  For the left adjoint, $\colim\ladj\Delta$, we have the dual results:
+  for the unit, $\Func{\eta_F}{F}{\Delta\colim F}$ is the colimit cone
+  associated with $\colim F$, and for the counit,
+  $\func{\eta_c}{\colim\Delta c}{c}$ is the identity~$1_c$.
 \end{proof}
 
 \end{document}
