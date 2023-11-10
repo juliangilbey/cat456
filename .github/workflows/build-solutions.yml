@@ -16,7 +16,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get dist-upgrade
-          sudo apt-get install latexmk texlive-latex-extra texlive-bibtex-extra texlive-fonts-extra
+          sudo apt-get install latexmk texlive-latex-extra texlive-bibtex-extra texlive-fonts-extra biber
 
       - name: Build PDFs
         run: make all
