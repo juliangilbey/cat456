@@ -12,11 +12,21 @@
 
 \setexercise{4}{5}{1}
 \begin{exercise}
-  
+  When does the unique functor $\func{!}{\sC}{\one}$ have a left
+  adjoint?  When does it have a right adjoint?
 \end{exercise}
 
 \begin{proof}
-  
+  $!$ has a left adjoint $\func{L}{\one}{\sC}$ if and only if there is
+  a natural isomorphism $\sC(L0,c)\cong \one(0,!c)$, where $0$~is the
+  unique object in~$\one$.  But $\one(0,!c)$ is a singleton set
+  (containing only $1_0$), so this holds if and only if $L0$ is an
+  initial object in~$\sC$.  Therefore $!$~has a left adjoint if and
+  only if $\sC$~has an initial object.
+
+  Dually, $!$ has a right adjoint $\func{R}{\one}{\sC}$ if and only if
+  $\sC$~has a terminal object, in which case $R0$~is such a terminal
+  object.
 \end{proof}
 
 \end{document}
