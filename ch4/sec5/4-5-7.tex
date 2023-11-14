@@ -12,11 +12,121 @@
 
 \setexercise{4}{5}{7}
 \begin{exercise}
-  
+  Consider a reflective subcategory inclusion $\sD\hookrightarrow\sC$
+  with reflector $\func{L}{\sC}{\sD}$.
+
+  \begin{enumerate}[label=(\roman*)]
+  \item Show that $\eta L = L\eta$, and that these natural
+    transformations are isomorphisms.
+
+  \item Show that an object $c\in\sC$ is in the \textbf{essential
+      image} of the inclusion $\sD\hookrightarrow\sC$, meaning that it
+    is isomorphic to an object in the subcategory $\sD$, if and only
+    if $\eta_c$~is an isomorphism.
+
+  \item Show that the essential image of $\sD$ consists of those
+    objects $c$ that are \textbf{local} for the class of morphisms
+    that are inverted by~$L$.  That is, $c$~is in the essential image
+    if and only if the pre-composition functions
+    $$\sC(b,c) \xrightarrow{f^*} \sC(a,c)$$
+    are isomorphisms for all maps $\func{f}{a}{b}$ in $\sC$ for which
+    $Lf$ is an isomorphism in~$\sD$.  This explains why the reflector
+    is also referred to as ``localization.''
+  \end{enumerate}
 \end{exercise}
 
 \begin{proof}
-  
+  To clarify what is happening, we will sometimes write the inclusion
+  $\func{i}{\sD}{\sC}$ explicitly in this solution.
+
+  \begin{enumerate}[label=(\roman*)]
+  \item Writing the inclusion explicitly, the question becomes to show
+    that $\eta iL=iL\eta$ (as $\Func{\eta}{1_{\sC}}{iL}$).
+
+    From the triangle identities, we have $\epsilon L\cdot L\eta=1_L$.
+    Post-composition with~$i$ gives $i\epsilon L\cdot iL\eta=1_{iL}$.
+    As $\epsilon$~is an isomorphism, so is $i\epsilon L$, and hence
+    $iL\eta$~is the inverse of~$i\epsilon L$ and is an isomorphism.
+
+    From the other triangle identity, $i\epsilon\cdot\eta i=1_i$ and
+    so $\eta i$ is the inverse of $i\epsilon$ (and both are
+    isomorphisms).  Pre-composition with~$L$ gives
+    $i\epsilon L\cdot \eta iL=1_{iL}$ and so $\eta iL$ is the inverse
+    of $i\epsilon L$.
+
+    Combining these two results, we have $iL\eta=\eta iL$ and these
+    are isomorphisms.
+
+  \item If $\eta_c$ is an isomorphism, then $c\cong Lc\in\sD$, so is
+    in the essential image of $\sD\hookrightarrow\sC$.
+
+    Conversely, assume that $c$ is in the essential image, so
+    $\isom{\phi}{c}{c'}$ for some $c'\in\sD$.  From the naturality
+    square
+    $$
+    \begin{tikzcd}
+      c \ar[r, "\eta_c"] \ar[d, "\phi"']
+      & Lc \ar[d, "L\phi"] \\
+      c' \ar[r, "\eta_{c'}"']
+      & Lc'
+    \end{tikzcd}
+    $$
+    it follows that $\eta_c$ is an isomorphism if and only if
+    $\eta_{c'}$~is.  We therefore need only show that $\eta_c$~is an
+    isomorphism in the case that $c\in\sD$.  But in this case, as
+    $c=ic$ and $\eta i$~is an isomorphism from the proof of~(i),
+    $\eta_c=\eta_{ic}$ is an isomorphism.
+
+  \item We first prove that if $c$ is in the essential image, then $c$
+    is local for this class of morphisms.  Suppose that $c\in\sD$.
+    Then for any $\func{f}{a}{b}$ in~$\sC$, we have the commuting
+    diagram
+    $$
+    \begin{tikzcd}
+      \sD(Lb,c) \ar[r, "\cong"] \ar[d, "(Lf)^*"']
+      & \sC(b,c) \ar[d, "f^*"] \\
+      \sD(La,c) \ar[r, "\cong"']
+      & \sC(a,c)
+    \end{tikzcd}
+    $$
+    where the isomorphisms are given by the adjuction $L\ladj i$.  If
+    $Lf$ is an isomorphism, then so is $(Lf)^*$ by Lemma 1.2.3, and
+    therefore so is~$f^*$.
+
+    Now suppose that $c$ is in the essential image (but not
+    necessarily in~$\sD$), and that $\isom{\phi}{c}{c'}$ is an
+    isomorphism to some $c'\in\sD$.  If $\func{f}{a}{b}$ and $Lf$~is
+    an isomorphism, then $\func{f^*}{\sC(b,c')}{\sC(a,c')}$ is an
+    isomorphism.  The following commutative diagram then shows that
+    $\func{f^*}{\sC(b,c)}{\sC(a,c)}$ is too:
+    $$
+    \begin{tikzcd}
+      \sC(b,c) \ar[r, "f^*"] \ar[d, "\phi_*"']
+      & \sC(a,c) \ar[d, "\phi_*"] \\
+      \sC(b,c') \ar[r, "f^*"']
+      & \sC(a,c')
+    \end{tikzcd}
+    $$
+
+    For the converse, suppose that $\sC(b,c) \xrightarrow{f^*}
+    \sC(a,c)$ is an isomorphism for every map $\func{f}{a}{b}$
+    in~$\sC$ for which $Lf$~is an isomorphism.  By~(ii), it suffices
+    to show that $\eta_c$~is an isomorphism.  Now $L\eta_c$~is an
+    isomorphism by~(i), so
+    $$\sC(Lc,c) \xrightarrow{(\eta_c)^*} \sC(c,c)$$
+    is an isomorphism.  In particular, there is some morphism
+    $\func{h}{Lc}{c}$ with $h\eta_c=1_c$, so $h$~is a split
+    epimorphism.
+
+    Post-composing this last equation with $L$ gives $Lh\cdot
+    L\eta_c=1_{Lc}$, and $L\eta_c$~is an isomorphism by~(i), so
+    $Lh$~is also an isomorphism.  As $Lc$~is in the essential image,
+    the first part of this argument now shows that $\sC(c,Lc)
+    \xrightarrow{h^*} \sC(Lc,Lc)$ is an isomorphism.  Thus there is
+    some morphism $\func{k}{c}{Lc}$ with $kh=1_{Lc}$.  Therefore
+    $h$~is also a (split) monomorphism, and from Exercise 1.2.vi it
+    follows that $h$~is an isomorphism, and hence so is~$\eta_c$.
+  \end{enumerate}
 \end{proof}
 
 \end{document}
