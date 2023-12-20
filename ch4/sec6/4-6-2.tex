@@ -12,11 +12,69 @@
 
 \setexercise{4}{6}{2}
 \begin{exercise}
-  
+  Use Theorem 4.6.3 to prove that the inclusion
+  $\mathsf{Haus}\hookrightarrow\Top$ of the full subcategory of
+  Hausdorff spaces into the category of all spaces has a left adjoint.
+  The left adjoint carries a space to its ``largest Hausdorff
+  quotient.''  Conclude, by applying Proposition 4.5.15, that the
+  category of Hausdorff spaces, as a reflective subcategory of a
+  complete and cocomplete category, is cocomplete as well as complete.
 \end{exercise}
 
 \begin{proof}
-  
+  We check that the conditions of Theorem 4.6.3 (the General Adjoint
+  Functor Theorem) apply to this inclusion.  First, we note that
+  $\mathsf{Haus}$ is a full subcategory of $\Top$: every morphism between
+  two Hausdorff spaces in $\Top$ is just a continuous function, and so
+  is a morphism in $\mathsf{Haus}$.
+
+  \begin{itemize}
+  \item The inclusion is continuous: a limit (cone) in $\mathsf{Haus}$
+    is a limit (cone) in~$\Top$.  We can see this using Theorem
+    3.4.12 as follows.  Suppose that we have a diagram
+    $\func{F}{\sJ}{\mathsf{Haus}}$.  Then $\lim_\sJ F$ is obtained as
+    an equaliser
+    $$
+    \begin{tikzcd}
+      \lim_\sJ F \ar[r, rightarrowtail]
+      & \prod\limits_{j\in\ob\sJ} Fj
+      \ar[r, shift left, "c"] \ar[r, shift right, "d"']
+      & \prod\limits_{f\in\mor\sJ} F(\cod f)
+    \end{tikzcd}
+    $$
+    If the products and equaliser are interpreted in $\Top$ rather
+    than $\mathsf{Haus}$, they and the morphisms are unchanged (noting
+    that the product of Hausdorff spaces in $\Top$ is still Hausdorff).
+    Thus the limit in $\mathsf{Haus}$ is a limit in $\Top$.
+
+    Note that this also shows that $\mathsf{Haus}$ is complete; see
+    the proof of Theorem 3.5.2.
+
+  \item $\mathsf{Haus}$ is a locally small subcategory as $\Top$ is.
+  \item $\mathsf{Haus}$ satisfies the solution set condition.  Letting
+    $X\in\Top$, we define the set $\Phi_X=\{\func{f_i}{X}{Y_i}\}$
+    (where $Y_i\in\mathsf{Haus}$) as follows.  Every continuous
+    function $\func{f}{X}{Y}$ with $Y$~Hausdorff factorises through
+    the image: $X\to \im f\hookrightarrow Y$.  The image is
+    homeomorphic to a subset of~$X$ endowed with some Hausdorff
+    topology, say~$\hat X$, giving the following factorisation of~$f$:
+    $$X\to \hat{X} \xrightarrow{\cong} \im f \hookrightarrow Y,$$
+    so in particular, $f$ factorises through this morphism
+    $X\to\hat{X}$.  To define $\Phi_X$, we therefore let the~$f_i$
+    range over all continuous maps to all possible subsets of~$X$ with
+    all possible Hausdorff topologies; this is a set as required.
+  \end{itemize}
+
+  As the conditions of the theorem are met, the inclusion admits a
+  left adjoint~$L$, which is a reflector.
+
+  We have already shown above that $\mathsf{Haus}$ is complete.  For
+  cocompleteness, consider a diagram in $\mathsf{Haus}$.  Its image in
+  $\Top$ admits a colimit as $\Top$ is cocomplete by Proposition
+  3.5.2.  Therefore by Proposition 4.5.15(ii), the diagram also admits
+  a colimit in $\mathsf{Haus}$ (obtained by applying the reflector~$L$
+  to the colimit in $\mathsf{Top}$).  Therefore $\mathsf{Haus}$ is
+  cocomplete.
 \end{proof}
 
 \end{document}
