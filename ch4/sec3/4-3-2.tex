@@ -12,11 +12,127 @@
 
 \setexercise{4}{3}{2}
 \begin{exercise}
-  
+  Prove Proposition 4.3.6.
 \end{exercise}
 
 \begin{proof}
-  
+  We begin by presenting a slight generalisation of Proposition 4.3.4.
+  We note that the nature of the set $\sB(Fa,b)$ on the left of the
+  isomorphism in that proposition is not really used beyond the fact
+  that it is a functor of the two variables $a$ and~$b$.  We can
+  therefore generalise the proposition as follows:
+
+  \settheorem{4}{3}{4}
+  \begingroup
+  \renewcommand{\thetheorem}{\thesection.$4'$}
+  \begin{proposition}
+    Consider a functor $\func{K}{\sD^\op\times\sE}{\Set}$ so that for
+    each $e\in\sE$ there exists an object $Le\in\sD$ together with an
+    isomorphism
+    \begin{equation}
+      \label{4-3-2-prop}
+      K(d,e)\cong \sD(d,Le),\qquad \text{natural in $d\in\sD$.}
+    \end{equation}
+    There there exists a unique way to extend the assignment
+    $\func{L}{\ob\sE}{\ob\sD}$ to a functor $\func{L}{\sE}{\sD}$ so
+    that the family of isomorphisms \eqref{4-3-2-prop} is also natural
+    in $e\in\sE$.
+  \end{proposition}
+  \endgroup
+  \popthm
+
+  The proof is almost identical to that of the original proposition;
+  we just need to modify the first couple of sentences as follows.
+
+  Naturality of \eqref{4-3-2-prop} in $\func{f}{e}{e'}$ demands that
+  the function
+  $$\sD(d,Le)\cong K(d,e) \xrightarrow{K(1_d,f)} K(d,e') \cong
+  \sD(d,Le')$$
+  equals post-composition by the yet-to-be-defined morphism
+  $\func{Lf}{Le}{Le'}$.  We claim that this composite function defines
+  a natural transformation $\sD(-,Le)\Rightarrow \sD(-,Le')$.  Suppose
+  $\func{h}{d'}{d}$.  Then we have the following diagram:
+  \begin{center}
+    \begin{tikzcd}
+      \sD(d,Le) \ar[r, "\cong"] \ar[d, "h^*"']
+      & K(d,e) \ar[r, "{K(1_d,f)}"] \ar[d, "{K(h,1_e)}"]
+      & K(d,e') \ar[r, "\cong"] \ar[d, "{K(h,1_{e'})}"]
+      & \sD(d,Le') \ar[d, "h^*"] \\
+      \sD(d',Le) \ar[r, "\cong"']
+      & K(d',e) \ar[r, "{K(1_{d'},f)}"']
+      & K(d',e') \ar[r, "\cong"']
+      & \sD(d',Le')
+    \end{tikzcd}
+  \end{center}
+  The left and right squares commute by the naturality of the
+  isomorphisms in~$d$.  The middle square commutes because both paths
+  compose to give $K(h,f)$.  Therefore the whole rectangle commutes
+  and the composite function gives a natural transformation
+  $\sD(-,Le)\Rightarrow \sD(-,Le')$ as claimed.
+
+  The rest of the proof of this proposition continues exactly as in
+  the proof of the original Proposition 4.3.4.
+
+  We can now prove Proposition 4.3.6, which we quote in stages.
+
+  \settheorem{4}{3}{6}
+  \begin{proposition}
+    Suppose that $\func{F}{\sA\times\sB}{\sC}$ is a bifunctor so that
+    for each object $a\in\sA$, the induced functor
+    $\func{F(a,-)}{\sB}{\sC}$ admits a right adjoint
+    $\func{G_a}{\sC}{\sB}$.  Then:
+    \begin{enumerate}[label=(\roman*)]
+    \item These right adjoints assemble into a unique bifunctor
+      $\func{G}{\sA^\op\times\sC}{\sB}$, defined so that
+      $G(a,c)=G_a(c)$ and so that the isomorphisms
+      $$\sC(F(a,b),c)\cong\sB(b,G(a,c))$$
+      are natural in all three variables.
+    \end{enumerate}
+  \end{proposition}
+  \popthm
+
+  The isomorphisms are natural in $b$ and $c$ by the definition of
+  adjoints, so we only need to show that they are natural in~$a$.  In
+  our above Proposition 4.3.$4'$, take $\sD=\sB$,
+  $\sE=\sA^\op$, $K_c(b,a)=\sC(F(a,b),c)$ and $L_ca=G(a,c)$.  Then our
+  isomorphisms can be expressed as $K_c(b,a)\cong \sB(b,L_ca)$,
+  natural in~$b$, so there is a unique way to extend the assignment
+  $\func{L_c}{\ob\sA^\op}{\ob\sB}$ to a functor
+  $\func{L_c}{\sA^\op}{\sB}$ so that the family of isomorphisms is
+  natural in~$a$.  This then gives us a unique functor
+  $\func{G}{\sA^\op\times\sC}{\sB}$ making the isomorphisms natural in
+  all three variables.  (To be more explicit: $G(a,c)$ is already
+  defined on objects.  On a morphism $\func{k}{c}{c'}$, we have
+  $G(1_a,k)=G_a(k)$ and on a morphism $\func{h}{a}{a'}$, we have
+  $G(h,1_c)=L_c(h)$.)
+
+  \settheorem{4}{3}{6}
+  \begin{proposition}[continued]
+    \leavevmode\\
+    If furthermore for each $b\in\sB$, the induced functor
+    $\func{F(-,b)}{\sA}{\sC}$ admits a right adjoint
+    $\func{H_b}{\sC}{\sA}$, then:
+    \begin{enumerate}[label=(\roman*), start=2]
+    \item There is a unique bifunctor
+      $\func{H}{\sB^\op\times\sC}{\sA}$ defined so that
+      $H(b,c)=H_b(c)$ and the isomorphisms
+      $$\sC(F(a,b),c)\cong \sB(b,G(a,c)) \cong \sA(a,H(b,c))$$
+      are natural in all three variables.
+    \item In this case, for each $c\in\sC$, the functors
+      $\func{G(-,c)}{\sA^\op}{\sB}$ and $\func{H(-,c)}{\sB^\op}{\sA}$
+      are mutual right adjoints.
+    \end{enumerate}
+  \end{proposition}
+  \popthm
+
+  The naturality of the first isomorphism was shown in~(i).  The
+  naturality of the isomorphisms $\sC(F(a,b),c)\cong \sA(a,H(b,c))$
+  follows exactly as in~(i); we have just swapped the roles of
+  $a\in\sA$ and $b\in\sB$.
+
+  Given these isomorphisms, (iii) immediately follows from the natural
+  isomorphisms $\sB(b,G(a,c)) \cong \sA(a,H(b,c))$ by the definition
+  of mutual right adjoint functors.
 \end{proof}
 
 \end{document}
