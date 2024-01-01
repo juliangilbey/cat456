@@ -6,18 +6,249 @@
 
 % \settheorem{1}{2}{3}
 % \begin{lemma}
-%   
+%
 % \end{lemma}
 % \popthm
 
 \setexercise{4}{5}{4}
 \begin{exercise}
-  
+  If $\func{G}{\sD}{\sC}$ has a left adjoint $F$ and if $\sD$ and
+  $\sC$ admit all limits indexed by a category~$\sJ$, use Propositions
+  4.5.1, 4.4.4, and 4.4.6 to argue that right adjoints preserve limits
+  by considering the diagram of adjoint functors:
+  $$
+  \begin{tikzcd}[row sep = large, column sep = large]
+    \sC
+      \ar[r, leftarrow, shift left = 1ex, "G"]
+      \ar[r, shift right = 1ex, "F"']
+      \ar[r, phantom, "\scriptscriptstyle\top"]
+      \ar[d, leftarrow, shift right = 1ex, "\lim"']
+      \ar[d, shift left = 1ex, "\Delta"]
+      \ar[d, phantom, "\scriptscriptstyle\radj"]
+    & \sD
+      \ar[d, shift right = 1ex, "\Delta"']
+      \ar[d, leftarrow, shift left = 1ex, "\lim"]
+      \ar[d, phantom, "\scriptscriptstyle\ladj"] \\
+    \sC^\sJ
+      \ar[r, shift left = 1ex, "F_*"]
+      \ar[r, leftarrow, shift right = 1ex, "G_*"']
+      \ar[r, phantom, "\scriptscriptstyle\bot"]
+    & \sD^\sJ
+  \end{tikzcd}
+  $$
+  The characterization of preservation of limits provided by Exercise
+  3.3.i may prove useful.
 \end{exercise}
 
 \begin{proof}
-  
+  The dual of the solution to Exercise 3.3.i is the following (using
+  notation which will be convenient for the question at hand): For any
+  diagram $\func{K}{\sJ}{\sD}$ and any functor $\func{G}{\sD}{\sC}$,
+  there is a canonical map $\func{f}{G\lim K}{\lim GK}$, assuming both
+  limits exists, and $G$~preserves the limit of~$K$ if and only if
+  $f$~is an isomorphism.  The map~$f$ is defined as follows.  Let
+  $\Func{\lambda}{\lim GK}{GK}$ and $\Func{\mu}{\lim K}{K}$ be the
+  respective limit cones.  The cone $G\mu$ factorises uniquely
+  through~$\lambda$, and we define the $f$~to be that unique morphism;
+  in other words, it is the unique morphism making the following
+  diagram commute:
+  \begin{equation}
+    \label{eq:4-5-4-3.3.i}
+    \begin{tikzcd}
+      \Delta G\lim K
+        \ar[rr, Rightarrow, "G\mu"]
+        \ar[rd, Rightarrow, dashed, "\exists! \Delta f"']
+      && GK \\
+      & \Delta\lim GK \ar[ru, Rightarrow, "\lambda"]
+    \end{tikzcd}
+  \end{equation}
+  where $\Delta$ is the diagonal functor.
+
+  We now consider the diagram in the question.  We have
+  $\Delta\ladj\lim$ by Proposition 4.5.1, and $F_*\ladj G_*$ by
+  Proposition 4.4.6.  We can compose the pairs of adjoints using
+  Proposition 4.4.4 to deduce that $\Delta F\ladj G\lim$ and
+  $F_*\Delta\ladj \lim G_*$ (using the two paths from $\sC$
+  to~$\sD^\sJ$).  We also note that $\Delta F=F_*\Delta$, and so there
+  is a unique natural isomorphism $\isom{\theta}{G\lim}{\lim G_*}$
+  commuting with the units and counits of the composite adjunctions,
+  by the dual of Proposition 4.4.1.  We will use this isomorphism to
+  obtain the required canonical map appearing in Exercise 3.3.i.
+
+  We first need to determine the units and counits of the composite
+  adjunctions; we do this using the proof of Proposition 4.4.4 and the
+  answer to Exercise~\ref{ex:4.5.ii}.  We label the four units
+  ($\eta$) and counits ($\epsilon$) in the square as follows:
+  $$
+  \begin{tikzcd}[row sep = large, column sep = large]
+    \sC
+      \ar[r, leftarrow, shift left = 1ex, "G"]
+      \ar[r, shift right = 1ex, "F"']
+      \ar[r, phantom, "\scriptstyle\eta" near start,
+          "\scriptscriptstyle\top",
+          "\scriptstyle\epsilon" near end]
+      \ar[d, leftarrow, shift right = 1ex, "\lim"']
+      \ar[d, shift left = 1ex, "\Delta"]
+      \ar[d, phantom, "\scriptstyle\hat\eta" near start,
+          "\scriptscriptstyle\radj",
+          "\scriptstyle\hat\epsilon" near end]
+    & \sD
+      \ar[d, shift right = 1ex, "\Delta"']
+      \ar[d, leftarrow, shift left = 1ex, "\lim"]
+      \ar[d, phantom, "\scriptstyle\eta'" near start,
+          "\scriptscriptstyle\ladj",
+          "\scriptstyle\epsilon'" near end] \\
+    \sC^\sJ
+      \ar[r, shift left = 1ex, "F_*"]
+      \ar[r, leftarrow, shift right = 1ex, "G_*"']
+      \ar[r, phantom, "\scriptstyle\hat\eta'" near start,
+          "\scriptscriptstyle\bot",
+          "\scriptstyle\hat\epsilon'" near end]
+    & \sD^\sJ
+  \end{tikzcd}
+  $$
+  The composite adjunction $\Delta F\ladj G\lim$ has unit $\bar\eta$
+  and counit~$\bar\epsilon$, while the composite
+  $F_*\Delta\ladj \lim G_*$ has unit~$\bar{\hat\eta}$ and counit
+  $\bar{\hat\epsilon}$.  From Exercise 4.5.ii and the proof of
+  Proposition 4.4.4, we have, for $K\in\sD^\sJ$ and $L\in\sC^\sJ$:
+  \begin{itemize}
+  \item $\func{\epsilon'_K}{\Delta \lim K}{K}$ is the limit cone
+    over~$K$
+  \item $\func{\hat\epsilon_L}{\Delta \lim L}{L}$ is the limit cone
+    over~$L$
+  \item $\func{\hat\epsilon'_K}{FGK}{K}$ is given by
+    $\hat\epsilon'_K=\epsilon K$ from the proof of Proposition 4.4.6
+    (see Exercise~\ref{ex:4.4.ii})
+  \item $\func{\hat\eta'_L}{L}{GFL}$ is given by
+    $\hat\eta'_L=\eta L$ similarly
+  \item
+    $\bar\epsilon = \Delta FG\lim \xRightarrow{\Delta \epsilon \lim}
+    \Delta \lim \xRightarrow{\epsilon'} 1_{\sD^\sJ}$ using the proof
+    of Proposition 4.4.4
+  \item
+    $\bar{\hat\epsilon} = F_*\Delta \lim G_* \xRightarrow{F_*
+      \hat\epsilon G_*} F_*G_* \xRightarrow{\hat\epsilon'}
+    1_{\sD^\sJ}$ similarly
+  \end{itemize}
+
+  We now fix a diagram $\func{K}{\sJ}{\sD}$ for the remainder of the
+  proof, and we take $\Func{\lambda}{\Delta\lim FK}{FK}$ and
+  $\Func{\mu}{\Delta \lim K}{K}$ to be the limit cones over $FK$ and
+  $K$ respectively.
+
+  We noted above that the isomorphism $\isom{\theta}{G\lim}{\lim G_*}$
+  commutes with the units and counits of the composite adjunctions;
+  for the counits, this means that the following diagram commutes:
+  $$
+  \begin{tikzcd}
+    \Delta FG\lim
+      \ar[r, Rightarrow, "\bar\epsilon"]
+      \ar[d, Rightarrow, "\Delta F\theta"']
+    & 1_{\sD^\sJ} \\
+    \Delta F\lim G_*
+      \ar[ur, Rightarrow, "\bar{\hat\epsilon}"']
+  \end{tikzcd}
+  $$
+  (as $\Delta F\lim G_* = F_*\Delta \lim G_*$), and at the
+  component~$K$, this diagram becomes
+  $$
+  \begin{tikzcd}
+    \Delta FG\lim K
+      \ar[r, Rightarrow, "\bar\epsilon_K"]
+      \ar[d, Rightarrow, "\Delta F\theta_K"']
+    & K \\
+    \Delta F\lim GK
+      \ar[ur, Rightarrow, "\bar{\hat\epsilon}_K"']
+  \end{tikzcd}
+  $$
+  Now from the above expressions for $\bar\epsilon$ and
+  $\bar{\hat\epsilon}$, this diagram can be expanded to give
+  $$
+  \begin{tikzcd}
+    \Delta FG\lim K
+      \ar[r, Rightarrow, "\Delta\epsilon_{\lim K}"]
+      \ar[d, Rightarrow, "\Delta F\theta_K"']
+    & \Delta\lim K
+      \ar[r, Rightarrow, "\epsilon'_K"]
+    & K
+      \ar[d, Rightarrow, "1_K"] \\
+    \Delta F\lim GK
+      \ar[r, Rightarrow, "F\hat\epsilon_{GK}"']
+    & FGK
+      \ar[r, Rightarrow, "\hat\epsilon'_K"']
+    & K
+  \end{tikzcd}
+  $$
+  Using $\epsilon'_K=\mu$, $\hat\epsilon_{GK}=\lambda$ and
+  $\hat\epsilon'_K=\epsilon K$, this diagram can be rewritten as
+  $$
+  \begin{tikzcd}[column sep = large]
+    F\Delta G\lim K
+      \ar[r, Rightarrow, "\mu\cdot\Delta\epsilon_{\lim K}"]
+      \ar[d, Rightarrow, "F\Delta\theta_K"']
+    & K
+      \ar[d, Rightarrow, "1_K"] \\
+    F\Delta\lim GK
+      \ar[r, Rightarrow, "\epsilon K\cdot F\lambda"']
+    & K
+  \end{tikzcd}
+  $$
+  This is a diagram in $\sD^\sJ$, which we can transpose across the
+  adjunction $F_*\ladj G_*$ to give
+  $$
+  \begin{tikzcd}[column sep = large]
+    \Delta G\lim K
+      \ar[r, Rightarrow, "(\mu\cdot\Delta\epsilon_{\lim K})^\flat"]
+      \ar[d, Rightarrow, "\Delta\theta_K"']
+    & GK
+      \ar[d, Rightarrow, "1_{GK}"] \\
+    \Delta\lim GK
+      \ar[r, Rightarrow, "(\epsilon K\cdot F\lambda)^\flat"']
+    & GK
+  \end{tikzcd}
+  $$
+  We can calculate the transposes of the two composites using the
+  naturality of the transposition (see the note after Definition
+  4.1.1, top of page 117; we take $f^\sharp=\Delta\epsilon_{\lim K}$,
+  $k=\mu$, and then $f^\sharp=\epsilon K$ and $h=\lambda$).  We obtain
+  $(\mu\cdot\Delta\epsilon_{\lim K})^\flat=G\mu\cdot
+  (\Delta\epsilon_{\lim K})^\flat$ and
+  $(\epsilon K\cdot F\lambda)^\flat=(\epsilon K)^\flat\cdot\lambda$.
+  We can now use Proposition 4.2.6 to calculate the remaining two
+  transposes.  For the first, we have
+  $$(\Delta\epsilon_{\lim K})^\flat = \Delta G\lim K
+  \xRightarrow{(\hat\eta')_{\Delta G \lim K}} GF\Delta G \lim K
+  \xRightarrow{G\Delta\epsilon_{\lim K}} G\Delta \lim K$$
+  As $\hat\eta'_L=\eta L$, this gives $(\Delta\epsilon_{\lim K})^\flat
+  = G\Delta \epsilon_{\lim K}\cdot \eta\Delta G\lim K$.  Since
+  $\Delta$~is the constant functor, the component
+  of this at $j\in\sJ$ is $G\epsilon_{\lim K}\cdot \eta_{G\lim
+    K}=1_{G\lim K}$ from the triangle identities, and therefore
+  $(\Delta\epsilon_{\lim K})^\flat = \Delta 1_{G\lim K}=1_{\Delta
+    G\lim K}$.  The second transposition is
+  $$(\epsilon K)^\flat = GK \xRightarrow{(\hat\eta')_{GK}} GFGK
+  \xRightarrow{G\epsilon K} GK$$
+  so $(\epsilon K)^\flat = G\epsilon K\cdot \eta GK = (G\epsilon\cdot
+  \eta G)K=1_G K=1_{GK}$.
+
+  Therefore our transposed square simplifies to
+  $$
+  \begin{tikzcd}
+    \Delta G\lim K
+      \ar[r, Rightarrow, "G\mu"]
+      \ar[d, Rightarrow, "\Delta\theta_K"']
+    & GK
+      \ar[d, Rightarrow, "1_{GK}"] \\
+    \Delta\lim GK
+      \ar[r, Rightarrow, "\lambda"']
+    & GK
+  \end{tikzcd}
+  $$
+  It follows that the unique morphism making the diagram
+  \eqref{eq:4-5-4-3.3.i} commute is $f=\theta_K$, and this is a
+  natural isomorphism.  Hence $G$~preserves the limit of~$K$ as we
+  wished to show.
 \end{proof}
 
 \end{document}
-
