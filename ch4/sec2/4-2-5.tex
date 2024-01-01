@@ -6,18 +6,112 @@
 
 % \settheorem{1}{2}{3}
 % \begin{lemma}
-%   
+%
 % \end{lemma}
 % \popthm
 
 \setexercise{4}{2}{5}
 \begin{exercise}
-  
+  A \textbf{morphism of adjunctions} from $F\ladj G$ to $F'\ladj G'$
+  is comprised of a pair of functors
+  \begin{center}
+    \begin{tikzcd}
+      \sC \ar[r, "H"]
+      \ar[d, shift right=1ex, "F"']
+      \ar[d, shift left=1ex, leftarrow, "G"]
+      \ar[d, phantom, "\ladj"]
+      & \sC'
+      \ar[d, shift right=1ex, "F'"']
+      \ar[d, shift left=1ex, leftarrow, "G'"]
+      \ar[d, phantom, "\ladj"] \\
+      \sD \ar[r, "K"']
+      & \sD'
+    \end{tikzcd}
+  \end{center}
+  so that the square with the left adjoints and the square with the
+  right adjoints both commute (i.e., $KF=F'H$ and $HG=G'K$) and
+  satisfying one additional condition, which takes a number of
+  equivalent forms.  Prove that the following are equivalent:
+  \begin{itemize}
+  \item $H\eta=\eta'H$, where $\eta$ and $\eta'$ denote the respective
+    units of the adjunctions.
+  \item $K\epsilon=\epsilon'K$, where $\epsilon$ and $\epsilon'$
+    denote the respective counits of the adjunctions.
+  \item Transposition across the adjunctions commutes with application
+    of the functors $H$ and $K$, i.e., for every $c\in\sC$ and
+    $d\in\sD$, the diagram
+    \begin{center}
+      \begin{tikzcd}
+        \sD(Fc,d) \ar[r, "\cong"] \ar[d, "K"']
+        & \sC(c,Gd) \ar[d, "H"] \\
+        \sD(KFc,Kd) \ar[d, equal]
+        & \sC(Hc,HGd) \ar[d, equal] \\
+        \sD'(F'Hc,Kd) \ar[r, "\cong"']
+        & \sC'(Hc,G'Kd)
+      \end{tikzcd}
+    \end{center}
+    commutes.
+  \end{itemize}
 \end{exercise}
 
 \begin{proof}
-  
+  (i) $\Leftrightarrow$ (iii).  Writing out the isomorphisms
+  explicitly, the diagram in~(iii) becomes
+  \begin{center}
+    \begin{tikzcd}
+      \sD(Fc,d) \ar[r, "G"] \ar[d, "K"']
+      & \sC(GFc,Gd) \ar[r, "(\eta_c)^*"]
+      & \sC(c,Gd) \ar[d, "H"] \\
+      \sD(KFc,Kd) \ar[d, equal]
+      && \sC(Hc,HGd) \ar[d, equal] \\
+      \sD'(F'Hc,Kd) \ar[r, "G'"']
+      & \sC'(G'F'Hc,G'Kd) \ar[r, "(\eta'_{Hc})^*"']
+      & \sC'(Hc,G'Kd)
+    \end{tikzcd}
+  \end{center}
+  The diagram commutes if and only if for every
+  $f^\sharp\in\sD(Fc,d)$, $H(Gf^\sharp\cdot \eta_c)=G'Kf^\sharp\cdot
+  \eta'_{Hc}$, that is, $HGf^\sharp\cdot H\eta_c=G'Kf^\sharp\cdot
+  \eta'_{Hc}$.  As $HG=G'K$, this is equivalent to $HGf^\sharp\cdot
+  H\eta_c = HGf^\sharp\cdot\eta'_{Hc}$ for all~$f^\sharp$.
+
+  If (i) holds, then by definition of whiskering, this means that
+  $H\eta_c=\eta'_{Hc}$ for all $c\in\sC$, so the diagram commutes for
+  all $c\in\sC$ and $d\in\sD$, so (iii)~holds.  Conversely, if
+  (iii)~holds, then for each $c\in\sC$, we may take $d=Fc$ and
+  $f^\sharp=1_{Fc}$, showing that $H\eta_c=\eta'_{Hc}$, so (i)~holds.
+
+  \bigskip
+  (ii) $\Rightarrow$ (iii).  The argument is very similar.  We take
+  the isomorphisms in the diagram in~(iii) in the opposite direction
+  (recalling Lemma 1.5.10), so the diagram in~(iii) commutes if and
+  only if the following diagram commutes:
+  \begin{center}
+    \begin{tikzcd}
+      \sD(Fc,d) \ar[r, leftarrow, "(\epsilon_d)_*"] \ar[d, "K"']
+      & \sD(Fc,FGd) \ar[r, leftarrow, "F"]
+      & \sC(c,Gd) \ar[d, "H"] \\
+      \sD(KFc,Kd) \ar[d, equal]
+      && \sC(Hc,HGd) \ar[d, equal] \\
+      \sD'(F'Hc,Kd) \ar[r, leftarrow, "(\epsilon'_{Kd})_*"']
+      & \sD'(F'Hc,F'G'Kd) \ar[r, leftarrow, "F'"']
+      & \sC'(Hc,G'Kd)
+    \end{tikzcd}
+  \end{center}
+  This diagram commutes if and only if for every
+  $f^\flat\in\sC(c,Gd)$,
+  $K\epsilon_d\cdot KFf^\flat = \epsilon'_{Kd}\cdot F'Hf^\flat$, and
+  as $F'H=KF$, this is equivalent to
+  $K\epsilon_d\cdot KFf^\flat = \epsilon'_{Kd}\cdot KFf^\flat$ for
+  all~$f^\flat$.
+
+  If (ii) holds, then $K\epsilon_d=\epsilon'_{Kd}$ for all $d\in\sD$,
+  so the diagram commutes for all $c\in\sC$ and $d\in\sD$, so
+  (iii)~holds.  Conversely, if (iii)~holds, then for each $d\in\sD$,
+  we may take $c=Gd$ and $f^\flat=1_{Gd}$, showing that
+  $K\epsilon_d=\epsilon'_{Kd}$, so (ii)~holds.
+
+  Thus all three conditions are equivalent.
 \end{proof}
 
 \end{document}
-
