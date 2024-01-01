@@ -12,12 +12,233 @@
 
 \setexercise{4}{4}{3}
 \begin{exercise}
-  
+  Use the natural bijection between hom-sets to prove the first half
+  of Proposition 4.4.6, that an adjunction $F\ladj G$ induces an
+  adjunction $F_*\ladj G_*$ by post-composition.  (Hint: Exercise
+  3.2.iv might help.)
 \end{exercise}
 
 \begin{proof}
-  
+  We recall Exercise 3.2.iv.  (Unfortunately, the solution in the
+  answer key provided by Dr Pardue's class has some significant errors
+  in it, so we give a fresh proof here.)
+
+  Exercise 3.2.iv asks: Show that for any small category~$\sJ$, any
+  locally small category~$\sC$, and any parallel pair of functors
+  $\pfunc{F,G}{\sJ}{\sC}$, the set $\Hom(F,G)$ of natural
+  transformations from $F$ to~$G$ can be defined as a small limit in
+  $\Set$.
+
+  To show this, let $J^\mathsection$ be the category whose objects are
+  morphisms in~$\sJ$ and which has morphisms $\func{\sigma_f}{1_x}{f}$
+  and $\func{\tau_f}{1_y}{f}$ for every morphism $\func{f}{x}{y}$
+  in~$\sJ$.  We define a functor $\func{H}{J^\mathsection}{\Set}$ by
+  defining, for each morphism $\func{f}{x}{y}$ in~$\sJ$,
+  \begin{align*}
+    Hf &= \sC(Fx,Gy)\\
+    H\sigma_f &= (Gf)_* \quad\text{which sends $H1_x=\sC(Fx,Gx)$ to
+                $Hf=\sC(Fx,Gy)$} \\
+    H\tau_f &= (Ff)^* \quad\text{which sends $H1_y=\sC(Fy,Gy)$ to
+              $Hf=\sC(Fx,Gy)$}
+  \end{align*}
+  The limit of $H$ is defined to be the set of cones over~$H$ with
+  summit~1.  Let $\lambda$~be such a cone with leg $\lambda_f$ for
+  each morphism $f$ in~$\sJ$.  In particular, for each $x\in\sJ$,
+  $\lambda_{1_x}\in \sC(Fx,Gx)$.  We claim that setting
+  $\alpha_x=\lambda_{1_x}$ gives the components of a natural
+  transformation $\Func{\alpha}{F}{G}$.  To show this, we must show
+  that for any morphism $\func{f}{x}{y}$ in~$\sJ$, the diagram
+  $$
+  \begin{tikzcd}
+    Fx \ar[r, "\alpha_x"] \ar[d, "Ff"']
+    & Gx \ar[d, "Gf"] \\
+    Fy \ar[r, "\alpha_y"']
+    & Gy
+  \end{tikzcd}
+  $$
+  commutes.  This requires $Gf\cdot \alpha_x = \alpha_y\cdot Ff$.  But
+  as $\lambda$~is a cone over~$H$, the following diagram commutes:
+  $$
+  \begin{tikzcd}
+    & 1 \ar[dl, "\lambda_{1_x}"']
+    \ar[d, "\lambda_f"]
+    \ar[dr, "\lambda_{1_y}"] \\
+    H1_x \ar[r, "H\sigma_f"']
+    & Hf
+    & H1_y \ar[l, "H\tau_f"]
+  \end{tikzcd}
+  $$
+  Evaluating the applications of the functor~$H$, this becomes
+  \begin{equation}
+    \label{eq:4-4-3-1}
+    \begin{tikzcd}
+      & 1 \ar[dl, "\alpha_x"']
+      \ar[d, "\lambda_f"]
+      \ar[dr, "\alpha_y"] \\
+      \sC(Fx,Gx) \ar[r, "(Gf)_*"']
+      & \sC(Fx,Gy)
+      & \sC(Fy,Gy) \ar[l, "(Ff)^*"]
+    \end{tikzcd}
+  \end{equation}
+  showing that $Gf\cdot \alpha_x=\alpha_y\cdot Ff$ as required.
+  Therefore every cone over~$H$ can be understood as a natural
+  transformation from $F$ to~$G$.
+
+  Conversely, given such a natural transformation $\alpha$, we can
+  define a cone~$\lambda$ over~$H$ with summit~1 in exactly this way,
+  with $\lambda_f$ being defined from~\eqref{eq:4-4-3-1}.
+
+  Therefore $\Hom(F,G)$ is bijective with the cones in
+  $\lim_{\sJ^\mathsection} H$.
+
+  Now writing $H=H(F,G)$ to make the dependence on $F$ and $G$
+  explicit, we can regard $\Hom(F,G)$ as a functor
+  $\func{\Hom}{(\sC^\sJ)^\op\times \sC^\sJ}{\Set}$, and likewise
+  $\lim_{\sJ^\mathsection}H(F,G)$ is also a functor between these two
+  categories.  The bijection
+  $\Hom(F,G)\cong\lim_{\sJ^\mathsection}H(F,G)$ is natural in $F$
+  and~$G$ (which seems obvious, and can be proven carefully by using
+  Proposition 3.6.1, though the details are somewhat tedious and will
+  not be given here), so these two functors are naturally isomorphic.
+
+  Therefore $\Hom(F,G)$ can be defined as
+  $\lim_{\sJ^\mathsection} H(F,G)$, a small limit in $\Set$.  This
+  completes the solution of Exercise 3.2.iv.
+
+  \bigskip
+
+  We now return to the current exercise.  We are given the natural
+  isomorphisms $\sD(Fc,d)\cong \sC(c,Gd)$ and a small category~$\sJ$,
+  and we wish to show $\sD^\sJ(F_*K,L)\cong \sC^\sJ(K,G_*L)$, that is,
+  $\sD^\sJ(FK,L)\cong \sC^\sJ(K,GL)$, natural in $K\in\sC^\sJ$ and
+  $L\in\sD^\sJ$.
+
+  Expressing $\sD^\sJ(FK,L)$ as the limit of the diagram
+  $\func{H_\sD(FK,L)}{\sJ^\mathsection}{\Set}$, where $H_\sD(FK,L)$ is
+  as described above, and $\sC^\sJ(K,GL)$ as the limit of the diagram
+  $H_\sC(K,GL)$, we wish to show that these two limits are isomorphic,
+  natural in $K$ and~$L$.  Using Corollary 3.6.3, it suffices to show
+  that the diagrams themselves are naturally isomorphic.  Using the
+  definition of the diagrams $H_\sD(FK,L)$ and $H_\sC(K,GL)$, we need
+  to show that the following diagram commutes for each
+  $\func{f}{x}{y}$ in~$\sJ$:
+  $$
+  \begin{tikzcd}
+    \sD(FKx,Lx) \ar[r, "\cong"] \ar[d, "(Lf)_*"']
+    & \sC(Kx,GLx) \ar[d, "(GLf)_*"] \\
+    \sD(FKx,Ly) \ar[r, "\cong"']
+    & \sC(Kx,GLy) \\
+    \sD(FKy,Ly) \ar[r, "\cong"'] \ar[u, "(FKf)^*"]
+    & \sC(Ky,GLy) \ar[u, "(Kf)^*"']
+  \end{tikzcd}
+  $$
+  We take the isomorphisms to be transposition across the adjunction
+  $F\ladj G$.  The upper square commutes by the naturality of
+  transposition in the second variable and the lower square commutes
+  by naturality of transposition in the first variable.  Therefore the
+  limits are isomorphic.
+
+  Next, we show that the isomorphism
+  $\sD^\sJ(FK,L)\cong \sC^\sJ(K,GL)$ is natural in $K\in\sC^\sJ$.
+  Suppose $K,K'\in\sC^\sJ$ with $\Func{\beta}{K'}{K}$.  We must show
+  that the following diagram commutes:
+  $$
+  \begin{tikzcd}
+    \lim_{\sJ^\mathsection}H_\sD(FK,L)
+    \ar[r, "\cong"] \ar[d, "\lim(F\beta)^*"']
+    & \lim_{\sJ^\mathsection}H_\sC(K,GL)
+    \ar[d, "\lim\beta^*"] \\
+    \lim_{\sJ^\mathsection}H_\sD(FK',L)
+    \ar[r, "\cong"]
+    & \lim_{\sJ^\mathsection}H_\sC(K',GL)
+  \end{tikzcd}
+  $$
+  As $\lim_{\sJ^\mathsection}$ is a functor, it suffices to show that
+  \begin{equation}
+    \label{eq:4-4-3-2}
+    \begin{tikzcd}
+      H_\sD(FK,L)
+      \ar[r, Rightarrow, "\cong"] \ar[d, Rightarrow, "(F\beta)^*"']
+      & H_\sC(K,GL) \ar[d, Rightarrow, "\beta^*"] \\
+      H_\sD(FK',L) \ar[r, Rightarrow, "\cong"]
+      & H_\sC(K',GL)
+    \end{tikzcd}
+  \end{equation}
+  commutes.  This requires showing that it commutes at every object
+  in~$\sJ^\mathsection$.  Let $\func{f}{x}{y}$ be a morphism in~$\sJ$;
+  the diagram at~$f$ is
+  $$
+  \begin{tikzcd}
+    \sD(FKx,Ly) \ar[r, "\cong"] \ar[d, "(F\beta_x)^*"']
+    & \sC(Kx,GLy) \ar[d, "(\beta_x)^*"] \\
+    \sD(FK'x,Ly) \ar[r, "\cong"]
+    & \sC(K'x,GLy)
+  \end{tikzcd}
+  $$
+  Take $g^\sharp\in\sD(FKx,Ly)$.  Via the top-right path, this is
+  transposed to $Gg^\sharp\cdot \eta_{Kx}$ (where
+  $\Func{\eta}{1_\sC}{GF}$ is the unit of the transposition) and then
+  sent to the composite
+  $$K'x \xrightarrow{\beta_x} Kx \xrightarrow{\eta_{Kx}} GFKx
+  \xrightarrow{Gg^\sharp} GLy.$$
+  Along the bottom-left path, $g^\sharp$~is first sent to
+  $g^\sharp\cdot F\beta_x$ and then transposed to give the composite
+  $$K'x \xrightarrow{\eta_{K'x}} GFK'x \xrightarrow{GF\beta_x} GFKx
+  \xrightarrow{Gg^\sharp} GLy.$$
+  By naturality of $\eta$, these two composites are equal, and so the
+  diagram~\eqref{eq:4-4-3-2} commutes at~$f$.  Therefore the original
+  isomorphism is natural in $K\in\sC^\sJ$.
+
+  Similarly, to show naturality in $L\in\sD^\sJ$, suppose
+  $\Func{\gamma}{L}{L'}$.  We must show that the following diagram
+  commutes:
+  $$
+  \begin{tikzcd}
+    \lim_{\sJ^\mathsection}H_\sD(FK,L)
+    \ar[r, "\cong"] \ar[d, "\lim \gamma_*"']
+    & \lim_{\sJ^\mathsection}H_\sC(K,GL)
+    \ar[d, "\lim(G\gamma)_*"] \\
+    \lim_{\sJ^\mathsection}H_\sD(FK,L')
+    \ar[r, "\cong"]
+    & \lim_{\sJ^\mathsection}H_\sC(K,GL')
+  \end{tikzcd}
+  $$
+  Again, it suffices to show that
+  \begin{equation}
+    \label{eq:4-4-3-3}
+    \begin{tikzcd}
+      H_\sD(FK,L)
+      \ar[r, Rightarrow, "\cong"] \ar[d, Rightarrow, "\gamma_*"']
+      & H_\sC(K,GL) \ar[d, Rightarrow, "(G\gamma)_*"] \\
+      H_\sD(FK,L') \ar[r, Rightarrow, "\cong"]
+      & H_\sC(K,GL')
+    \end{tikzcd}
+  \end{equation}
+  commutes, and at $\func{f}{x}{y}$, this becomes
+  $$
+  \begin{tikzcd}
+    \sD(FKx,Ly) \ar[r, "\cong"] \ar[d, "(\gamma_y)_*"']
+    & \sC(Kx,GLy) \ar[d, "(G\gamma_y)_*"] \\
+    \sD(FKx,L'y) \ar[r, "\cong"]
+    & \sC(Kx,GL'y)
+  \end{tikzcd}
+  $$
+
+  Take $g^\sharp\in\sD(FKx,Ly)$.  Via the top-right path, this is
+  transposed to $Gg^\sharp\cdot \eta_{Kx}$ and then sent to the
+  composite
+  $$Kx \xrightarrow{\eta_{Kx}} GFKx \xrightarrow{Gg^\sharp} GLy
+  \xrightarrow{G\gamma_y} GL'y.$$
+  Along the bottom-left path, $g^\sharp$~is first sent to
+  $\gamma_y\cdot g^\sharp$ and then transposed to give the composite
+  $$Kx \xrightarrow{\eta_{Kx}} GFKx \xrightarrow{Gg^\sharp} GLy
+  \xrightarrow{G\gamma_y} GL'y.$$
+  As these two composites are identical, the
+  diagram~\eqref{eq:4-4-3-3} commutes at~$f$.  Therefore the original
+  isomorphism is natural in $L\in\sD^\sJ$.
+
+  Therefore $\sD^\sJ(FK,L)\cong \sC^\sJ(K,GL)$, natural in $K$
+  and~$L$, so $F_* \ladj G_*$.
 \end{proof}
 
 \end{document}
-
