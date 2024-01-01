@@ -7,12 +7,90 @@
 \settheorem{4}{2}{7}
 \begin{remark}
   \addcontentsline{toc}{subsection}{Remark 4.2.7}%
-  
+  A fully-specified adjunction can be presented in four equivalent
+  forms.  It consists of a pair of functors $\afunc{F}{G}{\sC}{\sD}$
+  together with one of the following equivalent requirements:
+  \begin{enumerate}[label=(\roman*)]
+  \item a natural family of isomorphisms $\sD(Fc,d)\cong \sC(c,Gd)$
+    for all $c\in\sC$ and $d\in\sD$;
+  \item natural transformations $\Func{\eta}{1_\sC}{GF}$ and
+    $\Func{\epsilon}{FG}{1_\sD}$ so that $G\epsilon\cdot\eta G=1_G$
+    and $\epsilon F\cdot F\eta = 1_F$;
+  \item a natural transformation $\Func{\eta}{1_\sC}{GF}$ so that the
+    function
+    \begin{center}
+      \begin{tikzcd}
+        \sD(Fc,d) \ar[r, "G"] &
+        \sC(GFc,Gd) \ar[r, "(\eta_c)^*"] &
+        \sC(c,Gd)
+      \end{tikzcd}
+    \end{center}
+    defines an isomorphism for all $c\in\sC$ and $d\in\sD$;
+  \item a natural transformation $\Func{\epsilon}{FG}{1_\sD}$ so that
+    the function
+    \begin{center}
+      \begin{tikzcd}
+        \sC(c,Gd) \ar[r, "F"] &
+        \sD(Fc,FGd) \ar[r, "(\epsilon_d)_*"] &
+        \sD(Fc,d)
+      \end{tikzcd}
+    \end{center}
+    defines an isomorphism for all $c\in\sC$ and $d\in\sD$.
+  \end{enumerate}
 \end{remark}
 \popthm
 
-\begin{proof}
-  
+\begin{proof}[Proof]
+  The equivalence of (i) and (ii) was shown in Proposition 4.2.6.
+
+  Suppose (i) and (ii) are true.  Then the proof of Proposition 4.2.6
+  shows that the functions given in (iii) and (iv) are inverses of
+  each other, and hence define isomorphisms.  (The function in (iii)
+  sends $f^\sharp\in\sD(Fc,d)$  to $f^\flat\colon
+  c\xrightarrow{\eta_c} GFc\xrightarrow{Gf^\sharp} Gd$, and similarly
+  for the function in~(iv), which are the functions in Proposition
+  4.2.6.)
+
+  Conversely, suppose that the condition in (iii) holds; we prove that
+  the family of isomorphisms is natural in $c$ and~$d$, so that
+  (i)~holds.  Let $\func{h}{c'}{c}$ be a morphism in~$\sC$.  We need
+  to show that the outer rectangle in the following diagram commutes:
+  \begin{center}
+    \begin{tikzcd}
+      \sD(Fc,d) \ar[d, "Fh^*"'] \ar[r, "G"] &
+      \sC(GFc,Gd) \ar[r, "(\eta_c)^*"] \ar[d, "GFh^*"] &
+      \sC(c,Gd) \ar[d, "h^*"] \\
+      \sD(Fc',d) \ar[r, "G"'] &
+      \sC(GFc',Gd) \ar[r, "(\eta_{c'})^*"'] &
+      \sC(c',Gd)
+    \end{tikzcd}
+  \end{center}
+  Suppose $f^\sharp\in\sD(Fc,d)$.  Then the left hand square commutes
+  because $Gf^\sharp\cdot GFh=G(f^\sharp\cdot Fh)$ and the right hand
+  square commutes because $Gf^\sharp\cdot \eta_c\cdot h=Gf^\sharp
+  \cdot GFh\cdot \eta_{c'}$ by the naturality of~$\eta$.
+
+  For naturality in $d$, suppose $\func{h}{d}{d'}$.  We need to show
+  that the outer rectangle in this diagram commutes:
+  \begin{center}
+    \begin{tikzcd}
+      \sD(Fc,d) \ar[d, "h_*"'] \ar[r, "G"] &
+      \sC(GFc,Gd) \ar[r, "(\eta_c)^*"] \ar[d, "Gh_*"] &
+      \sC(c,Gd) \ar[d, "Gh_*"] \\
+      \sD(Fc,d') \ar[r, "G"'] &
+      \sC(GFc,Gd') \ar[r, "(\eta_c)^*"'] &
+      \sC(c,Gd')
+    \end{tikzcd}
+  \end{center}
+  Suppose $f^\sharp\in\sD(Fc,d)$.  Then the left hand square commutes
+  because $Gh\cdot Gf^\sharp=G(h\cdot f^\sharp)$ and the right hand
+  square commutes because pre-composition with $\eta_c$ and
+  post-composition with $Gh$ commute: they both give $Gh\cdot
+  Gf^\sharp\cdot \eta_c$.
+
+  Therefore condition (iii) implies condition (i), and similarly
+  condition (iv) implies condition (i), showing that all four
+  conditions are equivalent.
 \end{proof}
 
 \end{document}
