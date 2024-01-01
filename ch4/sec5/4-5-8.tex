@@ -12,11 +12,19 @@
 
 \setexercise{4}{5}{8}
 \begin{exercise}
-  
+  Find an example which demonstrates that the inclusion of a
+  reflective subcategory does not create all colimits.
 \end{exercise}
 
 \begin{proof}
-  
+  Consider $\Ab\hookrightarrow\Group$ of Example 4.5.14(ii).  Let
+  $C_2$~be the (abelian) group with two elements.  Then in $\Group$,
+  the coproduct $C_2\sqcup C_2$ is the free group $C_2*C_2$, an
+  infinite group, whereas in $\Ab$, an abelian category, the coproduct
+  is isomorphic to the direct product (or direct sum -- see Remark
+  3.1.27) $C_2\times C_2$, a finite group.  $C_2*C_2$ is nonabelian
+  (and infinite), so this inclusion does not create the colimit of
+  $C_2\sqcup C_2$ in $\Ab$.
 \end{proof}
 
 \end{document}
