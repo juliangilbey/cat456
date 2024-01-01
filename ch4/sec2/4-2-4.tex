@@ -12,11 +12,41 @@
 
 \setexercise{4}{2}{4}
 \begin{exercise}
-  
+  Each component of the counit of an adjunction is a terminal object
+  in some category.  What category?
 \end{exercise}
 
 \begin{proof}
-  
+  From Proposition 2.4.8 and its proof, we have the following two dual
+  results:
+  \begin{itemize}
+  \item If the covariant set-valued functor $F$ on~$\sC$ is
+    representable, with $\isom{\alpha}{\sC(c,-)}{F}$ being a natural
+    isomorphism, then the category of elements $\el F$ has an initial
+    element $(c,\alpha_c(1_c))$.
+  \item If the contravariant set-valued functor $F$ on~$\sC$ is
+    representable, with $\isom{\alpha}{\sC(-,c)}{F}$ being a natural
+    isomorphism, then the category of elements $\el F$ has a terminal
+    element $(c,\alpha_c(1_c))$.
+  \end{itemize}
+
+  In our situation, with $\afunc{F}{G}{\sC}{\sD}$ being adjoint
+  functors with $F\ladj G$, we have $\sD(F-,d)\cong \sC(-,Gd)$ for
+  each $d\in\sD$, so the contravariant functor
+  $\func{\sD(F-,d)}{\sC^\op}{\Set}$ is representable.  Thus the
+  category of elements $\el \sD(F-,d)$ has a terminal element which is
+  $(Gd,\epsilon_d)$, as $\epsilon_d$~is defined to be the transpose of
+  the identity on the representing element~$Gd$.  An alternative way
+  of describing the category $\el \sD(F-,d)$ is as the comma category
+  $F\downarrow d$.
+
+  Dually, as $\sD(Fc,-)\cong \sC(c,G-)$ for each $c\in\sC$, the
+  covariant functor $\func{\sC(c,G-)}{\sD}{\Set}$ is representable.
+  Thus the category of elements $\el \sC(c,G-)$ has an initial element
+  which is $(Fc,\eta_c)$, as $\eta_c$~is the transpose of the identity
+  on the representing element~$Fc$.  An alternative way of describing
+  the category $\el \sC(c,G-)$ is as the comma category
+  $c\downarrow G$.
 \end{proof}
 
 \end{document}
