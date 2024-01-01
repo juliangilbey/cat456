@@ -12,12 +12,54 @@
 
 \setexercise{4}{3}{3}
 \begin{exercise}
-  
+  Show that the contravariant power set functor
+  $\func{P}{\Set^\op}{\Set}$ is mutually right adjoint to itself.
 \end{exercise}
 
 \begin{proof}
-  
+  Letting $X,Y\in\Set$, we seek a natural bijection
+  $$\isom{\alpha_{X,Y}}{\Set(X,PY)}{\Set(Y,PX)}.$$
+  Letting $\func{f}{X}{PY}$, we define $\alpha_{X,Y}f$ by
+  $$(\alpha_{X,Y}f)(y)=\{x\in X:y\in f(x)\}.$$
+  We first claim that $\alpha_{X,Y}$ is a bijection, by showing that
+  $\alpha_{Y,X}\alpha_{X,Y}f=f$; it then immediately follows by
+  swapping $X$ and~$Y$ that $\alpha_{X,Y}\alpha_{Y,X}g=g$ for
+  $g\in\Set(Y,PX)$.  We have
+  \begin{align*}
+    (\alpha_{Y,X}\alpha_{X,Y}f)(x)
+    &= \{y\in Y:x\in(\alpha_{X,Y}f)(y)\} \\
+    &= \{y\in Y:y\in f(x)\} \\
+    &= f(x)
+  \end{align*}
+  so $\alpha_{Y,X}\alpha_{X,Y}f=f$, and $\alpha_{X,Y}$ is a bijection.
+
+  Next, we must show that this bijection is natural in $X$ and $Y$;
+  again, it suffices to show naturality in~$X$ as naturality in~$Y$
+  will follow by symmetry.  Suppose $\func{\phi}{X'}{X}$.  We must
+  show that this diagram commutes:
+  \begin{center}
+    \begin{tikzcd}
+      \Set(X,PY) \ar[r, "\alpha_{X,Y}"] \ar[d, "\phi^*"']
+      & \Set(Y,PX) \ar[d, "(P\phi)_*"] \\
+      \Set(X',PY) \ar[r, "\alpha_{X',Y}"']
+      & \Set(Y,PX')
+    \end{tikzcd}
+  \end{center}
+  Let $f\in\Set(X,PY)$.  Then the right-down path gives
+  \begin{align*}
+    ((P\phi)\alpha_{X,Y}f)(y)
+    &= (P\phi)(\{x\in X:y\in f(x)\}) \\
+    &= \phi^{-1}(\{x\in X:y\in f(x)\}) \\
+    &= \{x'\in X':y\in f(\phi(x'))\}).
+  \end{align*}
+  The down-right path gives
+  \begin{align*}
+    (\alpha_{X',Y}(f\phi))(y) = \{x'\in X':y\in f\phi(x')\}
+  \end{align*}
+  by the definition of $\alpha_{X',Y}$, so the diagram commutes and
+  $\alpha_{X,Y}$~is natural in~$X$, and hence in~$Y$ too.
+
+  Therefore $P$ is mutually right adjoint to itself.
 \end{proof}
 
 \end{document}
-
