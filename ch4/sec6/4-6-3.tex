@@ -12,11 +12,27 @@
 
 \setexercise{4}{6}{3}
 \begin{exercise}
-  
+  Suppose $\sC$ is a locally small category with coproducts.  Show
+  that a functor $\func{F}{\sC}{\Set}$ is representable if and only if
+  it admits a left adjoint.
 \end{exercise}
 
 \begin{proof}
-  
+  Suppose that $F\cong \sC(c,-)$ for some $c\in\sC$.  We define a
+  functor $\func{L}{\Set}{\sC}$ as follows.  For $X\in\Set$, let $LX:=
+  \coprod_X c$.  We then have
+  $$\sC(LX,c') = \sC(\coprod_X c,c')
+  \cong \sC(c,c')^X \cong (Fc')^X \cong \Set(X,Fc')$$
+  where the first congruence follows from Example 3.4.9 and the final
+  one holds because for any $A,B\in\Set$, $A^B\cong\Set(B,A)$.
+  Therefore $L\ladj F$.
+
+  Conversely, if $F$ admits a left adjoint, then it is representable
+  by the proof of Corollary 4.6.14, which made no assumptions
+  on~$\sC$.
+
+  Note that the assumptions of this exercise were stronger than
+  necessary; having copowers is sufficient.
 \end{proof}
 
 \end{document}
