@@ -12,11 +12,54 @@
 
 \setexercise{4}{5}{5}
 \begin{exercise}
-  
+  Show that a morphism $\func{f}{x}{y}$ in $\sC$ is a monomorphism if
+  and only if the square
+  $$
+  \begin{tikzcd}
+    x \ar[r, "1_x"] \ar[d, "1_x"']
+    & x \ar[d, "f"] \\
+    x \ar[r, "f"']
+    & y
+  \end{tikzcd}
+  $$
+  is a pullback.  Conclude that right adjoints preserve monomorphisms,
+  and that left adjoints preserve epimorphisms.
 \end{exercise}
 
 \begin{proof}
-  
+  Consider a cone over the diagram $x \xrightarrow{f} y \xleftarrow{f}
+  x$:
+  $$
+  \begin{tikzcd}
+    z
+      \ar[rrd, bend left, "h"]
+      \ar[rd, dashed, "g"]
+      \ar[rdd, bend right, "k"'] \\
+    & x \ar[r, "1_x"] \ar[d, "1_x"']
+    & x \ar[d, "f"] \\
+    & x \ar[r, "f"']
+    & y
+  \end{tikzcd}
+  $$
+  There exists a morphism $g$ making the whole diagram commute if and
+  only if $h=k$, in which case $g=h=k$ is unique.  Therefore, this
+  square is a pullback if and only if $fh=fk$ implies $h=k$, that is,
+  if and only if $f$~is a monomorphism.
+
+  Since right adjoints preserve limits, if $G$~is a right adjoint and
+  $f$~is a monomorphism, then
+  $$
+  \begin{tikzcd}
+    Gx \ar[r, "1_{Gx}"] \ar[d, "1_{Gx}"']
+    & Gx \ar[d, "Gf"] \\
+    Gx \ar[r, "Gf"']
+    & Gy
+  \end{tikzcd}
+  $$
+  is a pullback, and so $Gf$ is a monomorphism.  Therefore right
+  adjoints preserve monomorphisms.  Dually, it follows that left
+  adjoints preserve epimorphisms (and a morphism is an epimorphism if
+  and only if the dual square is a pushout).
 \end{proof}
 
 \end{document}
