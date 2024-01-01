@@ -73,27 +73,11 @@
   The rest of the proof of this proposition continues exactly as in
   the proof of the original Proposition 4.3.4.
 
-  We can now prove Proposition 4.3.6, which we quote in stages.
+  We can now prove Proposition 4.3.6.
 
-  \settheorem{4}{3}{6}
-  \begin{proposition}
-    Suppose that $\func{F}{\sA\times\sB}{\sC}$ is a bifunctor so that
-    for each object $a\in\sA$, the induced functor
-    $\func{F(a,-)}{\sB}{\sC}$ admits a right adjoint
-    $\func{G_a}{\sC}{\sB}$.  Then:
-    \begin{enumerate}[label=(\roman*)]
-    \item These right adjoints assemble into a unique bifunctor
-      $\func{G}{\sA^\op\times\sC}{\sB}$, defined so that
-      $G(a,c)=G_a(c)$ and so that the isomorphisms
-      $$\sC(F(a,b),c)\cong\sB(b,G(a,c))$$
-      are natural in all three variables.
-    \end{enumerate}
-  \end{proposition}
-  \popthm
-
-  The isomorphisms are natural in $b$ and $c$ by the definition of
-  adjoints, so we only need to show that they are natural in~$a$.  In
-  our above Proposition 4.3.$4'$, take $\sD=\sB$,
+  For part (i), the isomorphisms are natural in $b$ and $c$ by the
+  definition of adjoints, so we only need to show that they are
+  natural in~$a$.  In our above Proposition 4.3.$4'$, take $\sD=\sB$,
   $\sE=\sA^\op$, $K_c(b,a)=\sC(F(a,b),c)$ and $L_ca=G(a,c)$.  Then our
   isomorphisms can be expressed as $K_c(b,a)\cong \sB(b,L_ca)$,
   natural in~$b$, so there is a unique way to extend the assignment
@@ -106,33 +90,14 @@
   $G(1_a,k)=G_a(k)$ and on a morphism $\func{h}{a}{a'}$, we have
   $G(h,1_c)=L_c(h)$.)
 
-  \settheorem{4}{3}{6}
-  \begin{proposition}[continued]
-    \leavevmode\\
-    If furthermore for each $b\in\sB$, the induced functor
-    $\func{F(-,b)}{\sA}{\sC}$ admits a right adjoint
-    $\func{H_b}{\sC}{\sA}$, then:
-    \begin{enumerate}[label=(\roman*), start=2]
-    \item There is a unique bifunctor
-      $\func{H}{\sB^\op\times\sC}{\sA}$ defined so that
-      $H(b,c)=H_b(c)$ and the isomorphisms
-      $$\sC(F(a,b),c)\cong \sB(b,G(a,c)) \cong \sA(a,H(b,c))$$
-      are natural in all three variables.
-    \item In this case, for each $c\in\sC$, the functors
-      $\func{G(-,c)}{\sA^\op}{\sB}$ and $\func{H(-,c)}{\sB^\op}{\sA}$
-      are mutual right adjoints.
-    \end{enumerate}
-  \end{proposition}
-  \popthm
+  For part (ii), the naturality of the first isomorphism was shown
+  in~(i).  The naturality of the isomorphisms
+  $\sC(F(a,b),c)\cong \sA(a,H(b,c))$ follows exactly as in~(i); we
+  have just swapped the roles of $a\in\sA$ and $b\in\sB$.
 
-  The naturality of the first isomorphism was shown in~(i).  The
-  naturality of the isomorphisms $\sC(F(a,b),c)\cong \sA(a,H(b,c))$
-  follows exactly as in~(i); we have just swapped the roles of
-  $a\in\sA$ and $b\in\sB$.
-
-  Given these isomorphisms, (iii) immediately follows from the natural
-  isomorphisms $\sB(b,G(a,c)) \cong \sA(a,H(b,c))$ by the definition
-  of mutual right adjoint functors.
+  Given these isomorphisms, part (iii) immediately follows from the
+  natural isomorphisms $\sB(b,G(a,c)) \cong \sA(a,H(b,c))$ by the
+  definition of mutual right adjoint functors.
 \end{proof}
 
 \end{document}
