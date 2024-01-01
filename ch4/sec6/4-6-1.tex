@@ -12,12 +12,33 @@
 
 \setexercise{4}{6}{1}
 \begin{exercise}
-  
+  Give a direct proof of Lemma 4.6.2 along the lines of the argument
+  used in Proposition 3.3.8.
 \end{exercise}
 
 \begin{proof}
-  
+  To define a diagram $\func{(K,\kappa)}{\sJ}{s\downarrow U}$ is to
+  define a functor $\func{K}{\sJ}{\sA}$ together with a cone
+  $\Func{\kappa}{s}{UK}$ with summit~$s$.  We will show that if
+  $$
+  \begin{tikzcd}
+    K\colon \sJ \ar[r, "{(K,\kappa)}"]
+    & s\downarrow U \ar[r, "\Pi"]
+    & \sA
+  \end{tikzcd}
+  $$
+  admits a limit cone in $\sA$, then this cone lifts to define a
+  unique cone over $(K,\kappa)$ in $s\downarrow U$, and moreover this
+  cone is a limit cone.
+
+  Given a limit cone $\Func{\lambda}{\ell}{K}$ in $\sA$, as this limit
+  is preserved by~$U$ (by assumption), $\Func{U\lambda}{U\ell}{UK}$ is
+  a limit cone in~$\sS$.  It follows that there is a unique
+  factorisation of the cone~$\kappa$ through~$U\lambda$ along a map
+  $\func{t}{s}{U\ell}$.
+
+  Then $(\ell, t)$ is a limit for the diagram $(K,\kappa)$ in
+  $s\downarrow U$ with limit cone $U\lambda\cdot t$.
 \end{proof}
 
 \end{document}
-
