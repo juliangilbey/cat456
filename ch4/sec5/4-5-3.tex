@@ -12,11 +12,38 @@
 
 \setexercise{4}{5}{3}
 \begin{exercise}
-  
+  Use Proposition 4.5.1 to prove that in any complete category limits
+  commute with limits in the sense of the natural isomorphism of limit
+  functors (3.8.2).
 \end{exercise}
 
 \begin{proof}
-  
+  Suppose $\sC$ is complete and $\func{F}{\sI\times\sJ}{\sC}$ is a
+  diagram.  We want to show that
+  $\lim_{j\in\sJ}\lim_{i\in\sI} F(i,j) \cong
+  \lim_{i\in\sI}\lim_{j\in\sJ} F(i,j)$.  As in the proof of Theorem
+  3.8.1, it suffices to show that
+  $\lim_{i\in\sI}\lim_{j\in\sJ} F(i,j)\cong
+  \lim_{(i,j)\in\sI\times\sJ} F(i,j)$ as
+  $\sI\times\sJ\cong \sJ\times\sI$.  Now for any $c\in\sC$, we have by
+  Proposition 4.5.1
+  $$\sC(c,\lim_{i\in\sI}\lim_{j\in\sJ} F(i,j)) \cong
+  \sC^\sI(\Delta^\sI c, \lim_{j\in\sJ} F(-,j)) \cong
+  (\sC^\sI)^\sJ(\Delta^\sJ \Delta^\sI c, F)$$
+  where $\func{\Delta^\sI}{\sC}{\sC^\sI}$ and
+  $\func{\Delta^\sJ}{\sC^\sI}{(\sC^\sI)^\sJ}$ are diagonal functors.
+
+  By Exercise 1.7.vii, $(\sC^\sI)^\sJ\cong \sC^{\sI\times \sJ}$, and
+  also
+  $\func{\Delta^\sJ \Delta^\sI}{\sC}{(\sC^\sI)^\sJ\cong \sC^{\sI\times
+      \sJ}}$ is naturally isomorphic to $\Delta^{\sI\times \sJ}$.
+  Thus
+  $$\sC(c,\lim_{i\in\sI}\lim_{j\in\sJ} F(i,j)) \cong
+  \sC^{\sI\times \sJ}(\Delta^{\sI\times \sJ} c, F) \cong
+  \sC(c, \lim_{(i,j)\in\sI\times \sJ} F(i,j)),$$
+  again by Proposition 4.5.1.  Therefore
+  $\lim_{i\in\sI}\lim_{j\in\sJ} F(i,j)) \cong \lim_{(i,j)\in\sI\times
+    \sJ} F(i,j))$.
 \end{proof}
 
 \end{document}
