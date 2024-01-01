@@ -6,18 +6,335 @@
 
 % \settheorem{1}{2}{3}
 % \begin{lemma}
-%   
+%
 % \end{lemma}
 % \popthm
 
 \setexercise{4}{2}{3}
 \begin{exercise}
-  
+  Pick your favorite forgetful functor from Example 4.1.10 and prove
+  that it is a right adjoint by defining its left adjoint, the unit,
+  and the counit, and demonstrating that the triangle identities
+  hold.
 \end{exercise}
 
 \begin{proof}
-  
+  We show this for examples (i)--(vi) from Example 4.1.10; we state
+  the example at the start of each one, and name the left adjoint
+  as~$F$ in each case.
+
+  \begin{enumerate}[label=(\roman*)]
+  % (i)
+  \item $\func{U}{\Setp}{\Set}$.  The left adjoint carries a set $X$
+    to the pointed set $FX=X_+:= X\sqcup\{X\}$, with a freely-adjoined
+    basepoint.
+
+    Taking $X\in\Set$ and $Y_*\in\Setp$, we have
+    $\Setp(FX, Y_*)\cong \Set(X,UY_*)$, with the isomorphism taking a
+    based function $\func{f^\sharp}{FX}{Y_*}$ to the function
+    $\func{f^\flat}{X}{UY_*}$ which just ignores the basepoint.
+
+    We then have
+    \begin{center}
+      \begin{tikzcd}[row sep=0.2em]
+        X \ar[r, "\eta_X"] & UFX\\
+        x \ar[r, mapsto] & x
+      \end{tikzcd}
+    \end{center}
+    where $UFX=X\sqcup\{X\}$ as a set, and writing $Y:=UY_*$,
+    \begin{center}
+      \begin{tikzcd}[row sep=0.2em]
+        FUY_* \ar[r, "\epsilon_{Y_*}"] & Y_* \\
+        y \ar[r, mapsto] & y \\
+        \{Y\} \ar[r, mapsto] & *
+      \end{tikzcd}
+    \end{center}
+
+    We then obtain the triangle identities:
+    \begin{center}
+      \begin{tikzcd}[row sep=0.2em]
+        FX \ar[r, "F\eta_X"] & FUFX \ar[r, "\epsilon_{FX}"] & FX \\
+        x \ar[r, mapsto] & x \ar[r, mapsto] & x \\
+        \{X\} \ar[r, mapsto] & \{X\sqcup\{X\}\} \ar[r, mapsto] & \{X\}
+      \end{tikzcd}
+    \end{center}
+    as the basepoint of $FUFX$ is mapped to the basepoint of~$FX$,
+    hence $\epsilon_{FX}\cdot F\eta_X=1_{FX}$, which is the first
+    triangle identity.
+
+    Similarly,
+    \begin{center}
+      \begin{tikzcd}[row sep=0.2em]
+        UY_* \ar[r, "\eta_{UY_*}"] & UFUY_* \ar[r, "U\epsilon_{Y_*}"]
+        & UY_* \\
+        y \ar[r, mapsto] & y \ar[r, mapsto] & y
+      \end{tikzcd}
+    \end{center}
+    hence $U\epsilon_{Y_*}\cdot \eta_{UY_*}=1_{UY_*}$, which is the
+    second triangle identity.
+
+  % (ii)
+  \item $\func{U}{\Monoid}{\Set}$.  The free monoid on a set $X$
+    is the set $FX=\coprod_{n\ge0} X^{\times n}$ of finite lists of
+    elements of~$X$, including the empty list.
+
+    Composition in $FX$ is concatenation of lists.
+
+    Letting $X\in\Set$ and $M\in\Monoid$, we have
+    $\Monoid(FX, M)\cong \Set(X,UM)$, with the isomorphism taking a
+    morphism $\func{f^\sharp}{FX}{M}$ to the function
+    $\func{f^\flat}{X}{UM}$ which maps $x\in X$ to $f^\sharp((x))$
+    regarded as an element of the underlying set of~$M$.
+
+    We then have
+    \begin{center}
+      \begin{tikzcd}[row sep=0.2em]
+        X \ar[r, "\eta_X"] & UFX\\
+        x \ar[r, mapsto] & (x)
+      \end{tikzcd}
+    \end{center}
+    where $(x)\in X^{\times1}\subset \coprod_{n\ge0} X^{\times n}$,
+    regarded as a set, and
+    \begin{center}
+      \begin{tikzcd}[row sep=0.2em]
+        FUM \ar[r, "\epsilon_M"] & M \\
+        (m_1, m_2, \dots, m_k) \ar[r, mapsto] & m_1m_2\dots m_k
+      \end{tikzcd}
+    \end{center}
+    where the multiplication is in $M$.
+
+    We then obtain the triangle identities:
+    \begin{center}
+      \begin{tikzcd}[row sep=0.2em]
+        FX \ar[r, "F\eta_X"] & FUFX \ar[r, "\epsilon_{FX}"] & FX \\
+        (x_1,x_2,\dots,n_k) \ar[r, mapsto] &
+        ((x_1), (x_2), \dots, (x_k)) \ar[r, mapsto] &
+        (x_1,x_2,\dots,n_k)
+      \end{tikzcd}
+    \end{center}
+    since $(x_1)(x_2)\dots(x_k)=(x_1,x_2,\dots,x_k)$ in $FX$, hence
+    $\epsilon_{FX}\cdot F\eta_X=1_{FX}$, demonstrating the first
+    triangle identity.
+
+    Similarly,
+    \begin{center}
+      \begin{tikzcd}[row sep=0.2em]
+        UM \ar[r, "\eta_{UM}"] & UFUM \ar[r, "U\epsilon_M"] & UM \\
+        m \ar[r, mapsto] & (m) \ar[r, mapsto] & m
+      \end{tikzcd}
+    \end{center}
+    hence $U\epsilon_M\cdot \eta_{UM}=1_{UM}$, demonstrating the
+    second triangle identity.
+
+  % (iii)
+  \item $\func{U}{\Ring}{\Ab}$, forgetting the multiplicative
+    structure.  The free ring on an abelian group~$A$
+    is $FA=\bigoplus_{n\ge0} A^{\otimes n}$.  (Note that $A^{\otimes
+      0}=\ZZ$.)
+
+    Addition is componentwise, and multiplication is given by
+    $$(a_1\otimes \dots \otimes a_r)(b_1\otimes \dots \otimes b_s) =
+    a_1\otimes \dots \otimes a_r \otimes b_1 \otimes \dots \otimes
+    b_s$$
+    and then extended by linearity.  (More precisely, there is a
+    natural isomorphism $A^{\otimes r}\otimes A^{\otimes s}\cong
+    A^{\otimes(r+s)}$, and that is what is used to define the
+    product.)
+
+    Letting $A\in\Ab$ and $R\in\Ring$, we have
+    $\Ring(FA, R)\cong \Ab(A,UR)$, with the isomorphism taking a
+    morphism $\func{f^\sharp}{FA}{R}$ to the morphism
+    $\func{f^\flat}{A}{UR}$ which maps $a\in A$ to $f^\sharp(a)$, with
+    $a\in A^{\otimes 1}$, regarded as an element of the underlying
+    abelian group of~$R$.
+
+    We then have
+    \begin{center}
+      \begin{tikzcd}[row sep=0.2em]
+        A \ar[r, "\eta_A"] & UFA\\
+        a \ar[r, mapsto] & a
+      \end{tikzcd}
+    \end{center}
+    where the image is $a\in A^{\otimes1}$ in the direct sum, and
+    \begin{center}
+      \begin{tikzcd}[row sep=0.2em]
+        FUR \ar[r, "\epsilon_R"] & R \\
+        r_1 \otimes r_2 \otimes \dots \otimes r_k \ar[r, mapsto]
+        & r_1r_2\dots r_k
+      \end{tikzcd}
+    \end{center}
+    and extends by linearity.
+
+    We then obtain the triangle identities:
+    \begin{center}
+      \begin{tikzcd}[row sep=0.2em]
+        FA \ar[r, "F\eta_A"] & FUFA \ar[r, "\epsilon_{FA}"] & FA \\
+        a_1 \otimes a_2 \otimes \dots \otimes a_k \ar[r, mapsto] &
+        a_1 \otimes a_2 \otimes \dots \otimes a_k \ar[r, mapsto] &
+        a_1 \otimes a_2 \otimes \dots \otimes a_k
+      \end{tikzcd}
+    \end{center}
+    where the middle term lies in $(UFA)^{\otimes1}$, so
+    $\epsilon_{FA}\cdot F\eta_A=1_{FA}$, demonstrating the first
+    triangle identity.
+
+    Similarly,
+    \begin{center}
+      \begin{tikzcd}[row sep=0.2em]
+        UR \ar[r, "\eta_{UR}"] & UFUR \ar[r, "U\epsilon_R"] & UR \\
+        r \ar[r, mapsto] & r \ar[r, mapsto] & r
+      \end{tikzcd}
+    \end{center}
+    where the middle term lies in $(UR)^{\otimes1}$, so
+    $U\epsilon_R\cdot \eta_{UR}=1_{UR}$, demonstrating the second
+    triangle identity.
+
+  % (iv)
+  \item $\func{U}{\Ab}{\Set}$.  The free abelian group on a set~$X$ is
+    the set $FX=\ZZ[X]:=\bigoplus_X \ZZ$ of finite formal sums of
+    elements of~$X$ with integer coefficients.
+
+    This is identical to the more general (v), just writing $\ZZ$ in
+    place of~$R$.
+
+  % (v)
+  \item  $\func{U}{\Mod{R}}{\Set}$.  The free $R$-module on a set~$X$ is
+    $FX=R[X]:=\bigoplus_X R$ of finite formal sums of
+    elements of~$X$ with coefficients in~$R$.  A special case defines
+    the free $\mathbb{k}$-vector space on a set, defining the left
+    adjoint to $\func{U}{\Vect{\mathbb{k}}}{\Set}$ considered in the
+    introduction to this chapter.
+
+    Here, addition is componentwise, and we write
+    $\sum_{x\in X} \beta_x x$ for such a finite formal sum.
+
+    Letting $X\in\Set$ and $M\in\Mod{R}$, we have
+    $\Mod{R}(FX, M)\cong \Set(X,UM)$, with the isomorphism taking an
+    $R$-module homomorphism $\func{f^\sharp}{FX}{M}$ to the function
+    $\func{f^\flat}{X}{UM}$ which maps $x\in X$ to $f^\sharp(1x)$,
+    regarded as an element of the underlying set of~$M$.
+
+    We then have
+    \begin{center}
+      \begin{tikzcd}[row sep=0.2em]
+        X \ar[r, "\eta_X"] & UFX\\
+        x \ar[r, mapsto] & 1x
+      \end{tikzcd}
+    \end{center}
+    where the image is the sum $\sum_{x'\in X} \beta_{x'} x'$ with
+    $\beta_x=1$, $\beta_{x'}=0$ otherwise, and this sum is taken in
+    the underlying set of~$FX$.  We also have
+    \begin{center}
+      \begin{tikzcd}[row sep=0.2em]
+        FUM \ar[r, "\epsilon_M"] & M \\
+        \sum_{m\in M} \beta_m m \ar[r, mapsto]
+        & \sum_{m\in M} \beta_m m
+      \end{tikzcd}
+    \end{center}
+    where the sum in the image is interpreted in $M$.  (In the case of
+    abelian groups of example~(iv), this sum would be interpreted in
+    the abelian group regarded as a $\ZZ$-module for the purposes of
+    the scalar multiplication.)
+
+    We then obtain the triangle identities:
+    \begin{center}
+      \begin{tikzcd}[row sep=0.2em]
+        FX \ar[r, "F\eta_X"] & FUFX \ar[r, "\epsilon_{FX}"] & FX \\
+        \sum_{x\in X} \beta_x x \ar[r, mapsto] &
+        1\cdot \sum_{x\in X} \beta_x x \ar[r, mapsto] &
+        \sum_{x\in X} \beta_x x
+      \end{tikzcd}
+    \end{center}
+    where the middle term is a formal sum in $\bigoplus_{UFX}R$, so
+    $\epsilon_{FX}\cdot F\eta_X=1_{FX}$, demonstrating the first
+    triangle identity.
+
+    Similarly,
+    \begin{center}
+      \begin{tikzcd}[row sep=0.2em]
+        UM \ar[r, "\eta_{UM}"] & UFUM \ar[r, "U\epsilon_M"] & UM \\
+        m \ar[r, mapsto] & 1m \ar[r, mapsto] & m
+      \end{tikzcd}
+    \end{center}
+    where the middle term lies in the underlying set of
+    $\bigoplus_M R$, so $U\epsilon_M\cdot \eta_{UM}=1_{UM}$,
+    demonstrating the second triangle identity.
+
+  % (vi)
+  \item $\func{U}{\Ring}{\Set}$.  By composing the left adjoints to
+    the forgetful functors $\Ring\to \Ab\to \Set$, the free ring on a
+    set~$X$ is the free monoid on the free abelian group on the set:
+    $FX=\bigoplus_{n\ge0}\bigl(\bigoplus_X \ZZ\bigr)^{\otimes n}$.
+
+    More details about the composition of adjoint functions are given
+    in Section 4.4, in particular in Proposition 4.4.4.  But here we
+    will not make use of the results there, and work directly with the
+    functors given here.
+
+    Letting $X\in\Set$ and $R\in\Ring$, we have
+    $\Ring(FX, R)\cong \Set(X,UR)$, with the isomorphism taking a
+    morphism $\func{f^\sharp}{FX}{R}$ to the function
+    $\func{f^\flat}{X}{UR}$ which maps $x\in X$ to $f^\sharp(1x)$,
+    regarded as an element of the underlying set of~$R$, where $1x\in
+    \bigl(\bigoplus_X \ZZ\bigr)^{\otimes 1}$.
+
+    We then have
+    \begin{center}
+      \begin{tikzcd}[row sep=0.2em]
+        X \ar[r, "\eta_X"] & UFX\\
+        x \ar[r, mapsto] & 1x
+      \end{tikzcd}
+    \end{center}
+    where $1x\in \bigl(\bigoplus_X \ZZ\bigr)^{\otimes 1}$, regarded as
+    an element of the underlying set of~$FX$, and
+    \begin{center}
+      \begin{tikzcd}[column sep=0em]
+        FUR \ar[d, "\epsilon_R"'] & \in &
+        \sum\limits_{R} \beta_r^{(1)}r \otimes \sum\limits_{R}
+        \beta_r^{(2)}r \otimes \dots \otimes \sum\limits_{R}
+        \beta_r^{(k)}r \ar[d, mapsto] \\
+        R & \in &
+        \left(\sum\limits_{R} \beta_r^{(1)}r\right)\left(\sum\limits_{R}
+          \beta_r^{(2)}r\right) \dots \left(\sum\limits_{R}
+          \beta_r^{(k)}r\right)
+      \end{tikzcd}
+    \end{center}
+    where the product and sums in the image are evaluated in~$R$, and
+    each term $\beta_r^{(i)}r$ is evaluated by regarding $R$ as a
+    $\ZZ$-module.  The definition of $\epsilon_R$ then extends by
+    linearity to all of $FUR$.
+
+    We now obtain the triangle identities:
+    \begin{center}
+      \begin{tikzcd}[column sep=0em]
+        FX \ar[d, "F\eta_X"'] & \in &
+        \sum\limits_X \beta_x^{(1)}x \otimes \dots \otimes
+        \sum\limits_X \beta_x^{(k)}x \ar[d, mapsto] \\
+        FUFX \ar[d, "\epsilon_{FX}"'] & \in &
+        1\cdot\left(\sum\limits_X \beta_x^{(1)}x \otimes \dots
+          \otimes \sum\limits_X \beta_x^{(k)}x\right) \ar[d, mapsto] \\
+        FX & \in &
+        \sum_{X} \beta_x^{(1)}x \otimes \dots \otimes
+        \sum_{X} \beta_x^{(k)}x
+      \end{tikzcd}
+    \end{center}
+    where the middle term lies in
+    $\bigl(\bigoplus_{FX}\ZZ\bigr)^{\otimes1}$, so
+    $\epsilon_{FX}\cdot F\eta_X=1_{FX}$, demonstrating the first
+    triangle identity.
+
+    Similarly,
+    \begin{center}
+      \begin{tikzcd}[row sep=0.2em]
+        UR \ar[r, "\eta_{UR}"] & UFUR \ar[r, "U\epsilon_R"] & UR \\
+        r \ar[r, mapsto] & 1r \ar[r, mapsto] & r
+      \end{tikzcd}
+    \end{center}
+    where the middle term lies in
+    $\bigl(\bigoplus_{UR}\ZZ\bigr)^{\otimes1}$, so
+    $U\epsilon_R\cdot \eta_{UR}=1_{UR}$, demonstrating the second
+    triangle identity.
+  \end{enumerate}
 \end{proof}
 
 \end{document}
-
