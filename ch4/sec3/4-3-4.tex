@@ -6,18 +6,233 @@
 
 % \settheorem{1}{2}{3}
 % \begin{lemma}
-%   
+%
 % \end{lemma}
 % \popthm
 
 \setexercise{4}{3}{4}
 \begin{exercise}
-  
+  Define pointwise adjoints to the following bifunctors, giving rise
+  to examples of two-variable adjunctions.
+  \begin{enumerate}[label=(\roman*)]
+  \item There is a bifunctor
+    $$\Setp^\op\times\Setp\xrightarrow{\Hom_*}\Setp,$$
+    where $\Hom_*((X,x),(Y,y))$ is defined to be the set of pointed
+    functions $(X,x)\to(Y,y)$, with the constant function at~$y$
+    serving as the basepoint.  Define a two-variable adjunction
+    determined by this bifunctor, the pointwise left adjoints to
+    $\Hom_*((X,x),-)$.
+  \item Describe the left adjoint bifunctor
+    $\Setp\times\Setp\xrightarrow{\wedge}\Setp$ constructed in~(i) in
+    a sufficiently categorical way so that $\Set$ can be replaced by
+    any cartesian closed category with pushouts and pullbacks.
+  \item The discussion in Example 4.3.11 extends to any category
+    $\Mod{R}$ of modules over a \emph{commutative} ring~$R$.  If
+    $R$~is not commutative, for a pair of $R$-modules $A$ and~$B$,
+    $\Hom(A,B)$ is not necessarily an $R$-module, but it is still an
+    abelian group.  This construction defines a bifunctor
+    $$\Mod{R}^\op\times\Mod{R}\xrightarrow{\Hom}\Ab.$$
+    Extend this data to a two-variable adjunction.
+  \item In a similar fashion, define a two-variable adjunction
+    determined by the hom bifunctor
+    $$\cat{Ch}_R^\op\times\cat{Ch}_R\xrightarrow{\Hom}\Mod{R},$$
+    where the ring $R$ is commutative and the set
+    $\Hom(A_\bullet,B_\bullet)$ of chain homomorphisms $A_\bullet\to
+    B_\bullet$ inherits an $R$-module structure with addition and
+    scalar multiplication defined elementwise.
+  \end{enumerate}
 \end{exercise}
 
 \begin{proof}
-  
+  \begin{enumerate}[label=(\roman*)]
+  \item In parallel to the discussion in Example 4.3.14, we call the
+    left adjoint the smash product.  To simplify the notation, we
+    write $X_*=(X,x)$ and so on.  We thus require
+    $$\Setp(X_*\wedge Y_*,Z_*) \cong \Setp(Y_*, \Hom_*(X_*,Z_*)) \cong
+    \Setp(X_*, \Hom_*(Y_*,Z_*)).$$
+    For a given function $\hat{f}$ in $\Setp(Y_*, \Hom_*(X_*,Z_*))$,
+    the values of $\hat{f}(y')$ are arbitrary values in~$Z$ except when
+    $y'=y$ or $\hat{f}(y')(x)$, when the value must be~$z$.  We thus
+    define
+    $$(X,x)\wedge (Y,y) = (X\times Y)/(X\times\{y\}\cup \{x\}\times
+    Y)$$
+    with basepoint $(X\times\{y\}\cup \{x\}\times Y)$.  For a function
+    $f\in\Setp(X_*\wedge Y_*, Z_*)$, we have $\hat{f}\in \Setp(Y_*,
+    \Hom_*(X_*,Z_*))$ defined by $\hat{f}(y')(x') = f(x',y')$, where
+    $(x',y')$ is taken to be the image of $(x',y')\in X\times Y$ in
+    $(X,x)\wedge (Y,y)$; this is well-defined, as $f(x',y')=z$
+    whenever $x'=x$ or $y'=y$.
+
+    The naturality of this first isomorphism in all three variables is
+    straightforward.
+
+    Since $(X,x)\wedge(Y,y)$ is symmetrical in $(X,x)$ and $(Y,y)$,
+    the third isomorphism also holds, and we thus have a two-variable
+    adjunction.
+
+  \item We first note that we need a little more than pushouts and
+    pullbacks to do this: we also need either an initial object~$i$ or
+    at least binary coproducts.  Let us assume this from now on.  (A
+    cartesian closed category has finite products by definition, so in
+    particular it has the empty product, which is a terminal element.)
+    So suppose that $\sC$ is a cartesian closed category with an
+    initial element~$i$, a terminal element~$t$, pushouts and
+    pullbacks.  (From Theorem 3.4.18, we can equivalently describe
+    this as assuming that $\sC$ has all finite limits and finite
+    colimits.)  We write $\sC_*$ for the slice category $t/\sC$.
+
+    One challenge here is not only to replicate the quotient
+    construction of part~(i), which can be achieved using a pushout,
+    but also to specify the basepoint of this quotient, as the smash
+    product must live in~$\sC_*$.
+
+    We follow the construction in Elmendorf and
+    Mandell~\cite{elmendorf09}.  Their Construction 4.19 describes
+    both the wedge product and the $\Hom_*$ functor, with a proof that
+    the construction gives a two-variable adjunction appearing in
+    Lemma 4.20.
+
+    Let $\func{f}{t}{a}$ and $\func{g}{t}{b}$ be objects in~$\sC_*$.
+    For simplicity of notation, we write these objects as $a$ and~$b$,
+    which can be thought of as objects in either $\sC_*$ or of~$\sC$.
+    The functions $f$ and~$g$ are called the structure maps for $a$
+    and~$b$.
+
+    We can construct the generalisation of the basepoint
+    $X\times\{y\}\cup \{x\}\times Y$ from~(i) as follows: working
+    in~$\sC$, we have the objects $a\times t$ and $t\times b$, and
+    thus the object $(a\times t)\coprod(t\times b)$.  (This is why we
+    need binary coproducts or an initial element.)  Using this, we can
+    construct the following pushout in~$\sC$:
+    \begin{center}
+      \begin{tikzcd}
+        (a\times t)\coprod(t\times b)
+        \ar[r] \ar[d, "!"'] \ar[dr, phantom, "\ulcorner", at end]
+        & a\times b \ar[d] \\
+        t \ar[r]
+        & a\wedge b
+      \end{tikzcd}
+    \end{center}
+    The top morphism is induced by
+    $\func{1_a\times g}{a\times t}{a\times b}$ and
+    $\func{f\times 1_b}{t\times b}{a\times b}$.  In $\Set$, the
+    resulting object $a\wedge b$ is isomorphic to $a\times b$ with all
+    elements of the subset $(a\times t)\coprod(t\times b)$ identified
+    (where $t$~is interpreted as the basepoint of $a$ or~$b$ as
+    appropriate).
+
+    Finally, to turn this into an object in $\sC_*$, we require a
+    morphism $t\to a\wedge b$, but this is now easy: it is the bottom
+    arrow in this pushout.
+
+    Though the exercise did not ask for this, we also describe the
+    construction of the functor
+    $\func{\Hom_*}{\sC_*\times\sC_*}{\sC_*}$.  For this, we use the
+    following pullback in~$\sC$, where $\Hom$ here is the hom object
+    in~$\sC$, being the two-variable adjunct of the product functor:
+    \begin{center}
+      \begin{tikzcd}[column sep = large]
+        \Hom_*(a,b)
+        \ar[r] \ar[d] \ar[dr, phantom, "\lrcorner", at start]
+        & t \ar[d] \\
+        \Hom(a,b) \ar[r, "{\Hom(f,1_b)}"']
+        & \Hom(t,b)
+      \end{tikzcd}
+    \end{center}
+    The morphism from $t\to\Hom(t,b)$ is the composite
+    $$t\xrightarrow{\cong} \Hom(t,t) \xrightarrow{\Hom(1_t,g)}
+    \Hom(t,b).$$
+    Since $\Hom(t,-)$ is a right adjoint, it preserves limits (Theorem
+    4.5.2), and since $t$~is the limit of the empty diagram,
+    $\Hom(t,t)$ is also a terminal object, hence there is a unique
+    morphism $t\to \Hom(t,t)$, which is an isomorphism.
+
+    This gives the object $\Hom_*(a,b)$ in $\sC$; we now need to give
+    a morphism $t\to\Hom_*(a,b)$ to give the corresponding object
+    in~$\sC_*$.  For this, we consider the following diagram,
+    extending the pullback:
+    \begin{center}
+      \begin{tikzcd}[column sep = large]
+        t \ar[drr, bend left, "1_t"] \ar[d, "\cong"']
+        \ar[dr, dashed, "\exists!"] \\
+        \Hom(t,t) \ar[d, "{\Hom(!,1_t)}"] & \Hom_*(a,b)
+        \ar[r] \ar[d] \ar[dr, phantom, "\lrcorner", at start]
+        & t \ar[d] \\
+        \Hom(a,t) \ar[r, "{\Hom(1_a,g)}"']
+        & \Hom(a,b) \ar[r, "{\Hom(f,1_b)}"']
+        & \Hom(t,b)
+      \end{tikzcd}
+    \end{center}
+    The composite of the morphisms from $\Hom(t,t)$ to $\Hom(t,b)$ along
+    the outer-left path is
+    $$\Hom(f,1_b)\cdot \Hom(1_a,g) \cdot \Hom(!,1_t) = \Hom(1_t,g)$$
+    (remembering that $\Hom$ is contravariant in the first variable),
+    so the two outer paths from the upper left~$t$ to $\Hom(t,b)$ are
+    equal.  By the universal property of the pullback, there is thus a
+    unique morphism $t\to\Hom_*(a,b)$, and this defines $\Hom_*(a,b)$
+    as an object of~$\sC_*$.
+
+  \item We seek an adjunction
+    $$\Mod{R}(F(M,A),N) \cong \Ab(A,\Hom(M,N)) \cong
+    \Mod{R}(M,H(A,N))$$
+    natural in $M,N\in\Mod{R}$ and $A\in\Ab$.
+
+    Parallelling the discussion in Example 4.3.11, we define $F(M,A)$
+    to be a tensor product.  As $A$~is an abelian group, it can be
+    considered as a $\ZZ$-module.  There is a unique ring homomorphism
+    $\ZZ\to R$,so the $R$-module $M$ can also be considered as a
+    $\ZZ$-module, and hence in an $R$-$\ZZ$ bimodule.  We can thus
+    form the tensor product $M\otimes_\ZZ A$, which is an $R$-module;
+    we let $F(M,A)$ be this tensor product.  We then have
+    $$\Mod{R}(M\otimes_\ZZ A,N) \cong \Ab(A,\Hom(M,N))$$
+    which sends $\func{f}{M\otimes_\ZZ A}{N}$ to
+    $\func{\hat{f}}{A}{\Hom(M,N)}$ where $\hat{f}(a)(m)=f(m\otimes
+    a)$.  This isomorphism is natural in all three variables.
+
+    The other right adjoint is $H(A,N)$, which must be an $R$-module.
+    The only reasonble candidate for this is an $R$-module of
+    homomorphisms from $A$ to~$N$.  We have a $\ZZ$-module
+    $\Hom(A,N)$ by regarding $N$ as a $\ZZ$-module, and we can
+    consider it as an $R$-module by defining scalar multiplication
+    pointwise (so if $\phi\in\Hom(A,N)$ and $r\in R$, then
+    $(r\phi)(a)=r(\phi(a))$).  This does give the required natural
+    isomorphism, sending $\func{f}{M\otimes_\ZZ A}{N}$ to
+    $\func{\hat{f}}{M}{\Hom(A,N)}$ where $\hat{f}(m)(a)=f(m\otimes
+    a)$.
+
+    We have thus produced a two-variable adjunction
+    $$\Mod{R}(M\otimes_\ZZ A,N) \cong \Ab(A,\Hom(M,N)) \cong
+    \Mod{R}(M,\Hom(A,N)).$$
+
+  \item This case is similar to (iii); the only difficulty is to give
+    meaningful definitions to the tensor product and the other hom
+    object.  We wish to have natural isomorphisms
+    $$\cat{Ch}_R(M\otimes_R A_\bullet,B_\bullet) \cong
+    \cat{Ch}_R(A_\bullet,\Hom(M,B_\bullet)) \cong
+    \Mod{R}(M,\Hom(A_\bullet,B_\bullet)).$$
+
+    We first define the tensor product $M\otimes_R A_\bullet$.  This
+    is the chain complex with $n$th module $M\otimes_R A_n$, where the
+    boundary map is given by $\func{M\otimes_R d}{M\otimes_R
+      A_n}{M\otimes_R A_{n-1}}$.  Then given a chain morphism
+    $\func{f}{M\otimes_R A_\bullet}{B_\bullet}$, we obtain the
+    transpose $\func{\hat{f}}{M}{\Hom(A_\bullet,B_\bullet)}$ by
+    $\hat{f}(m)(a_n)=f(m\otimes a_n)$ where $a_n\in A_n$.
+
+    We next define the hom object $\Hom(M,B_\bullet)$.  This is an
+    $R$-module chain complex~$C_\bullet$, where $C_n=\Hom(M,B_n)$ with
+    $R$-module structure given by pointwise operations (which we can
+    do, as $R$~is commutative).  The boundary operator $d^C$ is given
+    by $d^C=d^B_*$, that is, post-composition with the boundary
+    operator of~$B_\bullet$.  Then given a chain morphism
+    $\func{f}{M\otimes_R A_\bullet}{B_\bullet}$, we obtain the
+    transpose $\func{\hat{f}}{A_\bullet}{\Hom(M,B_\bullet)}$ by
+    $\hat{f}(a_n)(m)=f(m\otimes a_n)$ where $a_n\in A_n$.
+
+    With these definitions of the tensor product and other hom object,
+    we obtain the desired two-variable adjunction.
+  \end{enumerate}
+
 \end{proof}
 
 \end{document}
-
