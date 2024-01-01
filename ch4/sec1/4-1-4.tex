@@ -4,20 +4,61 @@
 \begin{document}
 \maketitle
 
-% \settheorem{1}{2}{3}
-% \begin{lemma}
-%   
-% \end{lemma}
-% \popthm
-
 \setexercise{4}{1}{4}
 \begin{exercise}
-  
+  Prove that the construction of the free $R$-module on a set
+  described in Example 4.1.10(v) is functorial.
 \end{exercise}
 
 \begin{proof}
-  
+  We wish to show that $\func{F}{\Set}{\Mod{R}}$ with $F(X)=R[X]$ is
+  functorial.  Given $\func{f}{X}{Y}$ in \Set, we need to define
+  $\func{Ff}{R[X]}{R[Y]}$.  Suppose that $\sum_{x\in X} a_xx\in R[X]$
+  (writing this to mean $(a_x)_{x\in R}$).  We define
+  $$Ff\left(\sum_{x\in X} a_xx\right) = \sum_{x\in X} a_xf(x)$$
+  which is a finite formal sum in $R[Y]$.  We first show that this is
+  a morphism $R[X]\to R[Y]$ in \Mod{R}, and then we show this it is
+  functorial.
+
+  For any elements of $R[X]$ and any $r\in R$, we have:
+  \begin{align*}
+    Ff\left(\sum_{x\in X} a_xx+\sum_{x\in X} b_xx\right)
+         &=Ff\left(\sum_{x\in X} (a_x+b_x)x\right) \\
+         &=\sum_{x\in X} (a_x+b_x)f(x) \\
+         &= \sum_{x\in X} a_xf(x)+\sum_{x\in X} b_xf(x) \\
+         &= Ff\left(\sum_{x\in X} a_xx\right)+Ff\left(\sum_{x\in X}
+           b_xx\right)
+  \end{align*}
+  and
+  \begin{align*}
+    Ff\left(r\sum_{x\in X} a_xx\right)
+         &= Ff\left(\sum_{x\in X} ra_xx\right) \\
+         &= \sum_{x\in X} ra_xf(x) \\
+         &= r\sum_{x\in X} a_xf(x) \\
+         &= rFf\left(\sum_{x\in X} a_xx\right)
+  \end{align*}
+  so $Ff$ is a morphism as required.
+
+  For functoriality, we need to show that $F1_X=1_{FX}$, and if
+  $\func{f}{X}{Y}$ and $\func{g}{Y}{Z}$, then $F(gf)=Fg\cdot Ff$.
+  For the first, we have
+  \begin{align*}
+    F1_X\left(\sum_{x\in X} a_xx\right)
+    &= \sum_{x\in X} a_x1_X(x) \\
+    &= \sum_{x\in X} a_xx \\
+    &= 1_{R[X]}\left(\sum_{x\in X} a_xx\right)
+  \end{align*}
+  so $F1_X=1_{FX}$.  For the second, we have
+  \begin{align*}
+    F(gf)\left(\sum_{x\in X} a_xx\right)
+    &= \sum_{x\in X} a_xgf(x) \\
+    &= Fg\left(\sum_{x\in X} a_xf(x)\right) \\
+    &= Fg\left(Ff\left(\sum_{x\in X} a_xx\right)\right) \\
+    &= (Fg\cdot Ff)\left(\sum_{x\in X} a_xx\right) \\
+  \end{align*}
+  so $F(gf)=Fg\cdot Ff$.
+
+  Therefore the construction described is functorial.
 \end{proof}
 
 \end{document}
-
