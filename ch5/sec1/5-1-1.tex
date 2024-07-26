@@ -6,18 +6,792 @@
 
 % \settheorem{1}{2}{3}
 % \begin{lemma}
-%   
+%
 % \end{lemma}
 % \popthm
 
 \setexercise{5}{1}{1}
 \begin{exercise}
-  
+  Suppose $\sV$ is a monoidal category (see \S E.2), i.e., a category
+  with a bifunctor $\func{\otimes}{\sV \times \sV}{\sV}$ that is
+  associative up to coherent natural isomorphism and a unit object
+  ${*}\in\sV$ with natural isomorphisms
+  $v\otimes {*} \cong v \cong {*} \otimes v$.  Suppose also that
+  $\sV$~has finite coproducts and that the bifunctor~$\otimes$
+  preserves them in each variable.  Show that
+  $T(X) = \coprod_{n\ge0} X^{\otimes n}$ defines a monad on~$\sV$ by
+  defining natural transformations $\Func{\eta}{1_\sV}{T}$ and
+  $\Func{\mu}{T^2}{T}$ that satisfy the required conditions.
 \end{exercise}
 
 \begin{proof}
-  
+  We first note that for the definition of the monad to make sense, we
+  require $\sV$ to have countable coproducts, not just finite ones,
+  and so we assume that it does, and that these are also preserved by
+  the bifunctor~$\otimes$.
+
+  We also observe that this is an extension of the free monoid monad
+  of Example 5.1.4(ii), as $\Set$ can be thought of as a monoidal
+  category, with monoidal product the cartesian product and monoidal
+  unit a singleton set.
+
+  We present two solutions: the first is a direct construction of the
+  required natural transformations that parallel those for the free
+  monoid monad, while the second is a longer construction that shows
+  how this monad can be derived as the monad of an adjunction in a
+  similar way to that of the free monoid monad.
+
+  Both solutions require a little more understanding of the properties
+  of monoidal categories than given in the footnote of this exercise;
+  Appendix \S E.2 gives more details of the coherence result that we
+  will require (Theorem E.2.2), though we will not make use of
+  symmetors here.  A full statement and proof appears in \S VII.2
+  of~\cite{catworking}.  At the end of \S E.2, Riehl notes that any
+  two ``$n$-ary tensor product'' functors $\sV^{\times n}\to \sV$ that
+  are built iteratively from the bifunctor $\otimes$ and the unit
+  object~$*$, each permuting and parenthesising the inputs in some
+  manner, are connected by a unique natural isomorphism that is built
+  out of the given natural isomorphisms $\alpha$, $\lambda$ and~$\rho$
+  (and their inverses).  Furthermore, any two morphisms built in this
+  way between the same two products are equal.  Though we seldom need
+  to emphasise these, says Riehl, it is necessary to do so for this
+  proof.  The unique natural isomorphism is called the canonical
+  isomorphism.  We will write `can' in the following to mean the
+  relevant component of the relevant canonical isomorphism.
+
+  In the rest of this solution, we will slightly simplify the notation
+  used in the question: for any object $X\in\sV$, we write~$X^n$
+  instead of~$X^{\otimes n}$, and we understand this to mean
+  $((\cdots(X\otimes X)\otimes\cdots X)\otimes X$ (``all parentheses
+  in front''), with $X^0={*}$ and $X^1=X$; we similarly understand
+  other expressions such as $a\otimes b\otimes \cdots \otimes c$.  We
+  also write $\iota_n$ to indicate the appropriate coproduct
+  injection; we will not use different symbols for different
+  coproducts.  \renewcommand{\qedsymbol}{}
+\end{proof}
+
+\bigskip
+\textsc{First Approach}: a direct construction.
+
+We mimic the free monoid monad construction, defining
+$\func{\mu_X}{T^2(X)=\coprod_m\bigl(\coprod_n
+  X^n\bigr)^m}{T(X)=\coprod_r X^r}$ componentwise by
+$$
+\begin{tikzcd}[column sep=7em, row sep=large]
+  X^{n_1}\otimes \dots \otimes X^{n_m}
+  \ar[r,"\iota_m(\iota_{n_1}\otimes \dots \otimes \iota_{n_m})"]
+  \ar[d,"\text{can}"']
+  & \coprod_m\bigl(\coprod_n X^n\bigr)^m
+  \ar[d,dashed,"\mu_X"]
+  \\
+  X^{n_1+\dots+n_m}
+  \ar[r,"\iota_{n_1+\dots+n_m}"']
+  & \coprod_r X^r
+\end{tikzcd}
+$$
+where the top morphism is the composite
+$$\textstyle X^{n_1}\otimes \dots \otimes X^{n_m}
+  \xrightarrow{\iota_{n_1}\otimes \dots \otimes \iota_{n_m}}
+  \bigl(\coprod_n X^n\bigr)^m
+  \xrightarrow{\iota_m}
+  \coprod_m\bigl(\coprod_n X^n\bigr)^m,
+$$
+and the unit by $\func{\eta_X=\iota_1}{X}{\coprod_n X^n}$.
+
+We now show that these natural transformations satisfy the required
+identities.  We have the diagram
+\begingroup
+\small
+$$
+\begin{tikzcd}[column sep=small, row sep=large]
+  \begin{aligned}
+    &(X^{n_{11}}\otimes\dots\otimes X^{n_{1m_1}}) \otimes \cdots\\
+    &\quad {}\otimes(X^{n_{k1}}\otimes\dots\otimes X^{n_{km_k}})
+  \end{aligned}
+  \ar[rrr, "\text{can}\otimes\dots\otimes\text{can}"]
+  \ar[ddd, "\text{can}"']
+  \ar[dr, "\phi_1"]
+  &&&
+  \begin{aligned}
+    &X^{n_{11}+\dots+n_{1m_1}} \otimes \cdots\\
+    &\quad {}\otimes X^{n_{k1}+\dots+n_{km_k}}
+  \end{aligned}
+  \ar[ddd, "\text{can}"]
+  \ar[dl, "\phi_2"']
+  \\
+  & \coprod_k\bigl(\coprod_m\bigl(\coprod_n X^n\bigr)^m\bigr)^k
+  \ar[r, "T\mu_X"]
+  \ar[d, "\mu_{TX}"']
+  & \coprod_k\bigl(\coprod_r X^r\bigr)^k
+  \ar[d, "\mu_X"]
+  \\
+  & \coprod_s\bigl(\coprod_n X^n\bigr)^s
+  \ar[r, "\mu_X"']
+  & \coprod_t X^t
+  \\
+  \begin{aligned}
+    &X^{n_{11}}\otimes\dots\otimes X^{n_{1m_1}} \otimes \cdots\\
+    &\quad {} \otimes X^{n_{k1}}\otimes\dots\otimes X^{n_{km_k}}
+  \end{aligned}
+  \ar[rrr, "\text{can}"']
+  \ar[ur, "\phi_3"]
+  &&&
+  X^{n_{11}+\dots+n_{1m_1}+\dots+n_{k1}+\dots+n_{km_k}}
+  \ar[ul, "\phi_4"']
+\end{tikzcd}
+$$
+\endgroup
+where the $\phi_i$ are given by:
+\begin{align*}
+  \phi_1 &= \iota_k\bigl(\iota_{m_1}
+           (\iota_{n_{11}}\otimes \dots\otimes \iota_{n_{1m_1}})
+           \otimes \dots \otimes
+           \iota_{m_k}
+           (\iota_{n_{k1}}\otimes \dots\otimes \iota_{n_{km_k}})
+           \bigr)\\
+  \phi_2 &= \iota_k(\iota_{n_{11}+\dots+n_{1m_1}}
+           \otimes \dots \otimes
+           \iota_{n_{k1}+\dots+n_{km_k}})\\
+  \phi_3 &= \iota_{m_1+\dots+m_k}
+           (\iota_{n_{11}}\otimes \dots\otimes \iota_{n_{1m_1}}
+           \otimes \dots \otimes
+           \iota_{n_{k1}}\otimes \dots\otimes \iota_{n_{km_k}}) \\
+  \phi_4 &= \iota_{n_{11}+\dots+n_{1m_1}+\dots+n_{k1}+\dots+n_{km_k}}
+\end{align*}
+The outer square commutes by the coherence theorem, and so the inner
+square commutes as required.
+
+For the other two identities involving $\eta$, we have the following
+diagrams, using $\eta_X=\iota_1$ and similarly for $\eta_{TX}$:
+$$
+\begin{tikzcd}[column sep=normal, row sep=large]
+  X^n
+  \ar[rrr, equal]
+  \ar[dr, "\iota_n"]
+  \ar[ddd, equal]
+  &&& X^n
+  \ar[dl, "\iota_1 \iota_n"']
+  \ar[dddlll, bend left, "\text{can}=1_{X^n}"]
+  \\
+  & \coprod_n X^n
+  \ar[r, "\eta_{TX}"]
+  \ar[d, "1_{\coprod X^n}"']
+  & \coprod_m\bigl(\coprod_n X^n\bigr)^m
+  \ar[dl, "\mu_X"]
+  \\
+  & \coprod_n X^n
+  \\
+  X^n
+  \ar[ur, "\iota_n"']
+\end{tikzcd}
+$$
+
+$$
+\begin{tikzcd}[column sep=normal, row sep=large]
+  X^n
+  \ar[rrr, equal]
+  \ar[dr, "\iota_n"]
+  \ar[ddd, equal]
+  &&& X^n
+  \ar[dl, "\iota_n(\iota_1\otimes\dots\otimes\iota_1)"']
+  \ar[dddlll, bend left, "\text{can}=1_{X^n}"]
+  \\
+  & \coprod_n X^n
+  \ar[r, "T\eta_X"]
+  \ar[d, "1_{\coprod X^n}"']
+  & \coprod_n\bigl(\coprod_m X^m\bigr)^n
+  \ar[dl, "\mu_X"]
+  \\
+  & \coprod_n X^n
+  \\
+  X^n
+  \ar[ur, "\iota_n"']
+\end{tikzcd}
+$$
+In each case, the squares commute by the definitions of $\eta$ and
+$\mu$; as the outer triangle obviously commutes, so does the induced
+inner one.
+
+(Note that we have not demonstrated explicitly that the $\eta$ and
+$\mu$ we have defined are natural transformations; it is clear from
+their definitions that they are.)
+
+\bigskip
+\goodbreak
+
+\textsc{Second Approach}: via an adjunction.
+
+The free monoid monad is induced by the free $\ladj$ forgetful
+adjunction between monoids and sets as described in Example 5.1.4(ii).
+The unit and multiplication of the monad are then as described in
+Lemma 5.1.3.  Therefore, if we can produce a similar adjunction in
+this more general setting, we will automatically obtain the required
+monad along with its unit and multiplication.
+
+To do this, we will define the category of monoid objects in $\sV$,
+denoted $\Monoid_\sV$, and describe a free $\ladj$ forgetful
+adjunction $\afunc{F}{G}{\sV}{\Monoid_\sV}$.  The argument here is
+that of Theorem VII.3.2 of~\cite{catworking}, with some details filled
+in.
+
+An object in $\Monoid_\sV$ (a monoid) is an object $X\in\sV$ together
+with a unit $\func{\eta}{*}{X}$ and a multiplication
+$\func{\mu}{X\otimes X}{X}$ such that the diagrams
+$$
+\begin{tikzcd}
+  X\otimes(X\otimes X)
+  \ar[r, "\alpha"]
+  \ar[d, "1_X\otimes\mu"']
+  & (X\otimes X)\otimes X
+  \ar[r, "\mu\otimes 1_X"]
+  & X\otimes X
+  \ar[d, "\mu"]
+  \\
+  X\otimes X
+  \ar[rr, "\mu"']
+  && X
+\end{tikzcd}
+$$
+
+$$
+\begin{tikzcd}
+  {*}\otimes X
+  \ar[r, "\eta\otimes 1_X"]
+  \ar[dr, "\lambda"']
+  & X \otimes X
+  \ar[d, "\mu"]
+  & X\otimes{*}
+  \ar[l, "1_X\otimes\eta"']
+  \ar[dl, "\rho"]
+  \\
+  & X
+\end{tikzcd}
+$$
+are commutative.  A morphism
+$\func{f}{(X,\eta_X,\mu_X)}{(Y,\eta_Y,\mu_Y)}$ of monoids is a
+morphism $\func{f}{X}{Y}$ that commutes with the units and
+multiplications; explicitly, we require these diagrams to commute:
+$$
+\begin{tikzcd}
+  X \otimes X
+  \ar[r, "f\otimes f"]
+  \ar[d, "\mu_X"']
+  & Y \otimes Y
+  \ar[d, "\mu_Y"]
+  \\
+  X
+  \ar[r, "f"']
+  & Y
+\end{tikzcd}
+\qquad
+\begin{tikzcd}
+  *
+  \ar[r, "\eta_X"]
+  \ar[dr, "\eta_Y"']
+  & X
+  \ar[d, "f"]
+  \\
+  & Y
+\end{tikzcd}
+$$
+
+We will also have need below to refer to iterated multiplication.  For
+the monoid $(X,\eta,\mu)$, we define a morphism
+$\func{\mu^{(n)}}{X^n}{X}$ iteratively by $\mu^{(0)}=\eta$,
+$\mu^{(1)}=1_X$, $\mu^{(2)}=\mu$ and $\mu^{(n+1)}=\mu(\mu^{(n)}\otimes
+1_X)$.  Similarly, if $\func{f}{X}{Y}$ is a morphism of objects in~$\sV$,
+then $\func{f^n}{X^n}{Y^n}$ is defined componentwise: $f^0=1_*$,
+$f^1=f$, $f^{n+1}=f^n\otimes f$.
+
+We are now in a position to state the required theorem (VII.3.2
+of~\cite{catworking}):
+
+\begin{mtheorem}
+  If the monoidal category $(\sV,\otimes,{*})$ has countable
+  coproducts, and if for each $X\in\sV$ the functors $X\otimes{-}$ and
+  $\func{{-}\otimes X}{\sV}{\sV}$ preserve these coproducts, then the
+  forgetful functor $\func{U}{\Monoid_\sV}{\sV}$ has a left adjoint.
+\end{mtheorem}
+
+The action of the left adjoint $\func{F}{\sV}{\Monoid_\sV}$ on objects
+is given by $F(X)=\bigl(\coprod_{n\ge0}X^n, \eta_X, \mu_X\bigr)$,
+where $\eta_X$ and $\mu_X$ will be described in the proof.  Therefore
+the induced monad $T=UF$ has $T(X)=\coprod_{n\ge0}X^n$ as required.
+The monad unit is then~$\eta$ and the monad multiplication is
+$U\epsilon F$; these are identical to those defined in the first
+approach.
+
+\begin{proof}[Proof]
+  We first note that for any sequence of objects $a_n\in\sV$ and any
+  $b\in\sV$, there is an isomorphism
+  $\func{\theta}{b\otimes \coprod_n a_n}{\coprod_n b\otimes a_n}$.
+  This is because the functor $b\otimes{-}$ preserves countable
+  coproducts, so the image of the colimit cone
+  $\func{\iota_n}{a_n}{\coprod_n a_n}$ under this functor is a colimit
+  cone $\func{\iota_n}{b\otimes a_n}{b\otimes \coprod_n a_n}$.  Since
+  we also have the colimit cone
+  $\func{\iota_n}{b\otimes a_n}{\coprod_n b\otimes a_n}$ as $\sV$~has
+  countable coproducts, these two colimits are isomorphic, and there
+  is a unique isomorphism commuting with the legs of the colimit cones
+  by Proposition 3.1.7.  The same applies to the functor
+  ${-}\otimes b$, and we again use $\theta$ to indicate the
+  corresponding isomorphism.
+
+  Given $X\in\sV$, our first task is to construct a monoid $F(X)$.  We
+  take the object to be $\coprod_n X^n$, and we define the unit
+  $\func{\eta_X}{*}{\coprod_X X^n}$ to be the injection
+  $\func{\iota_0}{{*}=X^0}{\coprod_n X^n}$.
+
+  We next define the multiplication
+  $\func{\mu_X}{\coprod_m X^m\otimes \coprod_n X^n}{\coprod_r X^r}$
+  componentwise by $\func{\text{can}}{X^m\otimes X^n}{X^{m+n}}$ using
+  the canonical morphism.  More formally, we define $\mu_X$ by the
+  following commutative diagram:
+  $$
+  \begin{tikzcd}
+    \bigl(\coprod_m X^m\bigr) \otimes \bigl(\coprod_n X^n\bigr)
+    \ar[r, "\theta\circ\theta"]
+    \ar[dr, dashed, "\mu_X"']
+    & \coprod_{m,n} X^m\otimes X^n
+    \ar[d, dashed, "\phi"]
+    & X^m\otimes X^n
+    \ar[l, "\iota_{m,n}"']
+    \ar[d, "\text{can}"]
+    \\
+    & \coprod_r X^r
+    & X^{m+n}
+    \ar[l, "\iota_{m+n}"]
+  \end{tikzcd}
+  $$
+  where $\phi$ is the map induced by the coproduct injections,
+  $\theta\circ\theta$ is the composite of two isomorphisms as
+  described above (and implicitly also composed with the isomorphism
+  $\coprod_m \coprod_n F(m,n)\cong \coprod_{m,n} F(m,n)$ of Theorem
+  3.8.1), and $\mu_X=\phi(\theta\circ\theta)$.
+
+  We must show that these $\eta_X$ and $\mu_X$ satisfy the monoid
+  axioms; we do this below.
+
+  We now use Lemma 4.6.1 to show that $F$ is indeed a left adjoint
+  to~$U$.  For each $X\in\sV$, we define $\bar\eta_X$ (which will be
+  the component at~$X$ of the unit of the adjunction) to be the
+  morphism
+  $$\func{\bar\eta_X=\iota_1}{X=X^1}{\textstyle \coprod_n X^n=UFX}$$
+  and we claim that this is an initial object in the comma category
+  $X\downarrow U$.
+
+  Let $(Y,\eta_Y,\mu_Y)$ be a monoid in $\sV$ and
+  $\func{f}{X}{Y=U(Y,\eta_Y,\mu_Y)}$ be a morphism in~$\sV$ (which is
+  an object in $X\downarrow U$).  We need to show that there is a
+  unique monoid morphism
+  $\func{\bar f}{\bigl(\coprod_n
+    X^n,\eta_X,\mu_X\bigr)}{(Y,\eta_Y,\mu_Y)}$ with
+  $\bar f \bar \eta_X = f$.  We construct~$\bar f$ via the components
+  $\func{\bar f_n=\bar f \iota_n}{X^n}{Y}$ for each~$n$ as
+  follows.\footnote{This differs slightly from the argument
+    in~\cite{catworking}, as the uniqueness of~$\bar f$ is not
+    explicitly demonstrated there.}
+
+  The second monoid morphism identity requires the diagram
+  $$
+  \begin{tikzcd}
+    X^0={*}
+    \ar[r, "\eta_X=\iota_0"]
+    \ar[d, "\eta_Y"']
+    & \coprod_n X^n
+    \ar[dl, "\bar f"]
+    \\
+    Y
+  \end{tikzcd}
+  $$
+  to commute, so we must have $\bar f_0=\eta_Y$.
+
+  Since $f=\bar f\bar\eta_X=\bar f\iota_1$, we require $\bar f_1=f$.
+
+  As the morphism must satisfy the first monoid morphism identity,
+  consider the following diagram:
+  $$
+  \begin{tikzcd}
+    X^m \otimes X^n
+    \ar[dr, "\iota_{m,n}"']
+    \ar[rr, "\text{can}"]
+    \ar[dd, equals]
+    && X^{m+n}
+    \ar[dd, "\iota_{m+n}"]
+    \\
+    & \coprod_{m,n} X^m \otimes X^n
+    \ar[dr, "\phi"]
+    \\
+    X^m \otimes X^n
+    \ar[r, "\iota_m\otimes\iota_n"']
+    & \coprod_m X^m \otimes \coprod_n X^n
+    \ar[r, "\mu_X"']
+    \ar[u, "\theta\circ\theta"]
+    \ar[d, "\bar f\otimes \bar f"']
+    & \coprod_r X^r
+    \ar[d, "\bar f"]
+    \\
+    & Y \otimes Y
+    \ar[r, "\mu_Y"']
+    & Y
+  \end{tikzcd}
+  $$
+  The top part of the diagram commutes by the definition of $\phi$
+  and~$\mu_X$, with the left square commuting by Proposition 3.1.7.
+  We require the bottom square to commute.  Taking $n=1$, this then
+  requires
+  $\bar f\circ \iota_{m+1}\circ\text{can} = \mu_Y\circ (\bar f\otimes
+  \bar f)\circ(\iota_m\otimes \iota_1)$.  But $X^m\otimes X^1=X^{m+1}$
+  by definition, so $\text{can}=1_{X^{m+1}}$ in this case, and the
+  equation simplifies to
+  $\bar f_{m+1} = \mu_Y(\bar f_m\otimes \bar f_1) = \mu_Y(\bar
+  f_m\otimes f)$.  By induction, it then follows that $\bar
+  f_m=\mu_Y^{(m)}\circ f^m$, and this holds for $m=0$ as well.
+
+  We can summarise this as follows: $\bar f$ is the composite on the
+  bottom of this commutative diagram:
+  $$
+  \begin{tikzcd}
+    X^n
+    \ar[r, "f^n"]
+    \ar[d, "\iota_n"']
+    & Y^n
+    \ar[r, "\mu_Y^{(n)}"]
+    \ar[d, "\iota_n"]
+    & Y
+    \ar[d, equals]
+    \\
+    \coprod_n X^n
+    \ar[r, dashed]
+    & \coprod_n Y^n
+    \ar[r, dashed]
+    & Y
+  \end{tikzcd}
+  $$
+  where the arrows on the bottom are defined by the coproduct
+  injections to make the two squares commute.
+
+  We can slightly expand the above diagram to show that this
+  definition of~$\bar f$ does give a monoid morphism:
+  $$
+  \begin{tikzcd}
+    X^m \otimes X^n
+    \ar[dr, "\iota_{m,n}"']
+    \ar[rr, "\text{can}"]
+    \ar[dd, equals]
+    && X^{m+n}
+    \ar[dd, "\iota_{m+n}"]
+    \ar[dddr, bend left, "f^{m+n}"]
+    \\
+    & \coprod_{m,n} X^m \otimes X^n
+    \ar[dr, "\phi"]
+    \\
+    X^m \otimes X^n
+    \ar[r, "\iota_m\otimes\iota_n"']
+    \ar[d, "f^m\otimes f^n"']
+    %\ar[dr, phantom, "\tikz{\node[shape=circle,draw,inner sep=1pt]
+    % {\scriptstyle 1};}"]
+    \ar[dr, phantom, "\textcircled{1}"]
+    & \coprod_m X^m \otimes \coprod_n X^n
+    \ar[r, "\mu_X"']
+    \ar[u, "\theta\circ\theta"]
+    \ar[d, dashed, shift right=5pt]
+    \ar[dd, dashed, shift left=5pt, near start, "\bar f\otimes \bar f"]
+    & \coprod_r X^r
+    \ar[d, dashed, shift left=5pt]
+    \ar[dd, dashed, shift right=5pt, near start, "\bar f"']
+    \\
+    Y^m \otimes Y^n
+    \ar[r, "\iota_m\otimes\iota_n"']
+    \ar[d, "\mu_Y^{(m)}\otimes\mu_Y^{(n)}"']
+    \ar[dr, phantom, "\textcircled{2}"]
+    & \coprod_m Y^m \otimes \coprod_n Y^n
+    \ar[d, dashed, shift right=5pt]
+    \ar[r, phantom, "\textcircled{3}"]
+    & \coprod_r Y^r
+    \ar[d, dashed, shift left=5pt]
+    & Y^{m+n}
+    \ar[l, "\iota_{m+n}"]
+    \ar[d, "\mu_Y^{(m+n)}"]
+    \\
+    Y \otimes Y
+    \ar[r, equals]
+    & Y \otimes Y
+    \ar[r, "\mu_Y"']
+    & Y
+    \ar[r, equals]
+    & Y
+  \end{tikzcd}
+  $$
+  The top part of the diagram commutes as above.  The dashed morphisms
+  in the squares labelled 1 and~2 are induced by the coproduct
+  injections, and their composite is $\bar f \otimes \bar f$ by
+  construction.  Similarly, the right part of the diagram commutes by
+  the construction of~$\bar f$.  It remains to show that square~3
+  commutes.
+
+  As the morphisms in square~3 are defined by the coproduct
+  injections, it suffices to show that for every $m$ and~$n$, the
+  outer part of the diagram commutes, that is, that the following
+  diagram commutes:
+  $$
+  \begin{tikzcd}
+    X^m \otimes X^n
+    \ar[r, "\text{can}"]
+    \ar[d, "f^m\otimes f^n"']
+    & X^{m+n}
+    \ar[d, "f^{m+n}"]
+    \\
+    Y^m \otimes Y^n
+    \ar[r, dashed, "\text{can}"]
+    \ar[d, "\mu_Y^{(m)}\otimes \mu_Y^{(n)}"']
+    & Y^{m+n}
+    \ar[d, "\mu_Y^{(m+n)}"]
+    \\
+    Y \otimes Y
+    \ar[r, "\mu_Y"]
+    & Y
+  \end{tikzcd}
+  $$
+  The top square commutes by naturality of can, and the lower square
+  commutes by the general associative law for monoid multiplication,
+  which is Proposition VII.3.1 of~\cite{catworking}.  This completes
+  the proof that $\bar f$~is a monoid morphism.
+
+  Thus $\bar\eta_X$~is an initial object in $X\downarrow U$, proving
+  $U$~has a left adjoint and $F(X)=(\coprod_n X^n, \eta_X, \mu_X)$ is
+  a free monoid.
+
+  It only remains to show that $\eta_X$ and $\mu_X$ satisfy the
+  required monoid identities, which we now do.\footnote{Mac Lane
+    leaves it as an exercise: ``A large but routine diagram
+    (exercise!)''.  The following long argument is an expansion of
+    that given by Stefan Hamcke on StackExchange:
+    \url{https://math.stackexchange.com/questions/1269975}}
+
+  The first identity we need to show is proven using the following
+  diagram:
+  \begin{center}
+    \small
+    \begin{tikzpicture}[commutative diagrams/every diagram]
+      \node (P0) at (-2.5,5) {$\coprod_k X^k \otimes \bigl(\coprod_m X^m
+        \otimes \coprod_n X^n\bigr)$};
+      \node (P4) at (2.5,5) {$\bigl(\coprod_k X^k \otimes \coprod_m X^m
+        \bigr) \otimes \coprod_n X^n$};
+      \node (P1) at (-5.8,1.8) {$\coprod_k X^k \otimes \coprod_t X^t$};
+      \node (P3) at (5.8,1.8) {$\coprod_r X^r \otimes \coprod_n X^n$};
+      \node (P2) at (0,0) {$\coprod_s X^s$};
+      \node (C0) at (-2.5,3) {$\coprod_{k,m,n} X^k\otimes (X^m \otimes
+        X^n)$};
+      \node (C1) at (2.5,3) {$\coprod_{k,m,n} (X^k\otimes X^m) \otimes
+        X^n$};
+
+      \path[commutative diagrams/.cd, every arrow, every label]
+        (P0) edge node {$\alpha$} (P4)
+        (P0) edge node[swap] {$1_{\coprod X^k}\otimes \mu_X$} (P1)
+        (P1) edge node[swap] {$\mu_X$} (P2)
+        (P4) edge node {$\mu_X\otimes 1_{\coprod X^n}$} (P3)
+        (P3) edge node {$\mu_X$} (P2)
+        (P0) edge node[swap] {$\cong$} (C0)
+        (P4) edge node {$\cong$} (C1)
+        (C0) edge node[swap] {$\coprod \alpha$} (C1)
+        (C0) edge (P2)
+        (C1) edge (P2);
+    \end{tikzpicture}
+  \end{center}
+  We must show that the outer pentagon commutes: we do this by showing
+  that the three inner squares and triangle all commute.
+
+  We begin with the lower triangle.  This expands to the following
+  diagram:
+  $$
+  \begin{tikzcd}[row sep=large]
+    \coprod_{k,m,n} X^k\otimes (X^m \otimes X^n)
+    \ar[rr, dashed, "\coprod_{k,m,n} \alpha_{X^k,X^m,X^n}"]
+    \ar[rddd, dashed, bend right=30]
+    && \coprod_{k,m,n} (X^k\otimes X^m) \otimes X^n
+    \ar[lddd, dashed, bend left=30]
+    \\
+    X^k\otimes (X^m \otimes X^n)
+    \ar[rr, "\alpha_{X^k,X^m,X^n}"]
+    \ar[u, "\iota_{k,m,n}"]
+    \ar[dr, "\text{can}"']
+    && (X^k\otimes X^m) \otimes X^n
+    \ar[u, "\iota_{k,m,n}"]
+    \ar[dl, "\text{can}"]
+    \\
+    & X^{k+m+n}
+    \ar[d, "\iota_{k+m+n}"]
+    \\
+    & \coprod_s X^s
+  \end{tikzcd}
+  $$
+  The dashed arrows indicate maps induced from the coproduct
+  injections, and the $\alpha$'s are associators.  The central
+  triangle commutes because of the coherence theorem, and so the outer
+  (dashed) triangle commutes.
+
+  We next consider the upper square:
+  $$
+  \begin{tikzcd}[row sep=large, column sep=7em]
+    \coprod_k X^k \otimes \bigl(\coprod_m X^m \otimes \coprod_n
+    X^n\bigr)
+    \ar[r, "\alpha_{\coprod X^k,\coprod X^m,\coprod X^n}"]
+    \ar[d, "\theta^4"]
+    & \bigl(\coprod_k X^k \otimes \coprod_m X^m \bigr) \otimes
+    \coprod_n X^n
+    \ar[d, "\theta^4"']
+    \\
+    \coprod_{k,m,n} X^k\otimes (X^m \otimes X^n)
+    \ar[r, "\coprod_{k,m,n} \alpha_{X^k,X^m,X^n}"']
+    & \coprod_{k,m,n} (X^k\otimes X^m) \otimes X^n
+    \\
+    X^k\otimes (X^m \otimes X^n)
+    \ar[r, "\alpha_{X^k,X^m,X^n}"']
+    \ar[u, "\iota_{k,m,n}"']
+    \ar[uu, bend left=30, near end, "\iota_k\otimes(\iota_m\otimes
+      \iota_n)"]
+    & (X^k\otimes X^m) \otimes X^n
+    \ar[u, "\iota_{k,m,n}"]
+    \ar[uu, bend right=30, near end, "(\iota_k\otimes\iota_m)\otimes
+      \iota_n"']
+  \end{tikzcd}
+  $$
+  Here, $\theta^4$ indicates a composition of four isomorphisms
+  between coproducts of the form described at the beginning of the
+  proof, such that it commutes with the coproduct injections
+  indicated.  The outer square commutes by the naturality of~$\alpha$,
+  and so the upper square commutes as required.
+
+  We now consider the right hand square; the left hand square is
+  essentially identical.  This can be expanded as follows, with the
+  four objects and morphisms in the original diagram coloured blue for
+  clarity:
+  \begingroup
+  \small
+  $$
+  \begin{tikzcd}
+    & \color{blue} \bigl(\coprod_k X^k \otimes \coprod_m X^m\bigr)
+    \otimes \coprod_n X^n
+    \ar[dd, blue, near end, "(\theta\circ\theta)\otimes 1_{\coprod X^n}"']
+    \ar[ddr, blue, very near end, "\mu_X\otimes 1_{\coprod X^n}"]
+    \\
+    (X^k\otimes X^m) \otimes \coprod_n X^n
+    \ar[dr, "\iota_{k,m} \otimes 1_{\coprod X^n}"']
+    \ar[rrr, crossing over, pos=0.7, "\text{can} \otimes 1_{\coprod X^n}"]
+    \ar[ddd, equals]
+    && \null
+    &
+    X^{k+m} \otimes \coprod_n X^n
+    \ar[dl, "\iota_{k+m} \otimes 1_{\coprod X^n}"]
+    \ar[ddd, equals]
+    \\
+    & \color{blue} \coprod_{k,m} (X^k \otimes X^m) \otimes \coprod_n X^n
+    \ar[r, "\phi\otimes 1_{\coprod X^n}"']
+    \ar[d, blue, "\theta"']
+    \ar[ur, phantom, pos=0.3, "\textcircled{1}"]
+    \ar[dr, phantom, "\textcircled{2}"]
+    & \color{blue} \coprod_r X^r \otimes \coprod_n X^n
+    \ar[d, blue, "\theta"]
+    \\
+    & \coprod_{k,m} \bigl((X^k \otimes X^m) \otimes \coprod_n X^n\bigr)
+    \ar[r]
+    \ar[ddd, blue, "\theta"']
+    \ar[dr, phantom, pos=0.35, "\textcircled{3}"]
+    & \coprod_r \bigl(X^r \otimes \coprod_n X^n\bigr)
+    \ar[ddd, blue, "\theta"]
+    \\
+    (X^k\otimes X^m) \otimes \coprod_n X^n    
+    \ar[rrr, crossing over, "\text{can} \otimes 1_{\coprod X^n}"']
+    \ar[ur, "\iota_{k,m}"]
+    && \null
+    &
+    X^{k+m} \otimes \coprod_n X^n
+    \ar[ul, "\iota_{k+m}"']
+    \\
+    (X^k\otimes X^m) \otimes X^n    
+    \ar[rrr, crossing over, "\text{can} \otimes 1_{\coprod X^n}"']
+    \ar[u, "1_{X^k\otimes X^m}\otimes \iota_n"]
+    \ar[dr, "\iota_{k,m,n}"']
+    \ar[ddd, "\text{can}"']
+    &&&
+    X^{k+m} \otimes X^n
+    \ar[u, "1_{X^{k+m}}\otimes \iota_n"']
+    \ar[dl, "\iota_{k+m,n}"']
+    \ar[dddlll, bend left=20, "\text{can}"]
+    \\
+    & \coprod_{k,m,n} (X^k\otimes X^m) \otimes X^n
+    \ar[r]
+    \ar[d, blue]
+    \ar[dr, phantom, very near start, "\textcircled{4}"]
+    & \coprod_{r,n} X^r \otimes X^n
+    \ar[dl, blue, "\phi"]
+    \\
+    & \color{blue} \coprod_s X^s
+    & \null
+    \\
+    X^{k+m+n}
+    \ar[ur, "\iota_{k,m,n}"]
+  \end{tikzcd}
+  $$
+  \endgroup
+
+  The morphisms between the coproducts are induced by the coproduct
+  injections shown, and the morphisms labelled~$\theta$ are
+  isomorphisms of the type described at the beginning of this proof.
+  Triangle~1 commutes by the definition of $\mu_X$.  For square~2, the
+  outer square around it trivially commutes, so the inner square does
+  too.  Square~3 is similar, with both paths around the ``outer''
+  square composing to give $\text{can}\otimes 1_{\coprod X^n}$.  For
+  triangle~4, the outer triangle commutes by the coherence theorem,
+  and hence the inner one does too.
+
+  Finally, we need to prove the remaining monoid identities involving
+  the unit.  Recalling that $\eta_X=\iota_0$, we have
+  \begingroup
+  \small
+  $$
+  \begin{tikzcd}[row sep=large, column sep=large]
+    {*}\otimes X^n
+    \ar[rr, equals]
+    \ar[dr, "1_*\otimes \iota_n"]
+    \ar[dddrr, bend right=10, "\lambda_{X^n}"']
+    && X^0 \otimes X^n
+    \ar[rr, equals]
+    \ar[d, "\iota_0\otimes \iota_n"]
+    && X^0 \otimes X^n
+    \ar[dl, "\iota_{0,n}"']
+    \ar[dddll, bend left=10, "\text{can}"]
+    \\
+    & {*}\otimes \coprod_n X^n
+    \ar[r, "\eta_X\otimes 1_{\coprod X^n}"]
+    \ar[dr, "\lambda_{\coprod X^n}"']
+    & \coprod_m X^m \otimes \coprod_n X^n
+    \ar[r, "\theta\circ\theta"]
+    \ar[d, "\mu_X"]
+    & \coprod_{m,n} X^m \otimes X^n
+    \ar[dl, "\phi"]
+    \\
+    && \coprod_r X^r
+    \\
+    && X^n
+    \ar[u, "\iota_n"']
+  \end{tikzcd}
+  $$
+  \endgroup
+  The maps between the coproducts are induced as before (though the
+  full generality for~$\phi$ is not shown).  The top left square
+  commutes as $\eta_X=\iota_0$ (and $X^0={*}$); the top right commutes
+  by the choice of $\theta\circ\theta$; the bottom left square
+  commutes by naturality of~$\lambda$ and the bottom right commutes by
+  the definition of~$\phi$.  The right central triangle commutes by
+  the definition of~$\mu_X$ and the outer triangle commutes as
+  $\func{\lambda_{X^n}}{X^0\otimes X^n}{X^n}$ is the canonical
+  morphism.  A diagram chase then shows that $\mu_X\circ
+  (\eta_X\otimes 1_{\coprod X^n}) \circ (1_*\otimes \iota_n)=
+  \lambda_{\coprod X^n} \circ (1_*\otimes \iota_n)$, hence the left
+  central triangle commutes as required.  The corresponding identity
+  involving~$\rho$ is proved identically.
 \end{proof}
 
 \end{document}
-
