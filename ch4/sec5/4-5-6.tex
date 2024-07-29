@@ -33,49 +33,56 @@
   argument given there.
 
   We first note that $G$ is faithful or full just when the morphism
-  $\sD(x,y)\xrightarrow{G} \sC(Gx,Gy)$ is monic or epic respectively.
-  This morphism is natural in $x$ and~$y$.  We can compose this with
-  the adjunction isomorphism
+  $\sD(x,y)\xrightarrow{G} \sC(Gx,Gy)$ is monic or epic respectively
+  for all $x$ and~$y$.  This morphism is natural in $x$ and~$y$.  We
+  can compose this with the adjunction isomorphism
   $\isom{\phi_{x,y}}{\sC(Gx,Gy)}{\sD(FGx,y)}$ to give the composite
   morphism
   $$\sD(x,y)\xrightarrow{G} \sC(Gx,Gy) \xrightarrow{\phi_{x,y}}
   \sD(FGx,y)$$
   which is natural in $x$ and $y$; $G$ is faithful or full just when
   this is monic or epic for all $x$ and~$y$.  For each $x\in\sD$, this
-  gives a natural transformation $\sD(x,-)\Rightarrow \sD(FGx,-)$,
-  which by the Yoneda lemma is given by $f^*$ for some
+  composite gives a natural transformation $\sD(x,-)\Rightarrow
+  \sD(FGx,-)$, which by the Yoneda lemma is given by $f^*$ for some
   $\func{f}{FGx}{x}$ (Corollary 2.2.8).  Taking $y=x$, and observing
   that $1_x$ is sent to~$\epsilon_x$, we see that this natural
   transformation is $(\epsilon_x)^*$.
 
-  The next observation is that a natural transformation is a
-  monomorphism (in the functor category) if and only if every
-  component is a monomorphism, and likewise for epimorphisms.  This
-  follows because the natural transformation $\Func{\alpha}{H}{K}$ is
-  a monomorphism if and only if the diagram
+  The next observation is that if $\sA$~is a small category and
+  $\sB$~has all pullbacks, then a natural transformation between two
+  functors $\pfunc{H,K}{\sA}{\sB}$ is a monomorphism (in the functor
+  category~$\sB^\sA$) if and only if every component is a
+  monomorphism, and similarly for epimorphisms (now requiring $\sB$~to
+  have all pushouts).  This follows because the natural transformation
+  $\Func{\alpha}{H}{K}$ is a monomorphism if and only if the diagram
   $$
   \begin{tikzcd}
     H \ar[r, Rightarrow, "1_H"] \ar[d, Rightarrow, "1_H"']
     & H \ar[d, Rightarrow, "\alpha"] \\
-    H \ar[r, Rightarrow, "\alpha"]
+    H \ar[r, Rightarrow, "\alpha"']
     & K
   \end{tikzcd}
   $$
   is a pullback, by Exercise \ref{ex:4.5.v}, and by Proposition 3.3.9,
-  this is a pullback if and only if
+  as $\sB$~admits all pullbacks, this is a pullback if and only if
   $$
   \begin{tikzcd}
     Hx \ar[r, rightarrow, "1_{Hx}"] \ar[d, rightarrow, "1_{Hx}"']
     & Hx \ar[d, rightarrow, "\alpha_x"] \\
-    Hx \ar[r, rightarrow, "\alpha_x"]
+    Hx \ar[r, rightarrow, "\alpha_x"']
     & Kx
   \end{tikzcd}
   $$
   is a pullback for every component of~$\alpha$, so if and only if
   $\alpha_x$ is a monomorphism for every~$x$.
 
-  Therefore $G$ is faithful or full if and only if $(\epsilon_x)^*$ is
-  monic or epic for every $x\in\sD$.
+  In this case, as $\sD(x,-)$ lies in the functor category $\Set^\sD$,
+  and $\Set$~is complete and cocomplete, it follows that $G$~is
+  faithful or full if and only if $(\epsilon_x)^*$ is monic or epic
+  for every $x\in\sD$.  This argument requires $\sD$ to be small;
+  Mac~Lane, though, allows (large) functor categories $\sB^\sA$ with
+  $\sA$~any category, and the equivalent of Proposition 3.3.9 still
+  works in this case, so this argument still holds.
 
   We next show that if $\func{f}{x}{y}$ is a morphism in a
   category~$\sE$, then $f$~is an epimorphism if and only if
