@@ -6,18 +6,604 @@
 
 % \settheorem{1}{2}{3}
 % \begin{lemma}
-%   
+%
 % \end{lemma}
 % \popthm
 
 \setexercise{5}{1}{2}
 \begin{exercise}
-  
+  Show that the functor $\func{\beta}{\Set}{\Set}$ that carries a set
+  to the set of ultrafilters on that set is a monad by defining unit
+  and multiplication natural transformations that satisfy the unit and
+  associativity laws. (Hint: The ultrafilter monad is a submonad of
+  the double power set monad $\func{P^2}{\Set}{\Set}$.)
 \end{exercise}
 
 \begin{proof}
-  
+  To use the hint, we must define \emph{submonad}.  For a
+  category~$\sC$, we define the category $\cat{Monad}_\sC$ to have as
+  objects monads on~$\sC$.  A morphism \footnote{This definition is
+    taken from the nLab, Example 3.3 at
+    \url{https://ncatlab.org/nlab/show/monad}, with slightly different
+    notation.} from $(S, \eta^S, \mu^S)$ to $(T, \eta^T, \mu^T)$ is a
+  natural transformation $\Func{\alpha}{S}{T}$ such that the following
+  diagrams commute:
+  $$
+  \begin{tikzcd}[arrows=Rightarrow]
+    1_\sC
+    \ar[r, "\eta^S"]
+    \ar[dr, "\eta^T"']
+    & S
+    \ar[d, "\alpha"]
+    \\
+    & T
+  \end{tikzcd}
+  \qquad
+  \begin{tikzcd}[arrows=Rightarrow]
+    SS
+    \ar[r, "S\alpha"]
+    \ar[d, "\mu^S"']
+    & ST
+    \ar[r, "\alpha T"]
+    & TT
+    \ar[d, "\mu^T"]
+    \\
+    S
+    \ar[rr, "\alpha"']
+    && T
+  \end{tikzcd}
+  $$
+
+  A submonad is then a subobject in the category $\cat{Monad}_\sC$,
+  that is, a submonad of $(T,\eta^T,\mu^T)$ is a monomorphism
+  $\mono{\alpha}{(S,\eta^S,\mu^S)}{(T,\eta^T,\mu^T)}$.  A natural
+  tranformation between two functors $\Set\to\Set$ is a monomorphism
+  if every component is (see the solution to Exercise~\ref{ex:5.1.i}
+  for a discussion of the converse).  Therefore, in
+  $\cat{Monad}_\Set$, if every component of~$\alpha$ is a
+  monomorphism, $\alpha$~is a monomorphism of monads (though the
+  converse might not be the case).
+
+  We now define the unit and multiplication of the monad
+  $(\beta,\eta^\beta,\mu_\beta)$, and show that it is a submonad of
+  $(P^2,\eta^{P^2},\mu^{P^2})$ by defining a natural monomorphism
+  $\Func{\alpha}{\beta}{P^2}$ that satisfies the above conditions.
+  The rest of this solution proceeds as follows: we first define the
+  action of~$\beta$ on morphisms; we then define~$\alpha$ and show
+  that it is a natural monomorphism; next we determine $\eta^\beta$
+  and~$\mu^\beta$ from the defining conditions for a submonad and
+  prove they are well-defined, and finally we show that they satisfy
+  the conditions for the unit and multiplication of a monad.
+
+  \emph{Action of $\beta$ on morphisms.}  We recall the conditions for
+  a set $Z\subseteq PX$ to be an ultrafilter on~$X$:
+  \begin{enumerate}[label=(\arabic*)]
+  \item $Z$ is upward closed;
+  \item $Z$ is closed under finite intersections, and
+  \item for every subset $Y\subseteq X$, exactly one of $Y\in Z$ and
+    $X\setminus Y\in Z$ holds.\footnote{Note that this implies that
+      there are no ultrafilters on the empty set.}
+  \end{enumerate}
+  Note that if $Z$ is an ultrafilter on~$X$, then $\emptyset\notin Z$:
+  if it were, then by~(1), we must have $Z=PX$, and this
+  contradicts~(3), which requires that exactly one of $\emptyset\in Z$
+  and $X\in Z$ holds.
+
+  In the rest of this proof, we consistently use subscripts so that
+  $A_i\in P^iA$, $B_i\in P^iB$ and so on; in particular, we will have
+  $A_2\in\beta A$ and $A_4\in\beta(\beta A)$.
+
+  For any non-empty subset $Y\subseteq PX$, we write $\bar Y$ to mean
+  the smallest upward closed subset of~$PX$ containing~$Y$;
+  explicitly,
+  $$\bar Y=\{X'\subseteq X: Y'\subseteq X'\ \text{for some $Y'\in
+    Y$}\}.$$
+  For $\func{f}{A}{B}$, we define, for any $A_2\in\beta A$,
+  $$\beta f(A_2)=\overline{\{f(A_1)\colon A_1\in A_2\}}$$
+  and claim that this definition results in $\beta$~being
+  functorial.\footnote{Note in particular that for a principal
+    ultrafilter $\eta_A(a)$, its image under $\beta f$ is
+    $\eta_B(f(a))$, which suggests that this is likely to be the
+    `correct' definition.  We do not attempt to show that this
+    definition is the same as that derived from the definition of the
+    functor $\func{\beta}{\Top}{\cat{cHaus}}$ in Example 4.6.12.}  We
+  show first that $\beta f(A_2)\in \beta B$ by checking the defining
+  conditions:
+  \begin{enumerate}[label=(\arabic*)]
+  \item $\beta f(A_2)$ is upward closed by construction.
+  \item Suppose $B_1^{\vphantom1}, B_1'\in \beta f(A_2)$.  Then there
+    are sets $A_1^{\vphantom1},A_1'\in A_2$ with $f(A_1)\subseteq B_1$
+    and $f(A_1')\subseteq B_1'$.  Since $A_2$~is closed under finite
+    intersections, $f(A_1^{\vphantom1}\cap A_1')\in \beta f(A_2)$.  As
+    $f(A_1^{\vphantom1}\cap A_1')\subseteq f(A_1^{\vphantom1})\cap
+    f(A_1')$, it follows that
+    $f(A_1^{\vphantom1}\cap A_1')\subseteq B_1^{\vphantom1}\cap B_1'$,
+    so $B_1^{\vphantom1}\cap B_1'\in \beta f(A_2)$.
+  \item Suppose $B_1\subseteq B$ and $B_1\notin \beta f(A_2)$; we must
+    then show that $B\setminus B_1\in \beta f(A_2)$.  Let
+    $B_1'=B_1^{\vphantom1}\cap f(A)$.  We must have
+    $B_1'\notin\beta f(A_2)$ as $\beta f(A_2)$ is upward closed.  Let
+    $A_1=f^{-1}(B_1')$, and note that $f(A_1)=B_1'$.  If $A_1\in A_2$,
+    then $B_1'\in \beta f(A_2)$, which is not the case, so
+    $A\setminus A_1\in A_2$, and thus
+    $f(A)\setminus B_1'=f(A)\setminus f(A_1)=f(A\setminus A_1)\in
+    \beta f(A_2)$.  (The second equality holds as if $x\in A\setminus
+    A_1$, then $f(x)\notin B_1'=f(A_1)$.)  Finally, as $(B\setminus
+    B_1)\cap f(A)= f(A)\setminus B_1'$, it follows that $B\setminus
+    B_1\in \beta f(A_2)$.
+
+    If we had both $B_1\in \beta f(A_2)$ and $B\setminus B_1\in\beta
+    f(A_2)$, then by~(2), we would have $\emptyset\in\beta f(A_2)$.
+    But as $\emptyset\notin A_2$, $\emptyset\notin \beta f(A_2)$.
+  \end{enumerate}
+
+  For functoriality, for any $A_2\in\beta A$, we have
+  $$\beta 1_A(A_2)=\overline{\{A_1:A_1\in A_2\}}=A_2=1_{\beta
+    A}(A_2)$$
+  as $A_2$ is upward closed.  And if $\func{f}{A}{B}$ and
+  $\func{g}{B}{C}$, then for $A_2\in\beta A$,
+  \begin{align*}
+    \beta(gf)(A_2)
+      &= \overline{\{gf(A_1):A_1\in A_2\}} \\
+      &= \{C_1:gf(A_1)\subseteq C_1\ \text{for some $A_1\in A_2$}\} \\
+    \beta g(\beta f(A_2))
+      &= \overline{\{g(B_1):B_1\in \beta f(A_2)\}} \\
+      &= \{C_1:g(B_1)\subseteq C_1\ \text{for some $B_1\in \beta
+        f(A_2)$}\} \\
+      &= \{C_1:g(B_1)\subseteq C_1\ \text{and}\ f(A_1)\subseteq B_1\
+        \text{for some $A_1\in A_2$, $B_1\subseteq B$}\}
+  \end{align*}
+  and these are clearly equal.  Therefore our definition of $\beta f$
+  is valid.
+
+  \emph{Definition of the natural monomorphism
+    $\Func{\alpha}{\beta}{P^2}$.}  As described in Example 5.1.4(vii),
+  $\eta^{P^2}_A=\eta_A$ is the principal ultrafilter function on~$A$,
+  and $\mu^{P^2}_A=\eta_{PA}^{-1}$ is the inverse principal
+  ultrafilter function.\footnote{To briefly expand on this, the power
+    set adjunction, which we can denote as $P\ladj P^\op$, has
+    unit~$\eta$ and, by symmetry, counit $\epsilon=\eta^\op$.  Then
+    the induced double power set monad has multiplication
+    $\mu=P^\op\epsilon P=P^\op\eta^\op P$, so the component at~$A$ is
+    $\mu_A=P^\op\eta^\op_{PA}$.  As $P$~sends a function to its
+    inverse image function, we have $\mu_A=\eta^{-1}_{PA}$.}  Since
+  $\beta(A)\subset P^2A$ for all~$A$, we take $\alpha=\iota$ to be
+  inclusion, every component of which is clearly a monomorphism.  To
+  demonstrate naturality, we require the diagram
+  $$
+  \begin{tikzcd}
+    \beta A
+    \ar[r, "\iota_A"]
+    \ar[d, "\beta f"']
+    & P^2 A
+    \ar[d, "P^2 f"]
+    \\
+    \beta B
+    \ar[r, "\iota_B"']
+    & P^2 f
+  \end{tikzcd}
+  $$
+  to commute for $\func{f}{A}{B}$.  Recall that $\func{Pf}{PB}{PA}$ is
+  the inverse image function, $f^{-1}$, so $\func{P^2f}{P^2A}{P^2B}$
+  is given by $P^2f(A_2)=(f^{-1})^{-1}(A_2)$; more explicitly, if
+  $B_1\subseteq B$, then $B_1\in P^2f(A_2)$ if and only if
+  $f^{-1}(B_1)\in A_2$.  Now for $A_2\in \beta A$ and $B_1\subseteq
+  B$, we have
+  \begin{gather*}
+    B_1\in\iota_B\cdot \beta f(A_2) = \overline{\{f(A_1):A_1\in A_2\}}
+    \text{ if and only if } f(A_1)\subseteq B_1 \text{ for some $A_1\in
+      A_2$}\\
+    B_1\in P^2 f\cdot \iota_A(A_2) \text{ if and only if }
+    f^{-1}(B_1)\in A_2
+  \end{gather*}
+  Therefore if $B_1\in\iota_B\cdot \beta f(A_2)$, then
+  $f(A_1)\subseteq B_1$ for some~$A_1$, so $A_1\subseteq f^{-1}(B_1)$
+  and hence $f^{-1}(B_1)\in A_2$ as $A_2$~is upward closed.
+  Conversely, if $B_1\in P^2f\cdot\iota_A(A_2)$, then
+  $A_1:=f^{-1}(B_1)\in A_2$, and $f(A_1)=f(f^{-1}(B_1))\subseteq
+  B_1$.  This shows that $\iota$~is natural.
+
+  \emph{Definition of $\eta^\beta$ and $\mu^\beta$.}  Returning to our
+  desired morphism of monads, we thus require the following diagrams
+  to commute for every $A\in\Set$:
+  $$
+  \begin{tikzcd}
+    A
+    \ar[r, "\eta^\beta_A"]
+    \ar[dr, "\eta^{P^2}_A"']
+    & \beta(A)
+    \ar[d, "\iota_A"]
+    \\
+    & P^2(A)
+  \end{tikzcd}
+  \qquad
+  \begin{tikzcd}
+    \beta(\beta(A))
+    \ar[r, "\beta\iota_A"]
+    \ar[d, "\mu^\beta_A"']
+    & \beta(P^2(A))
+    \ar[r, "\iota_{P^2(A)}"]
+    & P^2(P^2(A))
+    \ar[d, "\mu^{P^2}_A"]
+    \\
+    \beta(A)
+    \ar[rr, "\iota_A"']
+    && P^2(A)
+  \end{tikzcd}
+  $$
+
+  From the left hand diagram, it is clear that we must take
+  $\eta^\beta_A=\eta_A$, the principal ultrafilter function, and this
+  is clearly well-defined as $\eta_A(a)\in \beta(A)$ for every $a\in
+  A$.  From the right-hand diagram, we must have $\iota_A\cdot
+  \mu^\beta_A= \mu^{P^2}_A\cdot \iota_{P^2{A}}\cdot \beta\iota_A$; it
+  thus suffices to show that $\mu^{P^2}_A\cdot \iota_{P^2{A}}\cdot
+  \beta\iota_A(A_4)$ is an ultrafilter on~$A$ for every
+  $A_4\in\beta(\beta(A))$.  If we do not write the inclusion morphisms
+  explicitly, we have $\mu^\beta_A= \mu^{P^2}_A\cdot \beta\iota_A$ and
+  must show that $\mu^{P^2}_A\cdot \beta\iota_A(A_4)$ is an
+  ultrafilter on~$A$.
+
+  We have $\beta\iota_A(A_4)=\overline{\{A_3:A_3\in A_4\}}$, where the
+  closure is in $P^2(P^2A)$, and so
+  $$\mu^\beta(A_4) = \mu^{P^2}_A\cdot \beta\iota_A(A_4)=
+  \eta^{-1}_{PA}(\overline{\{A_3:A_3\in A_4\}}) =
+  \eta^{-1}_{PA}(\bar A_4) \in P^2A.$$
+  We can now check the conditions for an ultrafilter.  We first note
+  that
+  \begin{alignat*}{2}
+    &&A_1&\in \eta^{-1}_{PA}(\bar A_4)\\
+    &\iff \quad& \eta_{PA}(A_1) &\in \bar A_4 \\
+    &\iff& A_3 &\subseteq \eta_{PA}(A_1) \quad\text{for some $A_3\in
+      A_4$} \\
+    &\iff& A_1 &\in A_2\quad\text{for all $A_2\in A_3$ for some
+      $A_3\in A_4$}
+  \end{alignat*}
+
+  \begin{enumerate}[label=(\arabic*)]
+  \item Suppose that $A_1\in\eta^{-1}_{PA}(\bar A_4)$ and
+    $A_1\subseteq B_1$.  Then with the $A_3$ as above, $B_1\in A_2$
+    for all $A_2\in A_3$ as $A_2\in\beta A$ is upward closed (and
+    $A_2\in\beta A$ because $A_4\in \beta(\beta A)$).  Therefore
+    $A_3\subseteq \eta_{PA}(B_1)$ and so $\eta_{PA}(B_1)\in\bar A_4$,
+    showing that $\eta^{-1}_{PA}(\bar A_4)$ is upward closed.
+
+  \item Suppose $A_1,B_1\in\eta^{-1}_{PA}(\bar A_4)$.  Then as above,
+    there are $A_3,B_3\in A_4$ with $A_1\in A_2$ for all $A_2\in A_3$
+    and $B_1\in B_2$ for all $B_2\in B_3$.  But as
+    $A_4\in\beta(\beta A)$, it is closed under finite intersections,
+    so $A_3\cap B_3\in A_4$.  Now for all $A_2\in A_3\cap B_3$, we
+    have $A_1,B_1\in A_2$, and as $A_2\in\beta A$, it follows that
+    $A_1\cap B_1\in A_2$, and hence
+    $A_1\cap B_1\in \eta^{-1}_{PA}(\bar A_4)$.
+
+  \item Let $A_1\in PA$.  Then $\beta A\cap \eta_{PA}(A_1)$ is the set
+    of all ultrafilters on~$A$ containing~$A_1$, while
+    $\beta A\cap \eta_{PA}(A\setminus A_1)$ is the set of all
+    ultrafilters on~$A$ containing~$A\setminus A_1$.  But every
+    ultrafilter on~$A$ contains exactly one of $A_1$ and
+    $A\setminus A_1$, so $\beta A$~is the disjoint union of
+    $\beta A\cap \eta_{PA}(A_1)$ and
+    $\beta A\cap \eta_{PA}(A\setminus A_1)$.  Therefore every
+    ultrafilter in $\beta(\beta A)$ contains exactly one of
+    $\beta A\cap \eta_{PA}(A_1)$ and
+    $\beta A\cap \eta_{PA}(A\setminus A_1)$, so either
+    $A_1\in \eta^{-1}_{PA}(\bar A_4)$ or $A\setminus A_1\in
+    \eta^{-1}_{PA}(\bar A_4)$ (using the earlier characterisation of
+    $\eta^{-1}_{PA}(\bar A_4)$.
+
+    Now suppose that both
+    $A_1,A\setminus A_1\in \eta^{-1}_{PA}(\bar A_4)$.  Then we have
+    some $A_3\in A_4$ with $A_1\in A_2$ for all $A_2\in A_3$ and some
+    $B_3\in A_4$ with $A\setminus A_1\in B_2$ for all $B_2\in B_3$.
+    As $A_4$~is an ultrafilter, $A_3\cap B_3\in A_4$ and
+    $A_1, A\setminus A_1\in A_2$ for all $A_2\in A_3\cap B_3$.  If
+    $A_3\cap B_3\ne\emptyset$, this is impossible, as $A_2$~is an
+    ultrafilter.  But if $A_3\cap B_3=\emptyset$, then
+    $B_3\subseteq \beta A\setminus A_3$, so
+    $\beta A\setminus A_3\in A_4$ as $A_4$~is upward closed, but then
+    $A_3, \beta A\setminus A_3\in A_4$, which is impossible as
+    $A_4$~is an ultrafilter on~$\beta A$.  Thus we cannot have both
+    $A_1,A\setminus A_1\in \eta^{-1}_{PA}(\bar A_4)$.
+  \end{enumerate}
+
+  Thus $\mu^\beta(A_4)=\mu^{P^2}_A\cdot \beta\iota_A(A_4)$ is
+  well-defined.
+
+  We next show that the components of $\eta^\beta$ and $\mu^\beta$ as
+  defined assemble to give natural transformations.  Let
+  $\func{f}{A}{B}$ be a morphism in $\Set$.  Then in the diagram
+  $$
+  \begin{tikzcd}
+    A
+    \ar[r, "\eta^\beta_A"]
+    \ar[d, "f"']
+    & \beta A
+    \ar[r, "\iota_A"]
+    \ar[d, "\beta f"]
+    & P^2A
+    \ar[d, "P^2f"]
+    \\
+    B
+    \ar[r, "\eta^\beta_B"']
+    &
+    \beta B
+    \ar[r, "\iota_B"']
+    & P^2B
+  \end{tikzcd}
+  $$
+  the outer rectangle commutes by the naturality of
+  $\eta^{P^2}=\iota\cdot\eta^\beta$ and the right square commutes by
+  the naturality of~$\iota$.  Thus
+  $\iota_B\cdot \beta f\cdot \eta^\beta_A = P^2f\cdot \iota_A\cdot
+  \eta^\beta_A = \iota_B\cdot \eta^\beta_B\cdot f$, so
+  $\beta f\cdot \eta^\beta_A = \eta^\beta_B\cdot f$ as $\iota_B$~is a
+  monomorphism.  The naturality of~$\mu^\beta$ follows in a similar
+  fashion.
+
+  \emph{Showing that $\eta^\beta$ and $\mu^\beta$ satisfy the unit and
+    multiplication laws.}  For each $A\in\Set$, we require these
+  diagrams to commute:
+  $$
+  \begin{tikzcd}
+    \beta(\beta A)
+    \ar[dr, "\mu^\beta_A"']
+    & \beta A
+    \ar[l, "\eta^\beta_{\beta A}"']
+    \ar[r, "\beta\eta^\beta_A"]
+    \ar[d, "1_{\beta A}"]
+    & \beta(\beta A)
+    \ar[dl, "\mu^\beta_A"]
+    \\
+    & \beta A
+  \end{tikzcd}
+  \qquad
+  \begin{tikzcd}
+    \beta(\beta(\beta A))
+    \ar[r, "\beta\mu^\beta_A"]
+    \ar[d, "\mu^\beta_{\beta A}"']
+    & \beta(\beta A)
+    \ar[d, "\mu^\beta_A"]
+    \\
+    \beta(\beta A)
+    \ar[r, "\mu^\beta_A"']
+    & \beta A
+  \end{tikzcd}
+  $$
+
+  For the first identity, we have
+  \begin{align*}
+    &\begin{tikzcd}[ampersand replacement=\&]
+      \beta A
+      \ar[r, "\beta\eta^\beta_A"]
+      \& \beta(\beta A)
+      \ar[r, "\mu^\beta_A"]
+      \& \beta A
+      \ar[r, "\iota_A"]
+      \& P^2A
+    \end{tikzcd} \\
+    =&\begin{tikzcd}[ampersand replacement=\&]
+      \beta A
+      \ar[r, "\beta\eta^\beta_A"]
+      \& \beta(\beta A)
+      \ar[r, "\beta\iota_A"]
+      \& \beta(P^2A)
+      \ar[r, "\iota_{P^2A}"]
+      \& P^2(P^2A)
+      \ar[r, "\mu^{P^2}_A"]
+      \& P^2A
+    \end{tikzcd} \\
+    &\qquad\text{by the definition of $\mu^\beta$}\\
+    =&\begin{tikzcd}[ampersand replacement=\&]
+      \beta A
+      \ar[r, "\beta\eta^{P^2}_A"]
+      \& \beta(P^2A)
+      \ar[r, "\iota_{P^2A}"]
+      \& P^2(P^2A)
+      \ar[r, "\mu^{P^2}_A"]
+      \& P^2A
+    \end{tikzcd} \\
+    &\qquad\text{by the definition of $\eta^\beta$}\\
+    =&\begin{tikzcd}[ampersand replacement=\&]
+      \beta A
+      \ar[r, "\iota_A"]
+      \& P^2A
+      \ar[r, "P^2\eta^{P^2}_A"]
+      \& P^2(P^2A)
+      \ar[r, "\mu^{P^2}_A"]
+      \& P^2A
+    \end{tikzcd} \\
+    &\qquad\text{by naturality of $\iota$}\\
+    =&\begin{tikzcd}[ampersand replacement=\&]
+      \beta A
+      \ar[r, "\iota_A"]
+      \& P^2A
+    \end{tikzcd} \\
+    &\qquad\text{by the monad identities for $(P^2,\eta^{P^2},\mu^{P^2})$}
+  \end{align*}
+  so $\mu^\beta_A\cdot \beta\eta^\beta_A=1_{\beta A}$ as $\iota_A$ is
+  a monomorphism.  Similarly,
+  \begin{align*}
+    &\begin{tikzcd}[ampersand replacement=\&]
+      \beta A
+      \ar[r, "\eta^\beta_{\beta A}"]
+      \& \beta(\beta A)
+      \ar[r, "\mu^\beta_A"]
+      \& \beta A
+      \ar[r, "\iota_A"]
+      \& P^2A
+    \end{tikzcd} \\
+    =&\begin{tikzcd}[ampersand replacement=\&]
+      \beta A
+      \ar[r, "\eta^\beta_{\beta A}"]
+      \& \beta(\beta A)
+      \ar[r, "\beta\iota_A"]
+      \& \beta(P^2A)
+      \ar[r, "\iota_{P^2A}"]
+      \& P^2(P^2A)
+      \ar[r, "\mu^{P^2}_A"]
+      \& P^2A
+    \end{tikzcd} \\
+    =&\begin{tikzcd}[ampersand replacement=\&]
+      \beta A
+      \ar[r, "\eta^\beta_{\beta A}"]
+      \& \beta(\beta A)
+      \ar[r, "\iota_{\beta A}"]
+      \& P^2(\beta A)
+      \ar[r, "P^2\iota_A"]
+      \& P^2(P^2A)
+      \ar[r, "\mu^{P^2}_A"]
+      \& P^2A
+    \end{tikzcd} \\
+    &\qquad\text{by naturality of $\iota$}\\
+    =&\begin{tikzcd}[ampersand replacement=\&]
+      \beta A
+      \ar[r, "\eta^{P^2}_{\beta A}"]
+      \& P^2(\beta A)
+      \ar[r, "P^2\iota_A"]
+      \& P^2(P^2A)
+      \ar[r, "\mu^{P^2}_A"]
+      \& P^2A
+    \end{tikzcd} \\
+    &\qquad\text{by the definition of $\eta^\beta$}\\
+    =&\begin{tikzcd}[ampersand replacement=\&]
+      \beta A
+      \ar[r, "\iota_A"]
+      \& P^2A
+      \ar[r, "\eta^{P^2}_{P^2A}"]
+      \& P^2(P^2A)
+      \ar[r, "\mu^{P^2}_A"]
+      \& P^2A
+    \end{tikzcd} \\
+    &\qquad\text{by naturality of $\eta^{P^2}$}\\
+    =&\begin{tikzcd}[ampersand replacement=\&]
+      \beta A
+      \ar[r, "\iota_A"]
+      \& P^2A
+    \end{tikzcd}
+  \end{align*}
+  so $\mu^\beta_A\cdot \eta^\beta_{\beta A}=1_{\beta A}$.
+
+  Finally, for associativity of multiplication, expanding the
+  definition of $\mu^\beta$ twice gives:
+  \begin{align*}
+    &\begin{tikzcd}[ampersand replacement=\&]
+      \beta^3 A
+      \ar[r, "\beta\mu^\beta_A"]
+      \& \beta^2 A
+      \ar[r, "\mu^\beta_A"]
+      \& \beta A
+      \ar[r, "\iota_A"]
+      \& P^2A
+    \end{tikzcd} \\
+    =&\begin{tikzcd}[ampersand replacement=\&]
+      \beta^3 A
+      \ar[r, "\beta\mu^\beta_A"]
+      \& \beta^2 A
+      \ar[r, "\beta\iota_A"]
+      \& \beta(P^2A)
+      \ar[r, "\iota_{P^2A}"]
+      \& P^2(P^2A)
+      \ar[r, "\mu^{P^2}_A"]
+      \& P^2A
+    \end{tikzcd} \\
+    =&\begin{tikzcd}[ampersand replacement=\&]
+      \beta^3 A
+      \ar[r, "\beta^2\iota_A"]
+      \& \beta^2(P^2A)
+      \ar[r, "\beta\iota_{P^2A}"]
+      \& \beta(P^2(P^2A))
+      \ar[r, "\beta\mu^{P^2}_A"]
+      \& \beta(P^2A)
+      \ar[r, "\iota_{P^2A}"]
+      \& P^2(P^2A)
+      \ar[r, "\mu^{P^2}_A"]
+      \& P^2A
+    \end{tikzcd}
+  \end{align*}
+  and likewise
+  \begin{align*}
+    &\begin{tikzcd}[ampersand replacement=\&]
+      \beta^3 A
+      \ar[r, "\mu^\beta_{\beta A}"]
+      \& \beta^2 A
+      \ar[r, "\mu^\beta_A"]
+      \& \beta A
+      \ar[r, "\iota_A"]
+      \& P^2A
+    \end{tikzcd} \\
+    =&\begin{tikzcd}[ampersand replacement=\&]
+      \beta^3 A
+      \ar[r, "\mu^\beta_{\beta A}"]
+      \& \beta^2 A
+      \ar[r, "\beta\iota_A"]
+      \& \beta(P^2A)
+      \ar[r, "\iota_{P^2A}"]
+      \& P^2(P^2A)
+      \ar[r, "\mu^{P^2}_A"]
+      \& P^2A
+    \end{tikzcd} \\
+    =&\begin{tikzcd}[ampersand replacement=\&]
+      \beta^3 A
+      \ar[r, "\beta^2\iota_A"]
+      \& \beta^2(P^2A)
+      \ar[r, "\mu^\beta_{P^2A}"]
+      \& \beta(P^2A)
+      \ar[r, "\iota_{P^2A}"]
+      \& P^2(P^2A)
+      \ar[r, "\mu^{P^2}_A"]
+      \& P^2A
+    \end{tikzcd} \\
+    &\qquad\text{by naturality of $\mu^\beta$}\\
+    =&\begin{tikzcd}[ampersand replacement=\&]
+      \beta^3 A
+      \ar[r, "\beta^2\iota_A"]
+      \& \beta^2(P^2A)
+      \ar[r, "\beta\iota_{P^2A}"]
+      \& \beta(P^2(P^2A))
+      \ar[r, "\iota_{P^2(P^2A)}"]
+      \& P^2(P^2(P^2A))
+      \ar[r, "\mu^{P^2}_{P^2A}"]
+      \& P^2(P^2A)
+      \ar[r, "\mu^{P^2}_A"]
+      \& P^2A
+    \end{tikzcd} \\
+    =&\begin{tikzcd}[ampersand replacement=\&]
+      \beta^3 A
+      \ar[r, "\beta^2\iota_A"]
+      \& \beta^2(P^2A)
+      \ar[r, "\beta\iota_{P^2A}"]
+      \& \beta(P^2(P^2A))
+      \ar[r, "\iota_{P^2(P^2A)}"]
+      \& P^2(P^2(P^2A))
+      \ar[r, "P^2\mu^{P^2}_A"]
+      \& P^2(P^2A)
+      \ar[r, "\mu^{P^2}_A"]
+      \& P^2A
+    \end{tikzcd} \\
+    &\qquad\text{by the monad identities for $\mu^{P^2}$}\\
+    =&\begin{tikzcd}[ampersand replacement=\&]
+      \beta^3 A
+      \ar[r, "\beta^2\iota_A"]
+      \& \beta^2(P^2A)
+      \ar[r, "\beta\iota_{P^2A}"]
+      \& \beta(P^2(P^2A))
+      \ar[r, "\beta\mu^{P^2}_A"]
+      \& \beta(P^2A)
+      \ar[r, "\iota_{P^2A}"]
+      \& P^2(P^2A)
+      \ar[r, "\mu^{P^2}_A"]
+      \& P^2A
+    \end{tikzcd} \\
+    &\qquad\text{by naturality of $\iota$}
+  \end{align*}
+  and so the two compositions are equal, proving the associativity
+  of~$\mu^\beta$.
+
+  In summary, $\eta^\beta_A=\eta_A$, the principal ultrafilter
+  function, and $\mu^\beta_A=\mu^{P^2}_A\cdot \beta\iota_A$.  These
+  definitions make $(\beta,\eta^\beta,\mu^\beta)$ a submonad of
+  $(P^2,\eta^{P^2},\mu^{P^2})$.
 \end{proof}
 
 \end{document}
-
