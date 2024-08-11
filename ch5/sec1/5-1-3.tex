@@ -12,11 +12,54 @@
 
 \setexercise{5}{1}{3}
 \begin{exercise}
-  
+  The adjunction associated to a reflective subcategory of $\sC$
+  induces an \textbf{idempotent monad} on~$\sC$. Prove that the
+  following three characterizations of an idempotent monad $(T, \eta,
+  \mu)$ are equivalent:
+  \begin{enumerate}[label=(\roman*)]
+  \item The multiplication $\Func{\mu}{T^2}{T}$ is a natural
+    isomorphism (hence, the appellation ``idempotent'').
+  \item Each component of $\Func{\mu}{T^2}{T}$ is a monomorphism.
+  \item The natural transformations $\Func{\eta T,T\eta}{T}{T^2}$ are
+    equal.
+  \end{enumerate}
 \end{exercise}
 
 \begin{proof}
-  
+  (i) $\Rightarrow$ (ii) is trivial.
+
+  For (ii) $\Rightarrow$ (iii), at the component $c$, the
+  defining identities of the monad give the commutative diagram
+  $$
+  \begin{tikzcd}
+    Tc \ar[r, "T\eta_c"] \ar[dr, "1_{Tc}"']
+    & T^2c \ar[d, "\mu_c"]
+    & Tc \ar[l, "\eta_{Tc}"'] \ar[dl, "1_{Tc}"]
+    \\
+    & Tc
+  \end{tikzcd}
+  $$
+  so $\mu_c\cdot T\eta_c=\mu_c\cdot \eta_{Tc}=1_{Tc}$.  Since $\mu_c$
+  is a monomorphism, $T\eta_c=\eta_{Tc}$, and hence $T\eta=\eta T$.
+
+  For (iii) $\Rightarrow$ (i), consider the diagram
+  $$
+  \begin{tikzcd}[column sep=6em]
+    T^2c
+    \ar[r, "T^2\eta_c=\eta_{T^2c}"]
+    \ar[d, "\mu_c"']
+    & T^3c
+    \ar[d, "T\mu_c"]
+    \\
+    Tc
+    \ar[r, "T\eta_c=\eta_{Tc}"']
+    & T^2c
+  \end{tikzcd}
+  $$
+  using $T\eta=\eta T$ for the displayed equalities.  The diagram
+  commutes by the naturality of~$\eta$.  Since
+  $\mu_c\cdot T\eta_c=1_{Tc}$ by the monad identities, it follows that
+  $T\eta_c\cdot \mu_c=1_{T^2c}$, so $\mu_c$~is an isomorphism.
 \end{proof}
 
 \end{document}
