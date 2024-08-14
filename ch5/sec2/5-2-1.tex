@@ -12,11 +12,83 @@
 
 \setexercise{5}{2}{1}
 \begin{exercise}
-  
+  Pick your favorite monad on $\Set$ induced from a free $\dashv$
+  forgetful adjunction involving some variety of algebraic structure
+  borne by sets, identify its algebras, and show that algebra
+  morphisms are precisely the homomorphisms, in the appropriate sense.
 \end{exercise}
 
 \begin{proof}
-  
+  Consider the free group monad $F$ of example 5.1.4(iv), induced by
+  the free $\dashv$ forgetful adjunction $\begin{tikzcd}
+    \Set \ar[r, shift left=1ex] \ar[r, leftarrow, shift right=1ex]
+    \ar[r, phantom, "\scriptstyle\bot"] & \Group
+  \end{tikzcd}$.  If $X\in\Set$, then $F(X)$ is the set of words
+  in~$X$ and the formal inverse $a^{-1}$ for each $a\in X$, quotiented
+  by the relations $aa^{-1}=a^{-1}a=1$ (the empty word) for each $a\in
+  X$.
+
+  An algebra for $F$ is a pair $(A\in\Set, \func{a}{FA}{A})$ such that
+  the diagrams
+  $$
+  \begin{tikzcd}
+    A
+    \ar[r, "\eta_A"]
+    \ar[dr, "1_A"']
+    & FA
+    \ar[d, "a"]
+    \\
+    & A
+  \end{tikzcd}
+  \qquad
+  \begin{tikzcd}
+    F^2A
+    \ar[r, "\mu_A"]
+    \ar[d, "Fa"']
+    & FA
+    \ar[d, "a"]
+    \\
+    FA
+    \ar[r, "a"']
+    & A
+  \end{tikzcd}
+  $$
+  both commute.
+
+  Every group $(G,*,e)$ gives rise to an algebra for $F$: let $X=UG$,
+  the underlying set of~$G$, then $(X, \func{\text{ev}}{FX}{X})$ is an
+  algebra, where $\text{ev}$ evaluates a word in the group~$G$
+  (explicitly, $\text{ev}(x_1\ldots x_n)=x_1*\cdots*x_n$, where some
+  of the $x_i$ might be of the form $x_i^{-1}$).  The left diagram
+  commutes as $\text{ev}(x)=x$ for every $x\in X$, and the square
+  commutes by the general associative law for~$*$.
+
+  Conversely, any algebra $(A,a)$ for the free group monad defines a
+  group $(A,*,e)$, where $e=a(1)$, $x*y=a(xy)$ and the inverse of~$x$
+  is $a(x^{-1})$, since
+  $$x*a(x^{-1})=a(xa(x^{-1}))=a(a(x)a(x^{-1}))=a(xx^{-1})=a(1)=e$$
+  and likewise for $a(x^{-1})*x$.  The associativity condition implied
+  by the square shows that $*$~is associative as required.
+
+  Now consider an algebra morphism $\func{f}{(A,a)}{(B,b)}$, with the
+  corresponding groups being $(A,*_A,e_A)$ and $(B,*_B,e_B)$:
+  $$
+  \begin{tikzcd}
+    TA
+    \ar[r, "Tf"]
+    \ar[d, "a"']
+    & TB
+    \ar[d, "b"]
+    \\
+    A
+    \ar[r, "f"']
+    & B
+  \end{tikzcd}
+  $$
+  Then $b\cdot Tf(1) = b(1) = e_B$, while $f\cdot a(1)=f(e_A)$, so
+  $f(e_A)=e_B$.  If $x,y\in A$, then
+  $$f(x*_A y)=f(a(xy))=b(Tf(ab))=b(f(x)f(y))=f(x)*_B f(y)$$
+  so an algebra morphism is a group homomorphism.
 \end{proof}
 
 \end{document}
