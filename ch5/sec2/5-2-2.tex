@@ -12,11 +12,91 @@
 
 \setexercise{5}{2}{2}
 \begin{exercise}
-  
+  Fill in the remaining details in the proof of Lemma 5.2.8 to show
+  that the free and forgetful functors relating a category~$\sC$ with a
+  monad~$T$ to the category $\sC^T$ of $T$-algebras are adjoints,
+  inducing the given monad~$T$.
 \end{exercise}
 
 \begin{proof}
-  
+  To show the first triangle law holds,
+  $$
+  \begin{tikzcd}
+    F^T
+    \ar[r, Rightarrow, "F^T\eta"]
+    \ar[dr, Rightarrow, "1_{F^T}"']
+    & F^TU^TF^T
+    \ar[d, Rightarrow, "\epsilon F^T"]
+    \\
+    & F^T
+  \end{tikzcd}
+  $$
+  we show that it holds at an arbitrary $A\in\sC$, so we must show
+  that
+  $$
+  \begin{tikzcd}
+    F^TA
+    \ar[r, "F^T\eta_A"]
+    \ar[dr, "1_{F^TA}"']
+    & F^TU^TF^TA
+    \ar[d, "\epsilon_{F^TA}"]
+    \\
+    & F^TA
+  \end{tikzcd}
+  $$
+  commutes.  Now $\eta_A$ is the component of the unit of the monad,
+  $\epsilon_{F^TA}=\epsilon_{(TA,\mu_A)}=\mu_A$, and $U^TF^T=T$, so
+  the triangle becomes
+  $$
+  \begin{tikzcd}
+    F^TA
+    \ar[r, "F^T\eta_A"]
+    \ar[dr, "1_{F^TA}"']
+    & F^TTA
+    \ar[d, "\mu_A"]
+    \\
+    & F^TA
+  \end{tikzcd}
+  $$
+  which expands to
+  $$
+  \begin{tikzcd}
+    (TA,\mu_A)
+    \ar[r, "T\eta_A"]
+    \ar[dr, "1_{TA}"']
+    & (T^2A, \mu_{TA})
+    \ar[d, "\mu_A"]
+    \\
+    & (TA,\mu_A)
+  \end{tikzcd}
+  $$
+  This commutes by the monad laws.
+
+  The other identity reads at $(A,a)\in\sC^T$:
+  $$
+  \begin{tikzcd}
+    U^T(A,a)
+    \ar[r, "\eta_{U^T(A,a)}"]
+    \ar[dr, "1_{U^T(A,a)}"']
+    & U^TF^TU^T(A,a)
+    \ar[d, "U^T\epsilon_{(A,a)}"]
+    \\
+    & U^T(A,a)
+  \end{tikzcd}
+  $$
+  which simplifies to
+  $$
+  \begin{tikzcd}
+    A
+    \ar[r, "\eta_A"]
+    \ar[dr, "1_A"']
+    & TA
+    \ar[d, "a"]
+    \\
+    & A
+  \end{tikzcd}
+  $$
+  which commutes as $(A,a)$ is a $T$-algebra.
 \end{proof}
 
 \end{document}
