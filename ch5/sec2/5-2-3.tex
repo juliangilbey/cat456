@@ -12,11 +12,90 @@
 
 \setexercise{5}{2}{3}
 \begin{exercise}
-  
+  Dualize Definition 5.2.4 and Lemma 5.2.8 to define the category of
+  coalgebras for a comonad together with its associated
+  forgetful--cofree adjunction.
 \end{exercise}
 
 \begin{proof}
-  
+  Definition 5.2.4 dualises to:
+  \begingroup
+  \renewcommand{\theHtheorem}{\theHsection.\arabic{theorem}.dual}
+  \settheorem{5}{2}{4}
+  \begin{definition}[dual version]
+    Let $\sC$ be a category with a comonad $(K, \epsilon, \delta)$.
+    The category of $K$-coalgebras is the category $\sC^K$ whose:
+    \begin{itemize}
+    \item objects are pairs $(A\in\sC, \func{a}{A}{KA})$, so that the
+      diagrams
+      $$
+      \begin{tikzcd}
+        A
+        \ar[r, "a"]
+        \ar[dr, "1_A"']
+        & KA
+        \ar[d, "\epsilon_A"]
+        \\
+        & A
+      \end{tikzcd}
+      \qquad
+      \begin{tikzcd}
+        A
+        \ar[r, "a"]
+        \ar[d, "a"']
+        & KA
+        \ar[d, "\delta_A"]
+        \\
+        KA
+        \ar[r, "Ka"']
+        & K^2A
+      \end{tikzcd}
+      $$
+      commute in $\sC$, and
+    \item morphisms $\func{f}{(A,a)}{(B,b)}$ are $K$-coalgebra
+      homomorphisms: maps $\func{f}{A}{B}$ in~$\sC$ so that the square
+      $$
+      \begin{tikzcd}
+        A
+        \ar[r, "f"]
+        \ar[d, "a"']
+        & B
+        \ar[d, "b"]
+        \\
+        KA
+        \ar[r, "Kf"']
+        & KB
+      \end{tikzcd}
+      $$
+      commutes, with composition and identities as in~$\sC$.
+    \end{itemize}
+  \end{definition}
+  \popthm
+  \endgroup
+
+  We then have the dual of Lemma 5.2.8, the proof of which is just the
+  dual of the proof of Lemma 5.2.8 (including the dual of Exercise
+  5.2.ii).
+
+  \begingroup
+  \renewcommand{\theHtheorem}{\theHsection.\arabic{theorem}.dual}
+  \settheorem{5}{2}{8}
+  \begin{lemma}[dual version]
+    For any comonad $(K,\epsilon,\delta)$ acting on a category~$\sC$,
+    there is a forgetful $\ladj$ cofree adjunction
+    $$
+    \begin{tikzcd}
+      \sC
+      \ar[r, shift left=1ex, "U^K"]
+      \ar[r, leftarrow, shift right=1ex, "F^K"']
+      \ar[r, phantom, "\scriptstyle\bot"]
+      & \sC^K
+    \end{tikzcd}$$
+    between $\sC$ and the category of $K$-coalgebras whose induced
+    comonad on~$\sC$ is $(K,\epsilon,\delta)$.
+  \end{lemma}
+  \popthm
+  \endgroup
 \end{proof}
 
 \end{document}
