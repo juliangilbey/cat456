@@ -491,7 +491,7 @@ approach.
     \ar[d, "f^m\otimes f^n"']
     %\ar[dr, phantom, "\tikz{\node[shape=circle,draw,inner sep=1pt]
     % {\scriptstyle 1};}"]
-    \ar[dr, phantom, "\textcircled{1}"]
+    \ar[dr, phantom, "\text{\textcircled{\scriptsize 1}}"]
     & \coprod_m X^m \otimes \coprod_n X^n
     \ar[r, "\mu_X"']
     \ar[u, "\theta\circ\theta"]
@@ -504,10 +504,10 @@ approach.
     Y^m \otimes Y^n
     \ar[r, "\iota_m\otimes\iota_n"']
     \ar[d, "\mu_Y^{(m)}\otimes\mu_Y^{(n)}"']
-    \ar[dr, phantom, "\textcircled{2}"]
+    \ar[dr, phantom, "\text{\textcircled{\scriptsize 2}}"]
     & \coprod_m Y^m \otimes \coprod_n Y^n
     \ar[d, dashed, shift right=5pt]
-    \ar[r, phantom, "\textcircled{3}"]
+    \ar[r, phantom, "\text{\textcircled{\scriptsize 3}}"]
     & \coprod_r Y^r
     \ar[d, dashed, shift left=5pt]
     & Y^{m+n}
@@ -689,15 +689,15 @@ approach.
     & \color{blue} \coprod_{k,m} (X^k \otimes X^m) \otimes \coprod_n X^n
     \ar[r, "\phi\otimes 1_{\coprod X^n}"']
     \ar[d, blue, "\theta"']
-    \ar[ur, phantom, pos=0.3, "\textcircled{1}"]
-    \ar[dr, phantom, "\textcircled{2}"]
+    \ar[ur, phantom, pos=0.3, "\text{\textcircled{\scriptsize 1}}"]
+    \ar[dr, phantom, "\text{\textcircled{\scriptsize 2}}"]
     & \color{blue} \coprod_r X^r \otimes \coprod_n X^n
     \ar[d, blue, "\theta"]
     \\
     & \coprod_{k,m} \bigl((X^k \otimes X^m) \otimes \coprod_n X^n\bigr)
     \ar[r]
     \ar[ddd, blue, "\theta"']
-    \ar[dr, phantom, pos=0.35, "\textcircled{3}"]
+    \ar[dr, phantom, pos=0.35, "\text{\textcircled{\scriptsize 3}}"]
     & \coprod_r \bigl(X^r \otimes \coprod_n X^n\bigr)
     \ar[ddd, blue, "\theta"]
     \\
@@ -723,7 +723,7 @@ approach.
     & \coprod_{k,m,n} (X^k\otimes X^m) \otimes X^n
     \ar[r]
     \ar[d, blue]
-    \ar[dr, phantom, very near start, "\textcircled{4}"]
+    \ar[dr, phantom, very near start, "\text{\textcircled{\scriptsize 4}}"]
     & \coprod_{r,n} X^r \otimes X^n
     \ar[dl, blue, "\phi"]
     \\
@@ -739,6 +739,7 @@ approach.
   The morphisms between the coproducts are induced by the coproduct
   injections shown, and the morphisms labelled~$\theta$ are
   isomorphisms of the type described at the beginning of this proof.
+  The numbered regions are all bounded on the sides by blue morphisms.
   Triangle~1 commutes by the definition of $\mu_X$.  For square~2, the
   outer square around it trivially commutes, so the inner square does
   too.  Square~3 is similar, with both paths around the ``outer''
