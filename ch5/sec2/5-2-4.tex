@@ -12,12 +12,109 @@
 
 \setexercise{5}{2}{4}
 \begin{exercise}
-  
+  Verify that the Kleisli category is a category by checking that the
+  composition operation of Definition 5.2.9 is associative and unital.
 \end{exercise}
 
 \begin{proof}
-  
+  We use the notation of that definition.  Let $\func{f}{A}{TB}$,
+  $\func{g}{B}{TC}$ and $\func{h}{C}{TD}$ be morphisms in~$\sC$
+  representing the morphisms $\tilde f\colon A\rightsquigarrow B$,
+  $\tilde g\colon B\rightsquigarrow C$ and $\tilde h\colon
+  C\rightsquigarrow D$ in~$\sC_T$.
+
+  We have, writing tildes for morphisms in $\sC_T$, and writing the
+  representing morphisms in~$\sC$ on the right,
+  \begin{align*}
+    \tilde f\cdot \tilde 1_A
+    &=\begin{tikzcd}[ampersand replacement=\&]
+      A
+      \ar[r, "\eta_A"]
+      \& TA
+      \ar[r, "Tf"]
+      \& T^2B
+      \ar[r, "\mu_B"]
+      \& TB
+    \end{tikzcd} \\
+    &=\begin{tikzcd}[ampersand replacement=\&]
+      A
+      \ar[r, "f"]
+      \& TB
+      \ar[r, "\eta_{TB}"]
+      \& T^2B
+      \ar[r, "\mu_B"]
+      \& TB
+    \end{tikzcd} \\
+    &\qquad\qquad\text{by naturality of $\eta$}\\
+    &=\begin{tikzcd}[ampersand replacement=\&]
+      A
+      \ar[r, "f"]
+      \& TB
+    \end{tikzcd} \\
+    &= \tilde f \\
+    \tilde 1_B\cdot \tilde f
+    &=\begin{tikzcd}[ampersand replacement=\&]
+      A
+      \ar[r, "f"]
+      \& TB
+      \ar[r, "T\eta_B"]
+      \& T^2B
+      \ar[r, "\mu_B"]
+      \& TB
+    \end{tikzcd} \\
+    &=\begin{tikzcd}[ampersand replacement=\&]
+      A
+      \ar[r, "f"]
+      \& TB
+    \end{tikzcd} \\
+    &= \tilde f
+  \end{align*}
+  so composition of morphisms is unital.  For associativity, we have
+  \begin{align*}
+    \tilde h\cdot (\tilde g\cdot \tilde f)
+    &=\begin{tikzcd}[ampersand replacement=\&]
+      A
+      \ar[r, "f"]
+      \& TB
+      \ar[r, "Tg"]
+      \& T^2C
+      \ar[r, "\mu_C"]
+      \& TC
+      \ar[r, "Th"]
+      \& T^2D
+      \ar[r, "\mu_D"]
+      \& TD
+    \end{tikzcd} \\
+    &=\begin{tikzcd}[ampersand replacement=\&]
+      A
+      \ar[r, "f"]
+      \& TB
+      \ar[r, "Tg"]
+      \& T^2C
+      \ar[r, "T^2h"]
+      \& T^3D
+      \ar[r, "\mu_{TD}"]
+      \& T^2D
+      \ar[r, "\mu_D"]
+      \& TD
+    \end{tikzcd} \\
+    &\qquad\qquad\text{by naturality of $\mu$}\\
+    &=\begin{tikzcd}[ampersand replacement=\&]
+      A
+      \ar[r, "f"]
+      \& TB
+      \ar[r, "Tg"]
+      \& T^2C
+      \ar[r, "T^2h"]
+      \& T^3D
+      \ar[r, "T\mu_D"]
+      \& T^2D
+      \ar[r, "\mu_D"]
+      \& TD
+    \end{tikzcd} \\
+    &\qquad\qquad\text{by monad laws}\\
+    &=(\tilde h\cdot \tilde g)\cdot \tilde f
+  \end{align*}  
 \end{proof}
 
 \end{document}
-
