@@ -12,11 +12,192 @@
 
 \setexercise{5}{2}{5}
 \begin{exercise}
-  
+  Verify that the assignments $F_T$ and $U_T$ defined in the proof of
+  Lemma 5.2.11 are functorial.
 \end{exercise}
 
 \begin{proof}
-  
+  We also show below that the stated isomorphism is, indeed, natural.
+
+  Let $A\in\sC$.  Then $F_T(1_A)$ is represented by
+  $A\xrightarrow{1_A} A\xrightarrow{\eta_A} TA$, so
+  $F_T(1_A)=1_{F_TA}$.  Next, suppose $\func{f}{A}{B}$ and
+  $\func{g}{B}{C}$ are morphisms in~$\sC$.  Then $F_T(g)F_T(f)$ is
+  represented by
+  \begin{align*}
+    &\begin{tikzcd}[ampersand replacement=\&]
+      A
+      \ar[r, "f"]
+      \& B
+      \ar[r, "\eta_B"]
+      \& TB
+      \ar[r, "Tg"]
+      \& TC
+      \ar[r, "T\eta_C"]
+      \& T^2C
+      \ar[r, "\mu_C"]
+      \& TC
+    \end{tikzcd} \\
+    =&\begin{tikzcd}[ampersand replacement=\&]
+      A
+      \ar[r, "f"]
+      \& B
+      \ar[r, "\eta_B"]
+      \& TB
+      \ar[r, "Tg"]
+      \& TC
+    \end{tikzcd} \\
+    =&\begin{tikzcd}[ampersand replacement=\&]
+      A
+      \ar[r, "f"]
+      \& B
+      \ar[r, "g"]
+      \& C
+      \ar[r, "\eta_C"]
+      \& TC
+    \end{tikzcd} \\
+    &\qquad\text{by naturality of $\eta$}
+  \end{align*}
+  which is the representation of $F_T(gf)$, so
+  $F_T(gf)=F_T(g)F_T(f)$.
+
+  Now for $A\in\sC_T$,
+  $U_T(1_A)=TA\xrightarrow{T\eta_A} T^2A\xrightarrow{\mu_A}
+  TA=1_{TA}=1_{U_TA}$ using the monad laws.  Next, let
+  $\func{f}{A}{TB}$ and $\func{g}{B}{TC}$ be morphisms in~$\sC$
+  representing the morphisms $\tilde f\colon A\rightsquigarrow B$ and
+  $\tilde g\colon B\rightsquigarrow C$ in~$\sC_T$.  Then
+  \begin{align*}
+    U_T(\tilde g)U_T(\tilde f)
+    &=\begin{tikzcd}[ampersand replacement=\&]
+      TA
+      \ar[r, "Tf"]
+      \& T^2B
+      \ar[r, "\mu_B"]
+      \& TB
+      \ar[r, "Tg"]
+      \& T^2C
+      \ar[r, "\mu_C"]
+      \& TC
+    \end{tikzcd} \\
+    &=\begin{tikzcd}[ampersand replacement=\&]
+      TA
+      \ar[r, "Tf"]
+      \& T^2B
+      \ar[r, "T^2g"]
+      \& T^3C
+      \ar[r, "\mu_{TC}"]
+      \& T^2C
+      \ar[r, "\mu_C"]
+      \& TC
+    \end{tikzcd} \\
+    &\qquad\qquad\text{by naturality of $\mu$} \\
+    &=\begin{tikzcd}[ampersand replacement=\&]
+      TA
+      \ar[r, "Tf"]
+      \& T^2B
+      \ar[r, "T^2g"]
+      \& T^3C
+      \ar[r, "T\mu_C"]
+      \& T^2C
+      \ar[r, "\mu_C"]
+      \& TC
+    \end{tikzcd} \\
+    &\qquad\qquad\text{by monad laws} \\
+    &= U_T(\tilde g\tilde f)
+  \end{align*}
+  proving that both $F_T$ and $U_T$ are functorial.
+
+  Finally, to show that the isomorphism
+  $\sC_T(F_TA,B)\cong \sC(A,U_TB)$ is natural in $A\in\sC$ and
+  $B\in\sC_T$, we let $\func{f}{A}{TB}$, $\func{g}{A'}{TB'}$ and
+  $\func{k}{B}{TB'}$ be morphisms in~$\sC$ representing the morphisms
+  $\tilde f\colon A\rightsquigarrow B$,
+  $\tilde g\colon A'\rightsquigarrow B'$ and
+  $\tilde k\colon B\rightsquigarrow B'$ in~$\sC_T$, and
+  $\func{h}{A}{A'}$ be a morphism in~$\sC$.  Then by Lemma 4.1.3, to
+  show that the isomorphism is natural, we must show that for these
+  two diagrams:
+  $$
+  \begin{tikzcd}
+    F_TA
+    \ar[r, rightsquigarrow, "\tilde f"]
+    \ar[d, rightsquigarrow, "F_Th"']
+    &
+    B
+    \ar[d, rightsquigarrow, "\tilde k"]
+    \\
+    F_TA'
+    \ar[r, rightsquigarrow, "\tilde g"']
+    & B'
+  \end{tikzcd}
+  \qquad
+  \begin{tikzcd}
+    A
+    \ar[r, "f"]
+    \ar[d, "h"']
+    &
+    U_TB=TB
+    \ar[d, "U_T\tilde k"]
+    \\
+    A'
+    \ar[r, "g"']
+    & U_TB'=TB'
+  \end{tikzcd}  
+  $$
+  the left-hand square commutes in $\sC_T$ if and only if the
+  right-hand transposed square commutes in~$\sC$.
+
+  Now $\tilde k\tilde f$ is represented by
+  $$
+  \begin{tikzcd}[ampersand replacement=\&]
+    A
+    \ar[r, "f"]
+    \& TB
+    \ar[r, "Tk"]
+    \& T^2B'
+    \ar[r, "\mu_{B'}"]
+    \& TB'
+  \end{tikzcd}
+  = \ U_T\tilde k\cdot f
+  $$
+  and $\tilde g\cdot F_Th$ is represented by
+  \begin{align*}
+    &\begin{tikzcd}[ampersand replacement=\&]
+      A
+      \ar[r, "h"]
+      \& A'
+      \ar[r, "\eta_{A'}"]
+      \& TA'
+      \ar[r, "Tg"]
+      \& T^2B'
+      \ar[r, "\mu_{B'}"]
+      \& TB'
+    \end{tikzcd} \\
+    =&\begin{tikzcd}[ampersand replacement=\&]
+      A
+      \ar[r, "h"]
+      \& A'
+      \ar[r, "g"]
+      \& TB'
+      \ar[r, "\eta_{TB'}"]
+      \& T^2B'
+      \ar[r, "\mu_{B'}"]
+      \& TB'
+    \end{tikzcd} \\
+    &\qquad\text{by naturality of $\eta$} \\
+    =&\begin{tikzcd}[ampersand replacement=\&]
+      A
+      \ar[r, "h"]
+      \& A'
+      \ar[r, "g"]
+      \& TB'
+    \end{tikzcd} \\
+    &\qquad\text{by monad laws} \\
+    =& \ gh
+  \end{align*}
+  Therefore the left-hand square commutes in $\sC_T$ if and only if
+  the right-hand square commutes in~$\sC_T$, as required.
 \end{proof}
 
 \end{document}
