@@ -6,18 +6,207 @@
 
 % \settheorem{1}{2}{3}
 % \begin{lemma}
-%   
+%
 % \end{lemma}
 % \popthm
 
 \setexercise{5}{2}{6}
 \begin{exercise}
-  
+  Fill in the remaining details in the proof of Proposition 5.2.12:
+  verify the functoriality of $J$ and~$K$ and show that the whiskered
+  composites of the counits of these three adjunctions with $K$
+  and~$J$ agree.
 \end{exercise}
 
 \begin{proof}
-  
+  For $K$, we need to show that $U\epsilon_d$ is an algebra structure
+  map rather than that it is functorial (which has already been
+  shown); we also show that $Kf$~is a morphism of algebras.  Note the
+  \hyperref[prop:5.2.12]{rewrite at the start of this section} of the
+  second half of the proof of this proposition.
+
+  We write $\tilde f\colon c\rightsquigarrow c'$ for the morphism in
+  $\sC_T$ represented by the morphism $\func{f}{c}{Tc'}$ in~$\sC$
+  (these are transposes of each other).  Now $\tilde 1_c\colon
+  c\rightsquigarrow c$ is represented by~$\eta_c$, so
+  $$J\tilde 1_c =
+  \begin{tikzcd}[ampersand replacement=\&]
+    Fc
+    \ar[r, "F\eta_c"]
+    \& FUFc
+    \ar[r, "\epsilon_{Fc}"]
+    \& Fc
+  \end{tikzcd}
+  $$
+  but $\epsilon F\cdot F\eta = 1_F$, so $J\tilde 1_c=1_{Fc}=1_{Jc}$.
+
+  Now suppose $\tilde f\colon c\rightsquigarrow c'$ and $\tilde
+  g\colon c'\rightsquigarrow c''$ are represented by
+  $\func{f}{c}{Tc'}$ and $\func{g}{c'}{Tc''}$.  Then
+  \begin{align*}
+    J\tilde g\cdot J\tilde f
+    &=\begin{tikzcd}[ampersand replacement=\&]
+      Fc
+      \ar[r, "Ff"]
+      \& FUFc'
+      \ar[r, "\epsilon_{Fc'}"]
+      \& Fc'
+      \ar[r, "Fg"]
+      \& FUFc''
+      \ar[r, "\epsilon_{Fc''}"]
+      \& Fc''
+    \end{tikzcd} \\
+    &=\begin{tikzcd}[ampersand replacement=\&]
+      Fc
+      \ar[r, "Ff"]
+      \& FUFc'
+      \ar[r, "FUFg"]
+      \& FUFUFc''
+      \ar[r, "\epsilon_{FUFc''}"]
+      \& FUFc''
+      \ar[r, "\epsilon_{Fc''}"]
+      \& Fc''
+    \end{tikzcd} \\
+    &\qquad\qquad\text{by naturality of $\epsilon$}\\
+    &=\begin{tikzcd}[ampersand replacement=\&]
+      Fc
+      \ar[r, "Ff"]
+      \& FUFc'
+      \ar[r, "FUFg"]
+      \& FUFUFc''
+      \ar[r, "FU\epsilon_{Fc''}"]
+      \& FUFc''
+      \ar[r, "\epsilon_{Fc''}"]
+      \& Fc''
+    \end{tikzcd} \\
+    &\qquad\qquad\text{by naturality of $\epsilon$ again}\\
+    &=\begin{tikzcd}[ampersand replacement=\&]
+      Fc
+      \ar[r, "Ff"]
+      \& FUFc'
+      \ar[r, "FUFg"]
+      \& FUFUFc''
+      \ar[r, "F\mu_{c''}"]
+      \& FUFc''
+      \ar[r, "\epsilon_{Fc''}"]
+      \& Fc''
+    \end{tikzcd} \\
+    &\qquad\qquad\text{as $\mu=U\epsilon F$}\\
+    &=J(\tilde g \tilde f)
+  \end{align*}
+  showing that $J$ is functorial.
+
+  We next show that $U\epsilon_d$ is an algebra structure map, showing
+  that $Kd=(Ud,U\epsilon_d)$ is well-defined.  We must show that
+  $$
+  \begin{tikzcd}
+    T^2Ud
+    \ar[r, "\mu_{Ud}"]
+    \ar[d, "TU\epsilon_d"']
+    & TUd
+    \ar[d, "U\epsilon_d"]
+    \\
+    TUd
+    \ar[r, "U\epsilon_d"']
+    & Ud
+  \end{tikzcd}
+  $$
+  commutes.  But using $\mu=U\epsilon F$ and $T=UF$, this is
+  $$
+  \begin{tikzcd}
+    UFUFUd
+    \ar[r, "U\epsilon_{FUd}"]
+    \ar[d, "UFU\epsilon_d"']
+    & UFUd
+    \ar[d, "U\epsilon_d"]
+    \\
+    UFUd
+    \ar[r, "U\epsilon_d"']
+    & Ud
+  \end{tikzcd}
+  $$
+  which commutes by the naturality of $\epsilon$, and so $U\epsilon_d$
+  is an algebra structure map.
+
+  To show that for $\func{f}{d}{d'}$ in $\sD$,
+  $\func{Uf}{(Ud,U\epsilon_d)}{(Ud',U\epsilon_{d'})}$ is a morphism of
+  algebras, we note that the diagram
+  $$
+  \begin{tikzcd}[column sep=6em]
+    UFUd=TUd
+    \ar[r, "TUf=UFUf"]
+    \ar[d, "U\epsilon_d"']
+    & TUd' = UFUd'
+    \ar[d, "U\epsilon_{d'}"]
+    \\
+    Ud
+    \ar[r, "Uf"']
+    & Ud'
+  \end{tikzcd}
+  $$
+  commutes by the naturality of $\epsilon$.
+
+  Next, to show that the whiskered composites agree, it suffices to
+  show that $K$ and~$J$ commute with the left and right adjoints, as
+  noted in the text after the statement of the proposition; we now do
+  this.
+
+  \begin{itemize}
+  \item $JF_T=F$.  For $c\in\sC$, $Fc=JF_Tc$ by the definition
+    of~$J$.  For $\func{f}{c}{c'}$ in~$\sC$,
+    \begin{align*}
+      JF_Tf
+      &= \begin{tikzcd}[ampersand replacement=\&]
+        Fc
+        \ar[r, "Ff"]
+        \& Fc'
+        \ar[r, "F\eta_{c'}"]
+        \& FTc' = FUFc'
+        \ar[r, "\epsilon_{Fc'}"]
+        \& Fc'
+      \end{tikzcd} \\
+      &=\begin{tikzcd}[ampersand replacement=\&]
+        Fc
+        \ar[r, "Ff"]
+        \& Fc'
+      \end{tikzcd} \\
+      &\qquad\qquad\text{by the triangle identities}\\
+      &=Ff
+    \end{align*}
+    so $JF_T=F$.
+
+  \item $UJ=U_T$.  For $c\in\sC_T$, $UJc=UFc=Tc=U_Tc$.  For $\tilde
+    f\colon c\rightsquigarrow c'$ in~$\sC_T$ represented by
+    $\func{f}{c}{Tc'}$ in~$\sC$,
+    \begin{align*}
+      UJ\tilde f
+      &= \begin{tikzcd}[ampersand replacement=\&]
+        UFc
+        \ar[r, "UFf"]
+        \& UFUFc'
+        \ar[r, "U\epsilon_{Fc'}"]
+        \& UFc'
+      \end{tikzcd} \\
+      &=\begin{tikzcd}[ampersand replacement=\&]
+        Tc
+        \ar[r, "Tf"]
+        \& T^2c'
+        \ar[r, "\mu_{c'}"]
+        \& Tc'
+      \end{tikzcd} \\
+      &\qquad\qquad\text{using $\mu=U\epsilon F$}\\
+      &=U_Tf
+    \end{align*}
+    so $UJ=U_T$.
+
+  \item $KF=F^T$.  For $c\in\sC$,
+    $KFc=(UFc,U\epsilon_{Fc})=(Tc,\mu_c)=F^Tc$, using $\mu=U\epsilon
+    F$.  For $\func{f}{c}{c'}$ in~$\sC$, $KFf=UFf=Tf=F^Tf$, so
+    $KF=F^T$.
+
+  \item $U^TK=U$.  For $d\in\sD$, $U^TKd=U^T(Ud,U\epsilon_d)=Ud$, and
+    for $\func{f}{d}{d'}$ in~$\sD$, $U^TKf=U^TUf=Uf$, so $U^TK=U$.
+  \end{itemize}
 \end{proof}
 
 \end{document}
-

@@ -1,0 +1,69 @@
+\documentclass[../../solutions]{subfiles}
+\title{Template}
+\author{}
+\begin{document}
+\maketitle
+
+\settheorem{5}{2}{12}
+\begin{proposition}
+  \addcontentsline{toc}{subsection}{Proposition 5.2.12}%
+  \label{prop:5.2.12}%
+  The Kleisli category $\sC_T$ is initial in $\cat{Adj}_T$ and the
+  Eilenberg--Moore category $\sC^T$ is terminal.  That is, for any
+  adjunction $F\ladj U$ inducing the monad $(T,\eta,\mu)$ on~$\sC$,
+  there exist unique functors
+  $$
+  \begin{tikzcd}[row sep=huge, column sep=large]
+    \sC_T \ar[r, dashed, "J", "\exists!"']
+    \ar[dr, shift left=1ex, pos=0.4, "U_T" {inner sep=0mm}]
+    \ar[dr, phantom, "\scriptstyle\top" {anchor=center, rotate=-45,
+      inner sep=.5mm}]
+    \ar[dr, shift right=1ex, leftarrow, pos=0.4, "F_T"' {inner sep=0mm}]
+    & \sD
+    \ar[r, dashed, "K", "\exists!"']
+    \ar[d, shift left=1ex, pos=0.5, "U"]
+    \ar[d, phantom, "\scriptstyle\dashv"]
+    \ar[d, shift right=1ex, leftarrow, pos=0.5, "F"']
+    & \sC^T
+    \ar[dl, shift left=1ex, pos=0.4, "U^T" {inner sep=0mm}]
+    \ar[dl, phantom, "\scriptstyle\bot" {anchor=center, rotate=45,
+      inner sep=.5mm}]
+    \ar[dl, shift right=1ex, leftarrow, pos=0.4, "F^T"' {inner sep=0mm}]
+    \\
+    & \sC
+  \end{tikzcd}
+  $$
+  commuting with the left and right adjoints.
+\end{proposition}
+\popthm
+
+I found the justification of the uniqueness of $K$ in the book a
+little unclear; the following is a rewrite of the second part of the
+proof to clarify this.
+
+\begin{proof}[Second half of proof]
+  To define the functor $K$ on an object $d\in\sD$ so that $U^TK=U$,
+  we seek a suitable $T$-object structure for the object $Ud\in\sC$;
+  we denote this by $Kd=(Ud, \func{\gamma_d}{TUd}{Ud})$.  On
+  morphisms, the condition $U^TK=U$ forces us to define the image
+  under~$K$ of $\func{f}{d}{d'}$ to be
+  $\func{Uf}{(Ud,\gamma_d)}{(Ud',\gamma_{d'})}$; that this is a
+  morphism of algebras will follow once we have determined~$\gamma_d$
+  (it is also given explicitly in the solution to
+  \hyperref[ex:5.2.vi]{Exercise 5.2.vi}).  Functoriality of~$K$ is
+  obvious.  For any algebra $(c,\func{\gamma}{Tc}{c})\in\sC^T$, the
+  algebra structure map~$\gamma$ appears as $\epsilon^T_{(c,\gamma)}$,
+  the component of the counit of $F^T\ladj U^T$ at the object
+  $(c,\gamma)$; see the proof of Lemma 5.2.8.  Thus, $\gamma$~can be
+  recognized as the morphism
+  $\func{\gamma=\epsilon^T_{(c,\gamma)}}{(Tc,\mu_c)}{(c,\gamma)}$ that
+  is the transpose of the identity on $c=U^T(c,\gamma)$.  The fact
+  that $K$~preserves transposes now tells us that
+  $K\epsilon_d=\epsilon^T_{(Ud,\gamma_d)}=\gamma_d$; since
+  $K\epsilon_d=U\epsilon_d$, we must take $\gamma_d=U\epsilon_d$.
+  Thus $Kd=(Ud,U\epsilon_d)$.  Finally, the proof that $U\epsilon_d$
+  is an algebra structure map appears in Exercise 5.2.vi.
+\end{proof}
+
+\end{document}
+
