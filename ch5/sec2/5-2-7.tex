@@ -12,11 +12,41 @@
 
 \setexercise{5}{2}{7}
 \begin{exercise}
-  
+  From the canonical functor $\func{K}{\sC_T}{\sC^T}$ of Lemma 5.2.13
+  that embeds the Kleisli category into the Eilenberg--Moore category
+  for a monad~$T$ on~$\sC$, one can define a ``restricted Yoneda''
+  functor
+  $$
+  \begin{tikzcd}[column sep=small, row sep=small]
+    \sC^T
+    \ar[rr, "{\sC^T(K-,-)}"]
+    && \Set^{\sC_T^\op}
+    \\
+    (A,a)
+    & \mapsto
+    & \sC^T(K-,(A,a))
+  \end{tikzcd}
+  $$
+  that constructs a presheaf on the Kleisli category for each
+  $T$-algebra $(A,a)$.  Show that the presheaves in the image of this
+  functor restrict along $\func{F_T}{\sC}{\sC_T}$ to representable
+  functors in $\Set^{\sC^\op}$.  In fact, this functor defines an
+  isomorphism between the Eilenberg--Moore category and the full
+  subcategory of presheaves on the Kleisli category that restrict
+  along~$F_T$ to representable functors.
 \end{exercise}
 
 \begin{proof}
-  
+  We have
+  \begin{align*}
+    \sC^T(KF_Tc,(A,a))
+    &= \sC^T((Tc,\mu_c),(A,a)) \\
+    &= \sC^T(F^Tc,(A,a)) \\
+    &\cong \sC(c,U^T(A,a)) \\
+    &= \sC(c,A)
+  \end{align*}
+  so $\sC^T(KF_T-,(A,a))\cong \sC(-,A)$; in other words, the
+  restricted functor is representable.
 \end{proof}
 
 \end{document}
