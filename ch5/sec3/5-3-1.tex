@@ -12,11 +12,69 @@
 
 \setexercise{5}{3}{1}
 \begin{exercise}
-  
+  Reading between the lines in the proof of Proposition 5.3.3, prove
+  that the category of algebras for an idempotent monad on~$\sC$
+  defines a reflective subcategory of~$\sC$ and moreover is equivalent
+  to the Kleisli category for that monad.
 \end{exercise}
 
 \begin{proof}
-  
+  Suppose that $(T,\eta,\mu)$ is an idempotent monad on~$\sC$; by
+  Exercise 5.1.iii, this means that $\mu$~is invertible and
+  $\eta T=T\eta$.  The first paragraph of the proof of Proposition
+  5.3.3 then follows unchanged (just replacing $L$ by~$T$).  Thus the
+  map $\func{U^T}{\sC^T}{\sC}$ is injective on objects and morphisms
+  (the latter by the definition of~$U^T$ on morphisms), so we may
+  treat $\sC^T$ as a subcategory of~$\sC$.
+
+  It is a full subcategory, as if
+  $(A,\eta_A^{-1}), (B,\eta_B^{-1})\in\sC^T$ and $\func{f}{A}{B}$ is a
+  morphism in~$\sC$, then $f$~is an algebra morphism, since the
+  diagram
+  $$
+  \begin{tikzcd}
+    TA
+    \ar[r, "Tf"]
+    \ar[d, "\eta_A^{-1}"']
+    & TB
+    \ar[d, "\eta_B^{-1}"]
+    \\
+    A
+    \ar[r, "f"']
+    & B
+  \end{tikzcd}
+  $$
+  commutes by the naturality of $\eta$.  As $U^T$ has a left
+  adjoint~$F^T$, it follows that $\sC^T$~is a reflective subcategory
+  of~$\sC$.
+
+  Now consider the canonical comparison functor from $\sC_T$
+  to~$\sC^T$:
+  $$
+  \begin{tikzcd}[row sep=huge, column sep=large]
+    \sC_T \ar[rr, "K"]
+    \ar[dr, shift left=1ex, pos=0.4, "U_T" {inner sep=0mm}]
+    \ar[dr, phantom, "\scriptstyle\top" {anchor=center, rotate=-45,
+      inner sep=.5mm}]
+    \ar[dr, shift right=1ex, leftarrow, pos=0.4, "F_T"' {inner sep=0mm}]
+    && \sC^T
+    \ar[dl, shift left=1ex, pos=0.4, "U^T" {inner sep=0mm}]
+    \ar[dl, phantom, "\scriptstyle\bot" {anchor=center, rotate=45,
+      inner sep=.5mm}]
+    \ar[dl, shift right=1ex, leftarrow, pos=0.4, "F^T"' {inner sep=0mm}]
+    \\
+    & \sC
+  \end{tikzcd}
+  $$
+  $K$ is full and faithful by Lemma 5.2.13, so we only need to show
+  that it is essentially surjective on objects to demonstrate that
+  $\sC_T$~is equivalent to~$\sC^T$ (Theorem 1.5.9).  By Lemma 5.2.13
+  again, the image of~$\sC_T$ is the free $T$-algebras, $(Tc,\mu_c)$
+  for $c\in\sC$.  But as $\sC^T$~is a reflective subcategory of~$\sC$,
+  for every $(A,a)\in \sC^T$, the component of the counit
+  $\epsilon_{(A,a)}\colon (TA,\mu_A)\xrightarrow{a}(A,a)$ is an
+  isomorphism, so every object in~$\sC^T$ is isomorphic to~$Kc$ for
+  some $c\in\sC_T$.  Thus $K$~defines an equivalence of categories.
 \end{proof}
 
 \end{document}
