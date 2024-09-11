@@ -1,0 +1,142 @@
+\documentclass[../../solutions]{subfiles}
+\title{Template}
+\author{}
+\begin{document}
+\maketitle
+
+\addcontentsline{toc}{subsection}{Definition 5.4.8 and Corollary 5.4.10(i)}%
+\label{def:5.4.8}
+Definition 5.4.8 is somewhat unclear (for example, in the definition
+of creates coequalizers, is it the fork that is isomorphic, or just
+the coequalizer?).  We present Beck's original
+definitions~\cite{beck} and then a proof of Corollary 5.4.10(i) using
+this.  (The proof in the book is unclear on this same point.)  At the
+start of the next section, we will present a slightly amended proof of
+Theorem 5.5.1, also taking this into account.  Note, incidentally,
+that the reference given at the start of Section 5.5 to this theorem
+is incorrect; it does not appear in Beck's Ph.D. thesis, but was,
+according to Mac~Lane~\cite[159]{catworking}, presented at a
+conference in 1966.
+
+\settheorem{5}{4}{8}
+\begin{definition}
+  Given a functor $\func{U}{\sD}{\sC}$:
+  \begin{itemize}
+  \item A \textbf{$U$-split coequalizer} is a parallel pair
+    $\pfunc{f,g}{x}{y}$ in~$\sD$ together with an extension of the
+    pair $\pfunc{Uf,Ug}{Ux}{Uy}$ to a split coequalizer diagram
+    $$
+    \begin{tikzcd}
+      Ux
+      \ar[r, shift left=0.5ex, "Uf"]
+      \ar[r, shift right=0.5ex, "Ug"']
+      & Uy \ar[r, "h"]
+      \ar[l, bend left=45, pos=0.45, "t"]
+      & z
+      \ar[l, bend left, pos=0.55, "s"]
+    \end{tikzcd}
+    $$
+    in~$\sC$.
+  \item \textbf{$\sD$ has $U$-split coequalizer pairs} if every
+    $U$-split coequalizer $\pfunc{f,g}{x}{y}$ in~$\sD$ has a
+    coequalizer in~$\sD$.
+  \item \textbf{$U$ preserves $U$-split pairs} if whenever
+    $\pfunc{f,g}{x}{y}$ is $U$-split, with the underlying fork of the
+    split coequalizer diagram being $Ux\rightrightarrows Uy\to z$, and
+    the pair $f$,~$g$ has a coequalizer $y\to z_0$ in~$\sD$, then the
+    canonical map $z\to Uz_0$ in~$\sC$ is an isomorphism.
+  \item \textbf{$U$ reflects $U$-split pairs} if whenever a fork
+    $x\rightrightarrows y\to z$ in~$\sD$ maps to a fork in~$\sC$ that
+    can be extended to a split coequalizer diagram, then
+    $x\rightrightarrows y\to z$ is a coequalizer diagram in~$\sD$.
+  \item \textbf{$U$ creates coequalizers of $U$-split pairs} if
+    $\sD$~has $U$-split coequalizer pairs, and $U$ preserves and
+    reflects $U$-split pairs.
+  \item \textbf{$U$ strictly creates coequalizers of $U$-split pairs} if
+    whenever $\pfunc{f,g}{x}{y}$ is $U$-split, this extends to a unique
+    fork $x\rightrightarrows y\to z$ in~$\sD$ whose image is the
+    underlying fork of the split coequalizer diagram in~$\sC$, and
+    moreover, this unique fork is a coequalizer diagram in~$\sD$.
+  \end{itemize}
+\end{definition}
+
+It is straightforward to see that if $U$ strictly creates coequalizers
+of $U$-split pairs, then it creates coequalizers of $U$-split pairs.
+
+With this clarified definition, the proof of Proposition 5.4.9 follows
+unchanged, but the proof of Corollary 5.4.10(i) requires some changes.
+We present this, together with the easy extension to the strict case.
+
+\settheorem{5}{4}{10}
+\begin{corollary}
+  \label{corr:5.4.10}%
+  If $\begin{tikzcd}\sC
+    \ar[r, shift left=0.7ex, "F"]
+    \ar[r, shift right=0.7ex, leftarrow, "G"']
+    \ar[r, phantom, "\scriptstyle\bot"]
+    & \sD
+  \end{tikzcd}$ is a monadic adjunction, then
+  \begin{enumerate}[label=(\roman*)]
+  \item $\func{U}{\sD}{\sC}$ creates coequalizers of $U$-split pairs.
+    If the adjunction is strictly monadic, then $U$ strictly creates
+    coequalizers of $U$-split pairs.
+  \end{enumerate}
+\end{corollary}
+\popthm
+
+\begin{proof}
+  To say that $\func{U}{\sD}{\sC}$ is monadic is to say that there is
+  an equivalence of categories
+  $$
+  \begin{tikzcd}
+    \sD
+    \ar[rr, "K", "\simeq"']
+    \ar[dr, "U"]
+    && \sC^T
+    \ar[dl, "U^T"]
+    \\
+    & \sC
+  \end{tikzcd}
+  $$
+  where $T$ is the monad $UF$.  In the strict case, $K$~is an
+  isomorphism of categories.
+
+  If $\pfunc{f,g}{A}{B}$ is a $U$-split pair in $\sD$, then
+  commutativity $U=U^TK$ implies that $\pfunc{Kf,Kg}{KA}{KB}$ is a
+  $U^T$-split pair in~$\sC^T$.  Proposition 5.4.9 lifts the fork of
+  the $U$-split coequalizer diagram in~$\sC$, say
+  $UA\rightrightarrows UB\to C$, to a unique coequalizer diagram
+  $$
+  \begin{tikzcd}
+    KA
+    \ar[r, shift left=0.5ex, "Kf"]
+    \ar[r, shift right=0.5ex, "Kg"']
+    & KB
+    \ar[r, "h"]
+    & (C,\gamma)
+  \end{tikzcd}
+  $$
+  in~$\sC^T$.  As an equivalence, $K$~creates colimits, so $f$,~$g$
+  have a coequalizer in~$\sD$, showing that $\sD$~has $U$-split
+  coequalizer pairs.  Since $K$~preserves colimits, if the pair
+  $f$,~$g$ has a coequalizer $y\to z_0$ in~$\sD$, then the image of
+  this coequalizer under~$K$ is a coequalizer of $Kf$,~$Kg$ in~$\sD$,
+  and so the canonical map $(C,\gamma)\to Kz_0$ in~$\sC^T$ is an
+  isomorphism (Proposition 3.1.7), and hence the canonical map
+  $C\to Uz_0$ is too.  Finally, as $K$~reflects colimits, if the fork
+  $x \rightrightarrows y\to z$ in~$\sD$ maps to a fork in~$\sC$ that
+  can be extended to a split coequalizer diagram, then its image
+  under~$K$ in~$\sC^T$ is a coequalizer diagram, and so the fork
+  in~$\sD$ is a coequalizer diagram.  Thus $U$~creates coequalizers of
+  $U$-split pairs.
+
+  In the case that the adjunction is strictly monadic, $K$~is an
+  isomorphism.  Thus if $\pfunc{f,g}{A}{B}$ is a $U$-split pair in
+  $\sD$, the uniqueness of the lift of the underlying fork of the
+  split coequalizer diagram to~$\sC^T$ and it being a coequalizer
+  diagram carries directly to~$\sD$ via~$K$, so $U$~strictly creates
+  coequalizers of $U$-split pairs.
+\end{proof}
+
+\end{document}
+
