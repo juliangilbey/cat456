@@ -12,11 +12,67 @@
 
 \setexercise{5}{4}{1}
 \begin{exercise}
-  
+  The coequalizer of a parallel pair of morphisms $f$ and $g$ in the
+  category $\Ab$ is equally the cokernel of the map $f-g$.  Explain
+  how the canonical presentation of an abelian group described in
+  Proposition 5.4.3 defines a presentation of that group, in the usual
+  sense.
 \end{exercise}
 
 \begin{proof}
-  
+  The presentation of an abelian group in the usual sense is
+  $A=\langle G\mid R\rangle$, where $G$~is a set of generators and
+  $R$~is a set of relations, which are elements of $\ZZ[G]$.  In this
+  case, for Proposition 5.4.3, $T=\ZZ[-]$, the abelian group monad on
+  $\Set$, and
+  $$
+  \begin{tikzcd}
+    \ZZ[\ZZ[A]]
+    \ar[r, shift left=0.5ex, "{\ZZ[\alpha]}"]
+    \ar[r, shift right=0.5ex, "\mu_A"']
+    & \ZZ[A]
+    \ar[r, twoheadrightarrow, "\alpha"]
+    & A
+  \end{tikzcd}
+  $$
+  is a coequaliser, where $\alpha$ is the canonical evaluation
+  homomorphism.  But as noted in the question, the coequaliser of
+  $\ZZ[\alpha]$ and~$\mu_A$ is the cokernel of the map
+  $\ZZ[\alpha]-\mu_A$, so $A\cong \ZZ[A]/\im(\ZZ[\alpha]-\mu_A)$ (as
+  abelian groups).
+
+  Let us explore the map
+  $\func{\ZZ[\alpha]-\mu_A}{\ZZ[\ZZ[A]]}{\ZZ[A]}$.  A finite sum
+  $\sum_i\lambda_i \sum_j \mu_{ij}a_{ij}\in \ZZ[\ZZ[A]]$, where
+  $\lambda_i, \mu_{ij}\in\ZZ$, $a_{ij}\in A$, maps under $\ZZ[\alpha]$
+  to $\sum_i\lambda_i\alpha\bigl(\sum_j\mu_{ij}a_{ij}\bigr)$, where
+  $\alpha\bigl(\sum_j\mu_{ij}a_{ij}\bigr)$ is a single element of~$A$,
+  and it maps under~$\mu_A$ to
+  $\sum_{i,j}(\lambda_i\mu_{ij})a_{ij}\in\ZZ[A]$ (simplified by
+  collapsing terms with identical $a_{ij}$).
+
+  In `usual' algebra, we have $A=\ZZ[G]/\ZZ[R]$, but we can take $G=A$
+  and we can instead take~$R$ to be all relations of the form
+  $1\cdot \sum\lambda_i a_i - \sum \lambda_i a_i$ (instead of just a
+  small generating set), where the first sum is a single element
+  of~$A$ and the second is an element of $\ZZ[A]$; we can write this
+  relation as
+  $1\cdot \alpha\bigl(\sum\lambda_i a_i\bigr) - \sum \lambda_i a_i$ to
+  make this explicit.
+
+  Now consider the element $1\cdot \sum\lambda_i a_i\in\ZZ[\ZZ[A]]$.
+  We have
+  $\ZZ[\alpha]\bigl(1\cdot \sum\lambda_i
+  a_i\bigr)=1\cdot\alpha\bigl(\sum \lambda_i a_i\bigr)$ while
+  $\mu_A\bigl(1\cdot \sum \lambda_i a_i\bigr)=\sum \lambda_i a_i$, and
+  so $1\cdot \alpha\bigl(\sum\lambda_i a_i\bigr) - \sum \lambda_i a_i$
+  is in the image of $\ZZ[\alpha]-\mu_A$.  As every element of
+  $\ZZ[\ZZ[A]]$ is a linear combination of elements of the form
+  $1\cdot \sum\lambda_i a_i\in\ZZ[\ZZ[A]]$, the image of
+  $\ZZ[\alpha]-\mu_A$ will consist of linear combinations of elements
+  of the form
+  $1\cdot \alpha\bigl(\sum\lambda_i a_i\bigr) - \sum \lambda_i a_i$,
+  which is $\ZZ[R]$.
 \end{proof}
 
 \end{document}
