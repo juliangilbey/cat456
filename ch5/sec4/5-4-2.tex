@@ -12,11 +12,90 @@
 
 \setexercise{5}{4}{2}
 \begin{exercise}
-  
+  Prove Proposition 5.4.3 directly by a diagram chase.
 \end{exercise}
 
 \begin{proof}
-  
+  Let $(T,\eta,\mu)$ be a monad on $\sC$ and let
+  $(A,\func{\alpha}{TA}{A})$ be a $T$-algebra.  We must show that
+  $$
+  \begin{tikzcd}
+    (T^2A,\mu_{TA})
+    \ar[r, shift left=0.5ex, "T\alpha"]
+    \ar[r, shift right=0.5ex, "\mu_A"']
+    & (TA,\mu_A)
+    \ar[r, "\alpha"]
+    & (A,\alpha)
+  \end{tikzcd}
+  $$
+  is a coequaliser diagram in $\sC^T$.  Note that it is certainly a
+  fork because of the algebra identities for $(A,\alpha)$.
+
+  Suppose $(B,\beta)$ is a $T$-algebra with
+  $\func{f}{(TA,\mu_A)}{(B,\beta)}$ giving the fork
+  \begin{equation}
+    \label{eq:5-4-2-1}
+    \begin{tikzcd}
+      (T^2A,\mu_{TA})
+      \ar[r, shift left=0.5ex, "T\alpha"]
+      \ar[r, shift right=0.5ex, "\mu_A"']
+      & (TA,\mu_A)
+      \ar[r, "\alpha"]
+      \ar[rd, "f"']
+      & (A,\alpha)
+      \ar[d, dashed, "\exists!"', "h"]
+      \\
+      && (B,\beta)
+    \end{tikzcd}
+  \end{equation}
+  We need to show that there is a unique algebra morphism $h$, as
+  shown, making the diagram commute.
+
+  We first claim existence by showing that $h=f\cdot \eta_A$ is an
+  algebra morphism that makes the diagram commute.  We have
+  \begin{alignat*}{2}
+    f\cdot \eta_A\cdot \alpha
+    &= f\cdot T\alpha \cdot \eta_{TA} &\qquad&\text{by naturality of
+      $\eta$}\\
+    &= f\cdot \mu_A \cdot \eta_{TA} &&\text{by assumed fork}\\
+    &= f &\qquad&\text{by the monad identities}
+  \end{alignat*}
+  so $h\cdot\alpha=f$ as morphisms in $\sC$.
+
+  To show $h$ is an algebra morphism, consider the following diagram;
+  our task is to show that the outer rectangle commutes.
+  $$
+  \begin{tikzcd}[row sep=large, column sep=large]
+    TA
+    \ar[r, "T\eta_A"]
+    \ar[d, "\alpha"']
+    & T^2A
+    \ar[r, "Tf"]
+    \ar[d, "T\alpha"]
+    & TB
+    \ar[d, "\beta"]
+    \\
+    A
+    \ar[r, "\eta_A"']
+    & TA
+    \ar[r, "f"']
+    & B
+  \end{tikzcd}
+  $$
+  We have
+  \begin{alignat*}{2}
+    \beta\cdot Tf\cdot T\eta_A
+    &= f\cdot T\alpha\cdot T\eta_A &\qquad&\text{$f$ is an algebra morphism}\\
+    &= f &&\text{by the monad identities} \\
+    &= f\cdot \eta_A\cdot\alpha &&\text{by the above}
+  \end{alignat*}
+  and so $h$ is an algebra morphism.
+
+  Finally, suppose that $\func{h'}{(A,\alpha)}{(B,\beta)}$ is an
+  algebra morphism also satisfying $h'\cdot \alpha=f$, so
+  $h'\cdot\alpha=h\cdot\alpha$.  But as $\alpha\cdot\eta_A=1_A$,
+  $\alpha$~is a split epimorphism, hence $h'=h$.  Thus the original
+  fork is a coequaliser diagram in~$\sC^T$.
 \end{proof}
 
 \end{document}
