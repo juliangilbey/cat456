@@ -13,7 +13,6 @@
 [2022/08/15 v0.02 LaTeX package for Category Theory in Context solutions]
 
 \RequirePackage{mathtools,array,xspace,amssymb,mathrsfs,graphicx,braket}
-\RequirePackage[cmtip,v2]{xy} % get v2 compatibility
 \RequirePackage[shortlabels]{enumitem}
 \RequirePackage[margin=1.75in]{geometry}
 \RequirePackage{amsthm}
@@ -230,20 +229,17 @@
 \newcommand{\sZ}{{\mathsf{Z}}}
 
 % script shortcuts -- NOT USED FOR CATEGORIES, USE mathsf
-% note: cD, cH, cL, and cR were commands in an earlier version of xypic now
-% considered obsolete, the file xyv2.tex still defines them, hence the
-% renewcommand
 \newcommand{\cA}{\mathcal{A}}
 \newcommand{\cB}{\mathcal{B}}
 \newcommand{\cC}{\mathcal{C}}
-\renewcommand{\cD}{\mathcal{D}} % see note
+\newcommand{\cD}{\mathcal{D}}
 \newcommand{\cF}{\mathcal{F}}
 \newcommand{\cG}{\mathcal{G}}
-\renewcommand{\cH}{\mathcal{H}} % see note
+\newcommand{\cH}{\mathcal{H}}
 \newcommand{\cI}{\mathcal{I}}
 \newcommand{\cJ}{\mathcal{J}}
 \newcommand{\cP}{\mathcal{P}}
-\renewcommand{\cL}{\mathcal{L}} % see note
+\newcommand{\cL}{\mathcal{L}}
 \newcommand{\cM}{\mathcal{M}}
 \newcommand{\cN}{\mathcal{N}}
 \newcommand{\cO}{\mathcal{O}}
