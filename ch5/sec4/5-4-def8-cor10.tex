@@ -8,15 +8,17 @@
 \label{def:5.4.8}
 Definition 5.4.8 is somewhat unclear (for example, in the definition
 of creates coequalizers, is it the fork that is isomorphic, or just
-the coequalizer?).  We present Beck's original
-definitions~\cite{beck} and then a proof of Corollary 5.4.10(i) using
-this.  (The proof in the book is unclear on this same point.)  At the
-start of the next section, we will present a slightly amended proof of
-Theorem 5.5.1, also taking this into account.  Note, incidentally,
-that the reference given at the start of Section 5.5 to this theorem
-is incorrect; it does not appear in Beck's Ph.D. thesis, but was,
-according to Mac~Lane~\cite[159]{catworking}, presented at a
-conference in 1966.
+the coequalizer?).  We present Beck's original definitions~\cite{beck}
+and then a proof of Corollary 5.4.10(i) using this.  (The proof in the
+book is unclear on this same point.)  At the start of the next
+section, we will present a slightly amended proof of Theorem 5.5.1,
+also taking this into account.  Note, incidentally, that the reference
+given at the start of Section 5.5 to this theorem is incorrect; it
+does not appear in Beck's Ph.D. thesis, but was, according to
+Mac~Lane~\cite[159]{catworking}, presented at a conference in 1966.
+Furthermore, as Corollary 5.4.10(ii) is used as a critical step in
+Theorem 5.5.1, we have to rewrite it to remove the assumption that
+$U$~is monadic; we call the new version Lemma 5.4.11.
 
 \settheorem{5}{4}{8}
 \begin{definition}
@@ -41,10 +43,11 @@ conference in 1966.
     $U$-split coequalizer $\pfunc{f,g}{x}{y}$ in~$\sD$ has a
     coequalizer in~$\sD$.
   \item \textbf{$U$ preserves $U$-split pairs} if whenever
-    $\pfunc{f,g}{x}{y}$ is $U$-split, with the underlying fork of the
-    split coequalizer diagram being $Ux\rightrightarrows Uy\to z$, and
-    the pair $f$,~$g$ has a coequalizer $y\to z_0$ in~$\sD$, then the
-    canonical map $z\to Uz_0$ in~$\sC$ is an isomorphism.
+    $\pfunc{f,g}{x}{y}$ is $U$-split, and $x\rightrightarrows y\to w$
+    is a coequaliser diagram, then its image under~$U$ is a
+    coequaliser diagram.  Equivalently, if the split coequaliser
+    diagram has underlying fork $Ux\rightrightarrows Uy\to z$, then
+    the unique commuting map $z\to Uw$ in~$\sC$ is an isomorphism.
   \item \textbf{$U$ reflects $U$-split pairs} if whenever a fork
     $x\rightrightarrows y\to z$ in~$\sD$ maps to a fork in~$\sC$ that
     can be extended to a split coequalizer diagram, then
@@ -52,11 +55,12 @@ conference in 1966.
   \item \textbf{$U$ creates coequalizers of $U$-split pairs} if
     $\sD$~has $U$-split coequalizer pairs, and $U$ preserves and
     reflects $U$-split pairs.
-  \item \textbf{$U$ strictly creates coequalizers of $U$-split pairs} if
-    whenever $\pfunc{f,g}{x}{y}$ is $U$-split, this extends to a unique
-    fork $x\rightrightarrows y\to z$ in~$\sD$ whose image is the
-    underlying fork of the split coequalizer diagram in~$\sC$, and
-    moreover, this unique fork is a coequalizer diagram in~$\sD$.
+  \item \textbf{$U$ strictly creates coequalizers of $U$-split pairs}
+    if whenever $\pfunc{f,g}{x}{y}$ is $U$-split, with a split
+    coequaliser diagram with underlying fork
+    $Ux\rightrightarrows Uy\to z$, then this lifts to a unique fork
+    $x\rightrightarrows y\to w$ in~$\sD$, and moreover, this unique
+    fork is a coequalizer diagram in~$\sD$.
   \end{itemize}
 \end{definition}
 
@@ -72,7 +76,7 @@ We present this, together with the easy extension to the strict case.
   \label{corr:5.4.10}%
   If $\begin{tikzcd}\sC
     \ar[r, shift left=0.7ex, "F"]
-    \ar[r, shift right=0.7ex, leftarrow, "G"']
+    \ar[r, shift right=0.7ex, leftarrow, "U"']
     \ar[r, phantom, "\scriptstyle\bot"]
     & \sD
   \end{tikzcd}$ is a monadic adjunction, then
@@ -84,14 +88,14 @@ We present this, together with the easy extension to the strict case.
 \end{corollary}
 \popthm
 
-\begin{proof}
+\begin{proof}[Proof]
   To say that $\func{U}{\sD}{\sC}$ is monadic is to say that there is
   an equivalence of categories
   $$
   \begin{tikzcd}
     \sD
     \ar[rr, "K", "\simeq"']
-    \ar[dr, "U"]
+    \ar[dr, "U"']
     && \sC^T
     \ar[dl, "U^T"]
     \\
@@ -134,9 +138,61 @@ We present this, together with the easy extension to the strict case.
   isomorphism.  Thus if $\pfunc{f,g}{A}{B}$ is a $U$-split pair in
   $\sD$, the uniqueness of the lift of the underlying fork of the
   split coequalizer diagram to~$\sC^T$ and it being a coequalizer
-  diagram carries directly to~$\sD$ via~$K$, so $U$~strictly creates
-  coequalizers of $U$-split pairs.
+  diagram carries over directly to~$\sD$ via~$K$, so $U$~strictly
+  creates coequalizers of $U$-split pairs.
+\end{proof}
+
+As noted above, we need to replace Corollary 5.4.10(ii) by the
+following slight variant:
+
+\settheorem{5}{4}{11}
+\begin{lemma}
+  \label{lemma:5.4.11}%
+  Suppose that
+  $\begin{tikzcd}\sC
+    \ar[r, shift left=0.7ex, "F"]
+    \ar[r, shift right=0.7ex, leftarrow, "U"']
+    \ar[r, phantom, "\scriptstyle\bot"]
+    & \sD
+  \end{tikzcd}$ is an adjunction such that $U$~reflects $U$-split
+  coequalisers.  Then for any $D\in\sD$, there is a coequaliser
+  diagram
+  $$
+  \begin{tikzcd}
+    FUFUD
+    \ar[r, shift left=0.5ex, "FU\epsilon_D"]
+    \ar[r, shift right=0.5ex, "\epsilon_{FUD}"']
+    & FUD
+    \ar[r, "\epsilon_D"]
+    & D
+  \end{tikzcd}
+  $$
+  involving the counit $\Func{\epsilon}{FU}{1_\sD}$ of the
+  adjunction.
+\end{lemma}
+\popthm
+
+Note that by Corollary 5.4.10(i), the hypotheses of this lemma hold if
+$F\ladj U$ is a monadic adjunction, giving the original Corollary
+5.4.10(ii).  The proof is exactly as given in the book, except that
+now reflecting is an assumption:
+
+\begin{proof}[Proof]
+  This is a fork by the naturality of $\epsilon$.  It is $U$-split by
+  the diagram
+  $$
+  \begin{tikzcd}
+    UFUFUD
+    \ar[r, shift left=0.5ex, "UFU\epsilon_D"]
+    \ar[r, shift right=0.5ex, "U\epsilon_{UFD}"']
+    & UFUD \ar[r, "U\epsilon_D"]
+    \ar[bend left=45]{l}{\eta_{UFUD}}
+    & UD
+    \ar[bend left]{l}{\eta_{UD}}
+  \end{tikzcd}
+  $$
+  in $\sC$.  Since $U$ reflects $U$-split coequalisers, the fork
+  defines a coequaliser diagram in~$\sD$.
 \end{proof}
 
 \end{document}
-
