@@ -1,0 +1,282 @@
+\documentclass[../../solutions]{subfiles}
+\title{Template}
+\author{}
+\begin{document}
+\maketitle
+
+\addcontentsline{toc}{subsection}{Theorem 5.5.1}%
+\label{thm:5.5.1}
+Following on from our discussion and modification of
+\hyperref[def:5.4.8]{Definition 5.4.8} above, we present a proof of
+Theorem 5.5.1 that closely follows the one presented in the text, but
+that aligns better to the modified definition.  It also clarifies and
+corrects the final paragraph of the argument.  The first two
+paragraphs of the argument are almost unchanged, but for ease, they
+are reproduced here.  We also incorporate Exercise 5.5.i into the
+proof for simplicity.
+
+\settheorem{5}{5}{1}
+\begin{theorem}[monadicity theorem]
+  A right adjoint functor $\func{U}{\sD}{\sC}$ is monadic
+  (respectively, strictly monadic) if and only if it creates
+  (respectively, strictly creates) coequalizers of $U$-split pairs.
+\end{theorem}
+
+\begin{proof}[Proof]
+  \renewcommand*{\theequation}{%
+    \thesection.\arabic{equation}%
+  }
+  Recalling Definition 5.4.8, the meaning of this result is the
+  following.  Given an adjunction $F\ladj U$ inducing a monad~$T$
+  on~$\sC$, Proposition 5.2.12 constructs the canonical comparison
+  functor:
+  $$
+  \begin{tikzcd}[row sep=large, column sep=normal]
+    \sD \ar[rr, "K"]
+    \ar[dr, shift left=1ex, pos=0.5, "U"]
+    \ar[dr, phantom, "\scriptstyle\top" {anchor=center, rotate=-45,
+      inner sep=.5mm}]
+    \ar[dr, shift right=1ex, leftarrow, pos=0.5, "F"']
+    && \sC^T
+    \ar[dl, shift left=1ex, pos=0.4, "U^T" {inner sep=0mm}]
+    \ar[dl, phantom, "\scriptstyle\bot" {anchor=center, rotate=45,
+      inner sep=.5mm}]
+    \ar[dl, shift right=1ex, leftarrow, pos=0.4, "F^T"' {inner sep=0mm}]
+    \\
+    & \sC
+  \end{tikzcd}
+  $$
+  Then by definition $U$ is monadic (respectively, strictly monadic)
+  if $K$~is an equivalence (respectively, isomorphism) of categories.
+
+  Corollary 5.4.10 (with the proof \hyperref[def:5.4.8]{above}) proves
+  the implication (i)$\Rightarrow$(ii), so we assume~(ii) and use it
+  to construct an inverse equivalence $\func{L}{\sC^T}{\sD}$ to the
+  functor~$K$.  We have $U^TK=U$ and $KF=F^T$, so if~$L$ is to define
+  an inverse equivalence to~$K$, we must have $U^T\cong UL$ and
+  $F\cong LF^T$, conditions that we use to guide the definition
+  of~$L$.
+  
+  In fact, we define $L$ so that the second of these conditions holds
+  strictly, namely, for each $A\in\sC$, define
+  $$L(TA,\mu_A) := FA$$
+  and define $L$ to carry a free map
+  $\func{Uf}{(TA,\mu_A)}{(TB,\mu_B)}$ between free algebras to the map
+  $\func{f}{FA}{FB}$.  (This means, in particular, that $L$ carries a
+  free map $Tf$ to~$Ff$.)  It remains to extend the definition of~$L$
+  to non-free algebras and maps.
+
+  An equivalence of categories preserves all limits and colimits.
+  With this in mind, for any algebra $(A,\alpha)\in\sC^T$, consider
+  the parallel pair $\pfunc{F\alpha,\epsilon_{FA}}{FUFA}{FA}$
+  in~$\sD$.  By Example 5.4.7, this parallel pair is $U$-split, with
+  the underlying fork of the split coequaliser diagram being
+  \begin{equation}
+    \label{eq:5-5-thm1-1}
+    \begin{tikzcd}[column sep=huge]
+      T^2A=UFUFA
+      \ar[r, shift left=0.5ex, "UF\alpha=T\alpha"]
+      \ar[r, shift right=0.5ex, "U\epsilon_{FA}=\mu_A"']
+      & TA=UFA
+      \ar[r, twoheadrightarrow, "\alpha"]
+      & A
+    \end{tikzcd}
+  \end{equation}
+  By the hypothesis that $U$ creates $U$-split coequalisers,
+  $F\alpha$, $\epsilon_{FA}$ has a coequaliser in~$\sD$, and we define
+  $\func{h_{(A,\alpha)}}{FA}{L(A,\alpha)}$ to be such a coequaliser:
+  \begin{equation}
+    \label{eq:5-5-thm1-2}
+    \begin{tikzcd}
+      FUFA
+      \ar[r, shift left=0.5ex, "F\alpha"]
+      \ar[r, shift right=0.5ex, "\epsilon_{FA}"']
+      & FA
+      \ar[r, twoheadrightarrow, "h_{(A,\alpha)}"]
+      & L(A,\alpha)
+    \end{tikzcd}
+  \end{equation}
+  This construction is arranged so that the coequaliser (5.4.4) is
+  preserved by~$L$.  (In the strict case, we define
+  $\func{h_{(A,\alpha)}}{FA}{L(A,\alpha)}$ to be the unique lift of
+  the underlying fork of the coequaliser diagram to~$\sD$.)
+  As $U$~preserves $U$-split pairs, the unique morphism $A\to
+  UL(A,\alpha)$ making the diagram
+  \begin{equation}
+    \label{eq:5-5-thm1-3}
+    \begin{tikzcd}
+      UFUFA
+      \ar[r, shift left=0.5ex, "UF\alpha"]
+      \ar[r, shift right=0.5ex, "U\epsilon_{FA}"']
+      & UFA
+      \ar[r, twoheadrightarrow, "\alpha"]
+      \ar[rd, "Uh_{(A,\alpha)}"']
+      & A
+      \ar[d, dashed, "\exists!"']
+      \\
+      && UL(A,\alpha)
+    \end{tikzcd}
+  \end{equation}
+  commute is an isomorphism, and so
+  $\func{Uh_{(A,\alpha)}}{UFA}{UL(A,\alpha)}$ is a coequaliser.  (In
+  the strict case, $UL(A,\alpha)=A$ and this isomorphism is the
+  identity.)
+
+  The action of $\func{L}{\sC^T}{\sD}$ on a morphism
+  $\func{f}{(A,\alpha)}{(B,\beta)}$ is defined to be the unique map
+  between coequalisers induced by a commutative diagram of parallel
+  pairs:
+  $$
+  \begin{tikzcd}[row sep=large]
+    FUFA
+    \ar[r, shift left=0.5ex, "F\alpha"]
+    \ar[r, shift right=0.5ex, "\epsilon_{FA}"']
+    \ar[d, "FUFf"']
+    & FA
+    \ar[r, twoheadrightarrow, "h_{(A,\alpha)}"]
+    \ar[d, "Ff"]
+    & L(A,\alpha)
+    \ar[d, dashed, "\exists!"', "Lf"]
+    \\
+    FUFB
+    \ar[r, shift left=0.5ex, "F\beta"]
+    \ar[r, shift right=0.5ex, "\epsilon_{FB}"']
+    & FB
+    \ar[r, twoheadrightarrow, "h_{(B,\beta)}"]
+    & L(B,\beta)
+  \end{tikzcd}
+  $$
+  Uniqueness of factorisations through colimit cones implies that this
+  definition is functorial; see Proposition 3.6.1.
+
+  The functor $K$ carries \eqref{eq:5-5-thm1-2} to
+  \begin{equation}
+    \label{eq:5-5-thm1-4}
+    \begin{tikzcd}
+      (T^2A,\mu_{TA})
+      \ar[r, shift left=0.5ex, "T\alpha"]
+      \ar[r, shift right=0.5ex, "\mu_A"']
+      & (TA,\mu_A)
+      \ar[r, "Kh_{(A,\alpha)}"]
+      & KL(A,\alpha)
+    \end{tikzcd}
+  \end{equation}
+  since, writing $\epsilon'$ for the counit of $F^T\ladj U^T$, we have
+  $K\epsilon=\epsilon' K$, and so
+  $K\epsilon_{FA}= \epsilon'_{KFA}= \epsilon'_{F^TA}=
+  \epsilon'_{(TA,\mu_A)}= \mu_A$.  Furthermore, $U^T$~sends this fork
+  to the lower coequaliser in~\eqref{eq:5-5-thm1-3}, as $U=U^TK$.  As
+  $U^T$ strictly creates coequalisers of $U^T$-split pairs,
+  \eqref{eq:5-5-thm1-4}~is a coequaliser diagram and the unique map
+  $\gamma_{(A,\alpha)}$ making the diagram
+  $$
+  \begin{tikzcd}
+    (T^2A,\mu_{TA})
+    \ar[r, shift left=0.5ex, "T\alpha"]
+    \ar[r, shift right=0.5ex, "\mu_A"']
+    & (TA,\mu_A)
+    \ar[r, twoheadrightarrow, "Kh_{(A,\alpha)}"]
+    \ar[rd, twoheadrightarrow, "\alpha"']
+    & KL(A,\alpha)
+    \ar[d, dashed, "\exists!"', "\gamma_{(A,\alpha)}"]
+    \\
+    && (A,\alpha)
+  \end{tikzcd}
+  $$
+  commute is an isomorphism.  (In the strict case,
+  $KL(A,\alpha)=(A,\alpha)$ and $\gamma_{(A,\alpha)}=1_{(A,\alpha)}$.)
+
+  We now show that the components $\gamma_{(A,\alpha)}$ assemble into
+  a natural isomorphism $\gamma\colon KL\cong 1_{\sC^T}$.  (In the
+  strict case, we trivially have $KL=1_{\sC^T}$.)  Suppose
+  $\func{f}{(A,\alpha)}{(B,\beta)}$.  We then have the diagram
+  $$
+  \begin{tikzcd}[row sep=large]
+    &&& (A,\alpha)
+    \ar[ddd, dashed, "\exists!"']
+    \\
+    (T^2A,\mu_{TA})
+    \ar[r, shift left=0.5ex, "T\alpha"]
+    \ar[r, shift right=0.5ex, "\mu_A"']
+    \ar[d, "T^2f"']
+    & (TA,\mu_A)
+    \ar[r, twoheadrightarrow, "Kh_{(A,\alpha)}"']
+    \ar[d, "Tf"]
+    \ar[urr, twoheadrightarrow, "\alpha"]
+    & KL(A,\alpha)
+    \ar[d, "KLf"']
+    \ar[ur, "\gamma_{(A,\alpha)}"']
+    \\
+    (T^2B,\mu_{TB})
+    \ar[r, shift left=0.5ex, "T\beta"]
+    \ar[r, shift right=0.5ex, "\mu_B"']
+    & (TB,\mu_B)
+    \ar[r, twoheadrightarrow, "Kh_{(B,\beta)}"]
+    \ar[drr, twoheadrightarrow, "\beta"']
+    & KL(B,\beta)
+    \ar[dr, "\gamma_{(B,\beta)}"]
+    \\
+    &&& (B,\beta)
+  \end{tikzcd}
+  $$
+  It is easy to show that
+  $(\beta\cdot Tf)\cdot T\alpha = (\beta\cdot Tf)\cdot \mu_A$, so
+  there is a unique arrow from the coequaliser (shown dashed)
+  $\func{j}{(A,\alpha)}{(B,\beta)}$ with
+  $\beta\cdot Tf=j\cdot \alpha$.  But $j=f$ satisfies this, as $f$~is
+  an algebra morphism.  We are thus reduced to showing that the
+  right-hand trapezium commutes.  We have
+  $$f\cdot \gamma_{(A,\alpha)} \cdot Kh_{(A,\alpha)}
+  = f\cdot\alpha = \beta\cdot Tf = \gamma_{(B,\beta)}\cdot
+  Kh_{(B,\beta)} \cdot Tf = \gamma_{(B,\beta)}\cdot KLf \cdot
+  Kh_{(A,a)}.$$
+  Since $Kh_{(A,\alpha)}$ is an epimorphism, we obtain $f\cdot
+  \gamma_{(A,\alpha)}= \gamma_{(B,\beta)}\cdot KLf$, and hence
+  $\gamma$~is a natural transformation, proving that $KL\cong
+  1_{\sC^T}$.
+
+  It remains to prove that $LK\cong 1_\sD$ (and in the strict case,
+  that $LK=1_\sD$).  Given $D\in\sD$, we have $KD=(UD,U\epsilon_D)$
+  by the proof of Proposition \hyperref[prop:5.2.12]{5.2.12}, so the
+  object $LKD$ is a coequaliser
+  $$
+  \begin{tikzcd}
+    FUFUD
+    \ar[r, shift left=0.5ex, "FU\epsilon_D"]
+    \ar[r, shift right=0.5ex, "\epsilon_{FUD}"']
+    & FUD
+    \ar[r, twoheadrightarrow, "h_{KD}"]
+    & LKD
+  \end{tikzcd}
+  $$
+  But by \hyperref[lemma:5.4.11]{Lemma 5.4.11} (our rewritten variant
+  of Corollary 5.4.10(ii)), this parallel pair has a coequaliser~$D$,
+  so we have a unique isomorphism $\delta_D$ between coequalisers
+  making this diagram commute:
+  $$
+  \begin{tikzcd}
+    FUFUD
+    \ar[r, shift left=0.5ex, "FU\epsilon_D"]
+    \ar[r, shift right=0.5ex, "\epsilon_{FUD}"']
+    & FUD
+    \ar[r, twoheadrightarrow, "h_{KD}"]
+    \ar[rd, twoheadrightarrow, "\epsilon_D"']
+    & LKD
+    \ar[d, dashed, "\exists!"', "\delta_D"]
+    \\
+    && D
+  \end{tikzcd}
+  $$
+  (Note that Lemma 5.4.11 assumes that $U$~reflects coequalisers of
+  $U$-split pairs.)  An almost identical diagram and argument to the
+  above now shows that if $\func{g}{D}{D'}$, then
+  $g\cdot \delta_D=\delta_{D'}\cdot LKg$ (though this time the dashed
+  arrow equals~$g$ by naturality of~$\epsilon$), showing that the
+  isomorphisms~$\epsilon_D$ assemble into a natural isomorphism
+  $\delta\colon LK\cong 1_\sD$.  (In the case that $U$ strictly
+  creates $U$-split pairs, our above definition gives $LKD=D$ and
+  $h_{KD}=\epsilon_D$, so $\delta_D=1_D$ and $LK=1_\sD$.)
+\end{proof}
+
+\end{document}
+

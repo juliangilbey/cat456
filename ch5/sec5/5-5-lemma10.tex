@@ -1,0 +1,103 @@
+\documentclass[../../solutions]{subfiles}
+\title{Template}
+\author{}
+\begin{document}
+\maketitle
+
+\addcontentsline{toc}{subsection}{Lemma 5.5.10}%
+\label{lemma:5.5.10}
+
+\settheorem{5}{5}{10}
+\begin{lemma}
+  For any pullback diagram of monomorphisms, as displayed on the left,
+  $$
+  \begin{tikzcd}
+    A'
+    \ar[r, "g"]
+    \ar[d, rightarrowtail, "a"']
+    \ar[dr, phantom, "\lrcorner", at start]
+    & B'
+    \ar[d, rightarrowtail, "b"]
+    \\
+    A
+    \ar[r, "f"']
+    & B
+  \end{tikzcd}
+  \hspace{2cm}
+  \begin{tikzcd}
+    PB'
+    \ar[r, "g^{-1}"]
+    \ar[d, "b_*"']
+    & PA'
+    \ar[d, "a_*"]
+    \\
+    PB
+    \ar[r, "f^{-1}"']
+    & PA
+  \end{tikzcd}
+  $$
+  the right hand square commutes.
+\end{lemma}
+
+The proof in the book makes assertions about various squares being
+pullbacks, but it is unclear to me why this should be the case.  The
+following argument, appearing on nLab\footnote{%
+  \url{https://ncatlab.org/nlab/show/Beck-Chevalley+condition}, in the
+  section on Images and preimages, accessed 15 September 2024}, is
+more convincing, and also has the benefit that it does not require any
+of the morphisms to be monic.  Here is the reworded lemma:
+
+\begin{mlemma}
+  For any pullback diagram, as displayed on the left,
+  $$
+  \begin{tikzcd}
+    D
+    \ar[r, "g"]
+    \ar[d, "h"']
+    \ar[dr, phantom, "\lrcorner", at start]
+    & B
+    \ar[d, "k"]
+    \\
+    A
+    \ar[r, "f"']
+    & C
+  \end{tikzcd}
+  \hspace{2cm}
+  \begin{tikzcd}
+    PB
+    \ar[r, "g^{-1}"]
+    \ar[d, "k_*"']
+    & PD
+    \ar[d, "h_*"]
+    \\
+    PC
+    \ar[r, "f^{-1}"']
+    & PA
+  \end{tikzcd}
+  $$
+  the right hand square commutes.
+\end{mlemma}
+
+\begin{proof}[Proof]
+  From Example 3.2.11 and Definition 3.2.3, we can take
+  $D=\{(a,b)\in A\times B:f(a)=k(b)\}$, with $h$ and~$g$
+  being the projections onto the first and second components
+  respectively.
+
+  Now we can write any set $X\in PB$ as the union of its elements:
+  $X=\bigcup_{x\in X}\{x\}$.  Now inverse functions and direct image
+  functions both preserve unions, which follows from Example 4.1.8, as
+  both are left adjoints, and left adjoints preserve coproducts.  It
+  therefore suffices to prove that the right-hand diagram commutes
+  when $X=\{x\}\in PB$.  We can then calculate directly:
+  \begin{align*}
+    h_*g^{-1}(\{x\})
+      &= h\bigl(\{(a,x):f(a)=k(x)\}\bigr) \\
+      &= \{a:f(a)=k(x)\} \\
+      &= f^{-1}(\{k(x)\}) \\
+      &= f^{-1}k_*(\{x\}).
+  \end{align*}
+\end{proof}
+
+\end{document}
+
