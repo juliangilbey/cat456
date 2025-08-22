@@ -12,12 +12,397 @@
 
 \setexercise{5}{5}{5}
 \begin{exercise}
-  
+  Generalizing Exercise 5.5.iv, for any small category $\sJ$ and any
+  cocomplete category~$\sC$ the forgetful functor $\sC^\sJ \to
+  \sC^{\ob\sJ}$ admits a left adjoint
+  $\func{\Lan}{\sC^{\ob\sJ}}{\sC^\sJ}$ that sends a functor $F\in
+  \sC^{\ob\sJ}$ to the functor $\Lan F\in \sC^\sJ$ defined by
+  $$\Lan F(j) = \coprod_{x\in\sJ\vphantom{j}}\coprod_{\sJ(x,j)} Fx.$$
+  \begin{enumerate}[label=(\roman*)]
+  \item Define $\Lan F$ on morphisms in $\sJ$.
+  \item Define $\Lan$ on morphisms in $\sC^{\ob\sJ}$.
+  \item Use the Yoneda lemma to show that Lan is left adjoint to the
+    forgetful (restriction) functor $\sC^\sJ\to \sC^{\ob\sJ}$.
+  \item Prove that this adjunction is monadic by appealing to
+    the monadicity theorem.
+  \end{enumerate}
 \end{exercise}
 
 \begin{proof}
-  
+  For parts (i)--(iii), there is only one reasonable way to define the
+  required morphisms, and part~(iii) shows that these are consistent
+  in the sense that they make $\Lan$ a left adjoint to the forgetful
+  functor $\func{U}{\sC^\sJ}{\sC^{\ob\sJ}}$.
+
+  We also note that the forgetful functor $U$ can be written as $i^*$
+  (so $UG=Gi$), where $i\colon \ob\sJ\hookrightarrow \sJ$ is the
+  inclusion function; we will find it helpful to write this inclusion
+  explicitly at various points in the following argument.
+
+  \begin{enumerate}[label=(\roman*)]
+  \item If $\func{f}{j}{j'}$ is a morphism in $\sJ$, we define
+    $\Lan F(f)$ to be the unique morphism that makes the following
+    diagram commute for every $y\in\sJ$ and $g\in\sJ(y,j)$:
+    $$
+    \begin{tikzcd}
+      Fy \ar[r, "\iota_g"] \ar[d, equal]
+      & \displaystyle \coprod_{\sJ(y,j)} Fy \ar[r, "\iota_y"]
+      & \displaystyle \coprod_{x\in\sJ\vphantom{j}}\coprod_{\sJ(x,j)} Fx
+      \ar[d, dashed, "\Lan F(f)"]
+      \\
+      Fy \ar[r, "\iota_{fg}"']
+      & \displaystyle \coprod_{\sJ(y,j')} Fy \ar[r, "\iota_y"']
+      & \displaystyle \coprod_{x\in\sJ\vphantom{j}}\coprod_{\sJ(x,j')} Fx
+    \end{tikzcd}
+    $$
+
+  \item If $\Func{\lambda}{F}{F'}$ is a morphism in $\sC^{\ob\sJ}$, we
+    define $\Func{\Lan\lambda}{\Lan F}{\Lan F'}$ by its components.
+    For each $j\in\sJ$, define $(\Lan\lambda)_j$ to be the unique
+    morphism making the following diagram commute for every $y\in\sJ$
+    and $g\in\sJ(y,j)$:
+    $$
+    \begin{tikzcd}
+      Fy \ar[r, "\iota_g"] \ar[d, "\lambda_y"']
+      & \displaystyle \coprod_{\sJ(y,j)} Fy \ar[r, "\iota_y"]
+      & \displaystyle \coprod_{x\in\sJ\vphantom{j}}\coprod_{\sJ(x,j)} Fx
+      \ar[d, dashed, "(\Lan \lambda)_j"]
+      \\
+      F'y \ar[r, "\iota_g"']
+      & \displaystyle \coprod_{\sJ(y,j)} F'y \ar[r, "\iota_y"']
+      & \displaystyle \coprod_{x\in\sJ\vphantom{j}}\coprod_{\sJ(x,j)} F'x
+    \end{tikzcd}
+    $$
+    As $\ob\sJ$ is a discrete category, it is trivial that these
+    components assemble to give a natural transformation.
+
+  \item \emph{The question asks us to use the Yolanda lemma to prove
+      this result, but I cannot see how to do this, especially as we
+      have explicity given definitions for the behaviour of $\Lan$ in
+      the previous parts.  In the proof of the general result in
+      Chapter~6, the Yolanda lemma is only mentioned twice: explicitly
+      in the discussion prior to Proposition 6.1.5, but there it is
+      not actually used (the natural transformation under
+      consideration is just $\gamma^*\cdot K^*$, and this does not
+      require the Yolanda lemma), and in Proposition 6.1.5 via
+      Proposition 4.3.4.  But as we are defining the morphisms
+      explicitly (in particular in part~(ii) above), we do not need
+      this proposition.  There may, though, be a much better way to do
+      the following!}
+
+    \smallskip
+
+    To show that $\func{\Lan}{\sC^{\ob\sJ}}{\sC^\sJ}$ is left adjoint
+    to~$U$, we show that for every $F\in\sC^{\ob J}$ and
+    $G\in\sC^\sJ$, we have
+    $$\sC^\sJ(\Lan F,G)\cong \sC^{\ob\sJ}(F,UG)=\sC^{\ob\sJ}(F,Gi)$$
+    and these isomorphisms are natural in $F$ and $G$.  This would
+    also show that $\Lan F$ represents the functor
+    $\func{\sC^{\ob\sJ}(F,-\cdot i)}{\sJ}{\Set}$, though we do not
+    make use of that here.
+
+    Given $\Func{\alpha^\sharp}{\Lan F}{G}$, define its transpose
+    $\Func{\alpha^\flat}{F}{Gi}$ by
+    $$
+    \begin{tikzcd}
+      \alpha^\flat_j\colon Fj \ar[r, "\iota_{1_j}"]
+      & \displaystyle \coprod_{\sJ(j,j)} Fj \ar[r, "\iota_j"]
+      & \displaystyle \coprod_{x\in\sJ\vphantom{j}}\coprod_{\sJ(x,j)} Fx
+      \ar[r, "\alpha^\sharp_j"]
+      & Gj
+    \end{tikzcd}    
+    $$
+    Note that these components trivially assemble to give a natural
+    transformation as $\ob\sJ$ is discrete.
+
+    Conversely, given $\Func{\alpha^\flat}{F}{Gi}$, we define its
+    transpose $\Func{\alpha^\sharp}{\Lan F}{G}$ by components: for
+    each $j\in\sJ$, let $\alpha^\sharp_j$ be the unique morphism that
+    makes the following diagram commute for each $y\in\sJ$ and
+    $g\in\sJ(y,j)$:
+    $$
+    \begin{tikzcd}
+      Fy \ar[r, "\iota_g"] \ar[d, "\alpha^\flat_y"']
+      & \displaystyle \coprod_{\sJ(y,j)} Fy \ar[r, "\iota_y"]
+      & \displaystyle \coprod_{x\in\sJ\vphantom{j}}\coprod_{\sJ(x,j)} Fx
+      \ar[d, dashed, "\alpha^\sharp_j"]
+      \\
+      Gy
+      \ar[rr, "Gg"']
+      && Gj
+    \end{tikzcd}
+    $$
+    (Note that the tempting alternative, sending
+    $Fy\xrightarrow{Fg}Fj$, is not defined in general, as $F$~is a
+    functor from~$\sC^{\ob\sJ}$.)  To show that the resulting
+    $\alpha^\sharp$~is a natural transformation, suppose
+    $\func{f}{j}{j'}$ is a morphism in~$\sJ$.  Then for each
+    $y\in\sJ$, $g\in\sJ(y,j)$, we have a diagram
+    $$
+    \begin{tikzcd}
+      Fy \ar[r, equal] \ar[d, "\iota_{fg}"']
+      & Fy \ar[r, "\alpha^\flat_y"] \ar[d, "\iota_g"']
+      & Gy \ar[dd, "Gg"'] \ar[ddd, bend left=30, "G(fg)"]
+      \\
+      \displaystyle \coprod_{\sJ(y,j')} Fy \ar[dd, "\iota_y"']
+      & \displaystyle \coprod_{\sJ(y,j)} Fy \ar[d, "\iota_y"']
+      \\
+      & \Lan F(j) \ar[r, "\alpha^\sharp_j"] \ar[d, "\Lan F(f)"']
+      & Gj \ar[d, "Gf"']
+      \\
+      \Lan F(j') \ar[r, equal]
+      & \Lan F(j') \ar[r, "\alpha^\sharp_{j'}"']
+      & Gj'
+    \end{tikzcd}
+    $$
+    The left-hand rectangle commutes by the definition of $\Lan F(f)$,
+    the upper-middle rectangle and outer boundary commute by the
+    definition of~$\alpha^\sharp$, and the right-hand triangle
+    commutes by the functoriality of~$G$.  It follows that $Gf\cdot
+    \alpha^\sharp_j\cdot \iota_y\cdot \iota_g = \alpha^\sharp_{j'}
+    \cdot \Lan F(f)\cdot \iota_y\cdot \iota_g$ for all $y$ and~$g$,
+    and so $Gf\cdot \alpha^\sharp_j = \alpha^\sharp_{j'} \cdot \Lan
+    F(f)$ by the uniqueness property of the coproduct $\Lan F(j)$.
+    Hence $\alpha^\sharp$~is a natural transformation.
+
+    We next show that these proposed transposes do indeed give a
+    bijection.  Given $\alpha^\sharp\in\sC^\sJ(\Lan F,G)$, we require
+    $(\alpha^\flat)^\sharp=\alpha^\sharp$.  Now
+    $(\alpha^\flat)^\sharp_j$ is the unique morphism that makes the
+    following diagram commute for all $y\in\sJ$, $g\in\sJ(y,j)$, where
+    we have added one extra arrow for $\Lan F(g)$:
+    $$
+    \begin{tikzcd}
+      Fy \ar[r, "\iota_g"] \ar[d, "\iota_{1_y}"']
+      & \displaystyle \coprod_{\sJ(y,j)} Fy \ar[r, "\iota_y"]
+      & \displaystyle \coprod_{x\in\sJ\vphantom{j}}\coprod_{\sJ(x,j)} Fx
+      \ar[dr, dashed, "(\alpha^\flat)^\sharp_j"]
+      \\
+      \displaystyle \coprod_{\sJ(y,y)} Fy \ar[r, "\iota_y"']
+      & \displaystyle \coprod_{x\in\sJ\vphantom{j}}\coprod_{\sJ(x,j)} Fx
+      \ar[ur, "\Lan F(g)"']
+      \ar[r, "\alpha^\sharp_y"']
+      & Gy \ar[r, "Gg"']
+      & Gj
+    \end{tikzcd}
+    $$
+    Here, the composite
+    $\alpha^\sharp_y\cdot \iota_y\cdot \iota_{1_y}$
+    is~$\alpha^\flat_y$, and the left-hand rectangle commutes by the
+    definition of $\Lan F(g)$.  Taking
+    $(\alpha^\flat)^\sharp_j=\alpha^\sharp_j$ makes the right-hand
+    square commute by the naturality of~$\alpha^\sharp$, so uniqueness
+    shows that $(\alpha^\flat)^\sharp=\alpha^\sharp$ as required.
+
+    In the opposite direction, given
+    $\alpha^\flat\in\sC^{\ob\sJ}(F,Gi)$, we show that
+    $(\alpha^\sharp)^\flat=\alpha^\flat$.  For each $j\in\sJ$, the top
+    row of the following diagram gives~$(\alpha^\sharp)^\flat_j$:
+    $$
+    \begin{tikzcd}
+      Fj \ar[r, "\iota_{1_j}"] \ar[d, "\alpha^\flat_j"']
+      & \displaystyle \coprod_{\sJ(j,j)} Fj \ar[r, "\iota_j"]
+      & \displaystyle \coprod_{x\in\sJ\vphantom{j}}\coprod_{\sJ(x,j)} Fx
+      \ar[r, "\alpha^\sharp_j"]
+      & Gj \ar[d, equal]
+      \\
+      Gj \ar[rrr, "G1_j"']
+      &&& Gj
+    \end{tikzcd}
+    $$
+    and this diagram commutes by the definition of $\alpha^\sharp$
+    applied to the morphism $1_j\in\sJ(j,j)$, so
+    $(\alpha^\sharp)^\flat_j=\alpha^\flat_j$ as required.  We
+    therefore have a bijection $\sC^\sJ(\Lan F,G) \cong
+    \sC^{\ob\sJ}(F,Gi)$ for each $F$ and~$G$.
+
+    We now show that these bijections are natural in $F$ and $G$,
+    using Lemma 4.1.3 to do so.  We therefore need to show that for
+    any morphisms with domains and codomains as shown in the following
+    diagrams:
+    $$
+    \begin{tikzcd}[arrows=Rightarrow]
+      \Lan F \ar[r, "\alpha^\sharp"] \ar[d, "\Lan\lambda"']
+      & G \ar[d, "\mu"]
+      & F \ar[r, "\alpha^\flat"] \ar[d, "\lambda"']
+      & Gi \ar[d, "\mu i"]
+      \\
+      \Lan F' \ar[r, "\beta^\sharp"']
+      & G'
+      & F' \ar[r, "\beta^\flat"']
+      & G'i
+    \end{tikzcd}
+    $$
+    the left-hand square commutes in $\sC^\sJ$ if and only if the
+    right-hand square commutes in $\sC^{\ob\sJ}$.  These square
+    commute if and only if the following squares commute for each
+    $j\in\sJ$:
+    \begin{equation}
+      \label{eq:5-5-5-1}
+      \begin{tikzcd}
+        \Lan F(j) \ar[r, "\alpha^\sharp_j"] \ar[d, "(\Lan\lambda)_j"']
+        & Gj \ar[d, "\mu_j"]
+        & Fj \ar[r, "\alpha^\flat_j"] \ar[d, "\lambda_j"']
+        & Gj \ar[d, "\mu_j"]
+        \\
+        \Lan F'(j) \ar[r, "\beta^\sharp_j"']
+        & G'j
+        & F'j \ar[r, "\beta^\flat_j"']
+        & G'j
+      \end{tikzcd}
+    \end{equation}
+    Suppose that the left-hand square commutes for all $j$.  Then for
+    each~$j$, substituting the definitions of the transposes in the
+    right-hand square and adding in an arrow for $(\Lan \lambda)_j$
+    gives
+    $$
+    \begin{tikzcd}
+      Fj \ar[r, "\iota_{1_j}"] \ar[d, "\lambda_j"']
+      & \displaystyle \coprod_{\sJ(j,j)} Fj \ar[r, "\iota_j"]
+      & \displaystyle \coprod_{x\in\sJ\vphantom{j}}\coprod_{\sJ(x,j)} Fx
+      \ar[r, "\alpha^\sharp_j"]
+      \ar[d, "(\Lan \lambda)_j"']
+      & Gj \ar[d, "\mu_j"]
+      \\
+      F'j \ar[r, "\iota_{1_j}"']
+      & \displaystyle \coprod_{\sJ(j,j)} F'j \ar[r, "\iota_j"']
+      & \displaystyle \coprod_{x\in\sJ\vphantom{j}}\coprod_{\sJ(x,j)} F'x
+      \ar[r, "\beta^\sharp_j"']
+      & G'j
+    \end{tikzcd}
+    $$
+    The left-hand rectangle in this diagram commutes by the definition of
+    $(\Lan\lambda)_j$ and the right-hand square here commutes by
+    assumption, so the right-hand square in~\eqref{eq:5-5-5-1} commutes.
+
+    Conversely, assume that the right-hand square
+    in~\eqref{eq:5-5-5-1} commutes for all~$j$.  Then for each
+    $j\in\sJ$, for each $y\in\sJ$ and $g\in\sJ(y,j)$, we have a
+    diagram
+    $$
+    \begin{tikzcd}
+      Fy \ar[r, "\alpha^\flat_y"] \ar[d, "\iota_g"']
+      \ar[ddddd, bend right=45, "\lambda_y"']
+      & Gy \ar[dd, "Gg"]
+      \ar[ddddd, bend left=45, "\mu_y"]
+      \\
+      \displaystyle \coprod_{\sJ(y,j)} Fy \ar[d, "\iota_y"']
+      \\
+      \Lan F(j) \ar[r, "\alpha^\sharp_j"] \ar[d, "(\Lan\lambda)_j"']
+      & Gj \ar[d, "\mu_j"]
+      \\
+      \Lan F'(j) \ar[r, "\beta^\sharp_j"']
+      & G'j
+      \\
+      \displaystyle \coprod_{\sJ(y,j)} F'y \ar[u, "\iota_y"]
+      \\
+      F'y \ar[r, "\beta^\flat_y"'] \ar[u, "\iota_g"]
+      & G'y \ar[uu, "G'g"']
+    \end{tikzcd}
+    $$
+    The left side commutes by the definition of $\Lan\lambda$ and the
+    right side commutes by the naturality of~$\mu$.  The top and
+    bottom rectangles commute by the definition of $\alpha^\sharp_j$
+    and~$\beta^\sharp_j$ respectively, and the boundary commutes by
+    assumption.  Therefore
+    $\mu_j\cdot \alpha^\sharp_j\cdot \iota_y \cdot \iota_g =
+    \beta^\sharp_j\cdot (\Lan \lambda)_j \cdot \iota_y \cdot \iota_g$
+    for each $y$ and~$g$, and so the central square here, which is the
+    left-hand square in~$\eqref{eq:5-5-5-1}$, commutes by the
+    uniqueness property of the coproduct $\Lan F(j)$.
+
+    Thus $\Lan$ is left adjoint to the forgetful functor $U$.
+
+  \item We prove that this adjunction is strictly monadic using the
+    monadicity theorem.  Suppose we have a parallel pair of morphisms
+    $\pfunc{\alpha,\beta}{F}{G}$ in $\sC^\sJ$ whose images in
+    $\sC^{\ob\sJ}$ extend to a split coequaliser diagram in
+    $\sC^{\ob\sJ}$ with underlying fork
+    $$
+    \begin{tikzcd}
+      UF
+      \ar[r, shift left=0.5ex, "U\alpha"]
+      \ar[r, shift right=0.5ex, "U\beta"']
+      & UG
+      \ar[r, twoheadrightarrow, "\gamma"]
+      & H
+    \end{tikzcd}
+    $$
+    We must show that there is a unique way to lift the functor
+    $\func{H}{\ob\sJ}{\sC}$ to a functor $\func{\hat H}{\sJ}{\sC}$ so
+    that $\gamma$~is a natural transformation in~$\sC^\sJ$, and
+    moreover that the resulting fork defines a coequaliser
+    in~$\sC^\sJ$.
+
+    For $\gamma$ to define a natural transformation in $\sC^\sJ$, we
+    require that for every morphism $\func{f}{j}{j'}$ in~$\sJ$, the
+    diagram
+    $$
+    \begin{tikzcd}
+      Gj \ar[r, "\gamma_j"] \ar[d, "Gf"']
+      & \hat Hj \ar[d, dashed, "\hat Hf"]
+      \\
+      Gj' \ar[r, "\gamma_{j'}"']
+      & \hat Hj'
+    \end{tikzcd}
+    $$
+    commutes, where $\hat Hf$ is yet to be defined; note also that
+    $\hat Hj=Hj$ for every $j\in\sJ$.  Since the fork in the split
+    coequaliser diagram is an absolute colimit, it is preserved by the
+    evaluation functor $\ev_j$.  Thus in the diagram
+    $$
+    \begin{tikzcd}
+      Fj
+      \ar[r, shift left=0.5ex, "\alpha_j"]
+      \ar[r, shift right=0.5ex, "\beta_j"']
+      \ar[d, "Ff"']
+      & Gj
+      \ar[r, twoheadrightarrow, "\gamma_j"]
+      \ar[d, "Gf"]
+      & Hj
+      \ar[d, dashed, "\exists!\vphantom{f}"', "\hat Hf"]
+      \\
+      Fj'
+      \ar[r, shift left=0.5ex, "\alpha_{j'}"]
+      \ar[r, shift right=0.5ex, "\beta_{j'}"']
+      & Gj'
+      \ar[r, twoheadrightarrow, "\gamma_{j'}"']
+      & Hj'
+    \end{tikzcd}
+    $$
+    the top and bottom rows are coequalisers and we must define
+    $\hat Hf$ to be the induced morphism.  Uniqueness ensures that the
+    resulting $\func{\hat H}{\sJ}{\sC}$ is functorial.  We also
+    observe that the image of~$\hat H$ under~$U$ is~$H$, as only the
+    identity morphisms exist in $\ob\sJ$.
+    
+    To show that this fork defines a coequaliser in $\sC^\sJ$, suppose
+    we have a fork in $\sC^\sJ$
+    $$
+    \begin{tikzcd}
+      F
+      \ar[r, shift left=0.5ex, "\alpha"]
+      \ar[r, shift right=0.5ex, "\beta"']
+      & G
+      \ar[r, "\gamma"]
+      \ar[dr, "\delta"']
+      & \hat H
+      \ar[d, dashed, "\epsilon"]
+      \\
+      && K
+    \end{tikzcd}
+    $$
+    The underlying fork (obtained by applying $U$) has a unique
+    morphism $\func{\epsilon}{H}{K}$ in $\sC^{\ob\sJ}$; we need to
+    show that this gives a morphism (natural transformation)
+    in~$\sC^\sJ$.  Let $\func{f}{j}{j'}$ be a morphism in~$\sJ$.  We
+    have, using the naturality of $\gamma$ and~$\delta$,
+    $$Kf\cdot \epsilon_j \cdot \gamma_j = Kf\cdot \delta_j =
+    \delta_{j'}\cdot Gf = \epsilon_{j'} \cdot \gamma_{j'} \cdot Gf =
+    \epsilon_{j'} \cdot \hat Hf \cdot \gamma_j.$$ But $\gamma_j$ is an
+    epimorphism, so $Kf\cdot \epsilon_j = \epsilon_{j'}\cdot \hat Hf$,
+    showing that $\epsilon$~is natural, as required.
+  \end{enumerate}
 \end{proof}
 
 \end{document}
-

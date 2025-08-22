@@ -12,12 +12,162 @@
 
 \setexercise{5}{5}{6}
 \begin{exercise}
-  
+  Describe a more general class of functors $\func{K}{\sI}{\sJ}$
+  between small categories so that for any cocomplete $\sC$ the
+  restriction functor $\func{\res_K}{\sC^\sJ}{\sC^\sI}$ strictly
+  creates colimits of $\res_K$-split parallel pairs.  All such
+  functors admit left adjoints and are therefore monadic.  Challenge:
+  describe the left adjoint (or see Theorem 6.2.1).
 \end{exercise}
 
 \begin{proof}
+  These functors admit left adjoints by Proposition 6.1.5 and Theorem
+  6.2.1 (or Corollary 6.2.6).  We do not give a solution to the
+  Challenge here.
   
+  We claim that when $K$ is a bijection on objects, then the resulting
+  adjunction is strictly monadic.  We suggest that this is the largest
+  general class satisfying this condition.
+
+  Note first that $\res_K=K^*$, so for any functor $F\in\sC^\sJ$,
+  $\res_K F=FK$.
+
+  Suppose that $\pfunc{\alpha,\beta}{F}{G}$ is a $\res_K$-split pair
+  in~$\sC^\sJ$, so we have a split coequaliser diagram in~$\sC^\sI$
+  with underlying fork
+  $$
+  \begin{tikzcd}
+    FK
+    \ar[r, shift left=0.5ex, "\alpha K"]
+    \ar[r, shift right=0.5ex, "\beta K"']
+    & GK
+    \ar[r, twoheadrightarrow, "\gamma"]
+    & H
+  \end{tikzcd}
+  $$
+  Then at each $i\in\sI$, we can apply the evaluation functor $\ev_i$
+  to get a coequaliser in~$\sC$:
+  $$
+  \begin{tikzcd}
+    FKi
+    \ar[r, shift left=0.5ex, "\alpha_{Ki}"]
+    \ar[r, shift right=0.5ex, "\beta_{Ki}"']
+    & GKi
+    \ar[r, twoheadrightarrow, "\gamma_i"]
+    & Hi
+  \end{tikzcd}
+  $$
+  
+  We must show that there is a unique way to lift the functor
+  $\func{H}{\sI}{\sC}$ to a functor $\func{\hat H}{\sJ}{\sC}$ and
+  $\Func{\gamma}{GK}{H}$ to~$\Func{\hat\gamma}{G}{\hat H}$; we will
+  then have $\hat HK=H$ and $\hat\gamma K=\gamma$.  We must, in
+  particular, define $\hat HKi=Hi$ and $\hat\gamma_{Ki}=\gamma_i$ for
+  each $i\in\sI$.  If $K$~is not surjective, we do not have a unique
+  way to define $\hat H$ on objects of~$\sJ$ in general, so we require
+  $K$~to be surjective on objects.  If $K$~is not injective, we might
+  have $Ki=Ki'$ but $Hi\ne Ki'$, making it impossible to define
+  $\hat HKi$, so we require $K$~to be injective on objects.  In
+  summary, we require $K$~to be bijective on objects.
+
+  Therefore, for each $j\in\sJ$, we have $j=Ki$ for a unique
+  $i\in\sI$, so $\hat Hj=Hi$ and $\hat\gamma_j=\gamma_i$; we can
+  therefore rewrite the above fork as
+  $$
+  \begin{tikzcd}
+    Fj
+    \ar[r, shift left=0.5ex, "\alpha_j"]
+    \ar[r, shift right=0.5ex, "\beta_j"']
+    & Gj
+    \ar[r, twoheadrightarrow, "\hat\gamma_i"]
+    & \hat Hj
+  \end{tikzcd}
+  $$
+
+  Arguing in the standard way, given $\func{f}{j}{j'}$ in $\sJ$, we
+  have the diagram
+  $$
+  \begin{tikzcd}
+    Fj
+    \ar[r, shift left=0.5ex, "\alpha_j"]
+    \ar[r, shift right=0.5ex, "\beta_j"']
+    \ar[d, "Ff"']
+    & Gj
+    \ar[r, twoheadrightarrow, "\hat\gamma_j"]
+    \ar[d, "Gf"]
+    & \hat Hj
+    \ar[d, dashed, "\exists!\vphantom{\hat Hf}"', "\hat Hf"]
+    \\
+    Fj'
+    \ar[r, shift left=0.5ex, "\alpha_{j'}"]
+    \ar[r, shift right=0.5ex, "\beta_{j'}"']
+    & Gj'
+    \ar[r, twoheadrightarrow, "\hat\gamma_{j'}"']
+    & \hat Hj'
+  \end{tikzcd}
+  $$
+  that we require to commute if $\hat\gamma$ is to be a natural
+  transformation; there is a unique way to define $\hat Hf$ to achieve
+  this.
+
+  However, as we require $\hat HK=H$ to behave nicely on morphisms as
+  well as on objects, we must also have $\hat HKg=Hg$ for every
+  $\func{g}{i}{i'}$ in~$\sI$.  We have the diagram
+  $$
+  \begin{tikzcd}
+    FKi
+    \ar[r, shift left=0.5ex, "\alpha_{Ki}"]
+    \ar[r, shift right=0.5ex, "\beta_{Ki}"']
+    \ar[d, "FKg"']
+    & GKi
+    \ar[r, twoheadrightarrow, "\gamma_i"]
+    \ar[d, "GKg"]
+    & Hi
+    \ar[d, "Hg"]
+    \\
+    FKi'
+    \ar[r, shift left=0.5ex, "\alpha_{Ki'}"]
+    \ar[r, shift right=0.5ex, "\beta_{Ki'}"']
+    & GKi'
+    \ar[r, twoheadrightarrow, "\gamma_{i'}"']
+    & Hi'
+  \end{tikzcd}
+  $$
+  which commutes by the naturality of $\gamma$.  Taking $j=Ki$,
+  $j'=Ki'$ and $f=Kg$ shows that $\hat Hf=Hg$ as required.
+
+  The argument showing that this fork defines a coequaliser in
+  $\sC^\sJ$ is essentially identical to that of the previous exercise:
+  supposing that we have a fork in~$\sC^\sJ$:
+  $$
+  \begin{tikzcd}
+    F
+    \ar[r, shift left=0.5ex, "\alpha"]
+    \ar[r, shift right=0.5ex, "\beta"']
+    & G
+    \ar[r, "\hat\gamma"]
+    \ar[dr, "\delta"']
+    & \hat H
+    \ar[d, dashed, "\hat\epsilon"]
+    \\
+    && L
+  \end{tikzcd}
+  $$
+  the underlying fork (obtained by applying $\res_K=K^*$) has a unique
+  morphism $\Func{\epsilon}{H}{LK}$ in~$\sC^\sI$; we need to show that
+  this lifts to a unique morphism $\Func{\hat\epsilon}{\hat H}{L}$
+  in~$\sC^\sJ$.  As $K$~is bijective on objects, we must define
+  $\hat\epsilon_{Ki}=\epsilon_i$ for each $i\in\sI$.
+
+  To show that this gives a morphism in~$\sC^\sJ$, let
+  $\func{f}{j}{j'}$ be a morphism in~$\sJ$.  We have, using the
+  naturality of $\hat\gamma$ and~$\delta$,
+  $$Lf\cdot \hat\epsilon_j \cdot \hat\gamma_j = Lf\cdot \delta_j =
+  \delta_{j'}\cdot Gf = \hat\epsilon_{j'} \cdot \hat\gamma_{j'} \cdot
+  Gf = \hat\epsilon_{j'} \cdot \hat Hf \cdot \hat\gamma_j.$$
+  But $\hat\gamma_j$ is an epimorphism, so
+  $Kf\cdot \hat\epsilon_j = \hat\epsilon_{j'}\cdot \hat Hf$, showing
+  that $\epsilon$~is natural, as required.
 \end{proof}
 
 \end{document}
-

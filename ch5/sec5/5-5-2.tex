@@ -12,11 +12,84 @@
 
 \setexercise{5}{5}{2}
 \begin{exercise}
-  
+  Use the monadicity theorem to prove that another of the categories
+  listed in Corollary 5.5.3 is monadic over sets.
 \end{exercise}
 
 \begin{proof}
-  
+  We prove the result for the categories listed in (iii):
+  $\cat{Lattice}$ and the two categories of semilattices,
+  $\cat{MeetSemilattice}$ and $\cat{JoinSemilattice}$.  We begin with
+  $\cat{MeetSemilattice}$.  A meet semilattice $L$ is a poset with all
+  finite limits; this is equivalent to saying that it has a terminal
+  (maximum) element, which we identify with a morphism
+  $\func{\epsilon}{1}{L}$, and for any pair of elements $x$,~$y$ in
+  the poset, it has $x\wedge y$, the product of $x$ and~$y$.  The
+  argument of Corollary 5.5.3 now follows identically, just replacing
+  the monoid~$M$ with the meet semilattice~$L$, the unit~$\eta$ with
+  the maximum element~$\epsilon$, and the multiplication~$\mu$ with
+  the meet~$\wedge$.
+
+  This shows that if we have a $U$-split parallel pair
+  $\pfunc{f,g}{L}{L'}$ in $\cat{MeetSemilattice}$ with the coequaliser
+  in $\Set$ being $L\rightrightarrows L' \xrightarrow{h} L''$, then
+  $L''$~can be given a unique structure of pairwise meets and a
+  maximum element.  Note, in particular, that the argument of that
+  corollary shows that for any $x', y'\in L'$, we have
+  $h(x'\wedge' y')=h(x')\wedge'' h(y')$.  For simplicity of notation,
+  we now drop the primes from meets, and for any $x\in L'$ we write
+  $\bar x:=h(x)$.  This result then becomes
+  $\overline{x\wedge y}=\bar x\wedge \bar y$ for any $x,y\in L'$.
+
+  It remains to show that $L''$~can be given a unique poset structure
+  that makes~$h$ be a meet semilattice homomorphism.  But for any meet
+  semilattice, we have $x\le y$ if and only if $x\wedge y=x$, and we
+  must use this to define the poset structure on~$L''$ (no other
+  definition would be compatible with the meet structure on~$L''$).
+  To show that $h$~is a poset morphism, suppose $x\le y$ in~$L'$ (so
+  $x=x\wedge y$).  We then have
+  $\bar x=\overline{x\wedge y} = \bar x\wedge \bar y$, so
+  $\bar x\le \bar y$, as required.
+
+  An identical argument shows that $\cat{JoinSemilattice}$ is also
+  monadic over $\Set$.
+
+  Finally, to show that $\cat{Lattice}$ is monadic over $\cat{Set}$,
+  we show that $\func{U}{\cat{Lattice}}{\Set}$ strictly creates
+  $U$-split coequaliser pairs.  Suppose $\pfunc{f,g}{L}{L'}$ are two
+  lattice homomorphisms whose underlying functions extend to a split
+  coequaliser diagram in $\Set$, with underlying fork
+  $L\rightrightarrows L' \xrightarrow{h} L''$.  Then from the above,
+  we obtain unique meet semilattice and join semilattice structures
+  on~$L''$.  To show that we obtain a lattice structure, we must show
+  that these structures are compatible, meaning that the orderings
+  induced by the two semilattice structures are the same.  The
+  following argument appears in~\cite{pedicchio99}.  In any lattice,
+  we have the two absorption laws:
+  \begin{align*}
+    a\vee (a\wedge b) &= a \\
+    a\wedge (a\vee b) &= a
+  \end{align*}
+  and these are sufficient to show that the induced poset structures
+  are the same: if $a\le b$ from the meet structure, then
+  $a=a\wedge b$, hence
+  $b=b\vee(b\wedge a)= (a\wedge b)\vee b=a\vee b$, so $a\le b$ in the
+  join structure, and likewise for the other direction.
+
+  As $h$ is surjective, we can take two arbitrary elements in~$L''$ to
+  be $\bar x$ and~$\bar y$ for some $x,y\in L'$.  We then calculate
+  \begin{align*}
+    \bar x\vee (\bar x\wedge \bar y)
+      &= \bar x\vee \overline{x\wedge y} \\
+      &= \overline{x\vee (x\wedge y)} \\
+      &= \bar x \\
+    \bar x\wedge (\bar x\vee \bar y)
+      &= \bar x\wedge \overline{x\vee y} \\
+      &= \overline{x\wedge (x\vee y)} \\
+      &= \bar x
+  \end{align*}
+  Therefore the absorption laws hold in $L''$, and the induced
+  structure does give a lattice.
 \end{proof}
 
 \end{document}

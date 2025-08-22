@@ -12,11 +12,94 @@
 
 \setexercise{5}{5}{4}
 \begin{exercise}
-  
+  For any group $G$, the forgetful functor $\Set^{\sB G}\to\Set$
+  admits a left adjoint that sends a set~$X$ to the $G$-set
+  $G\times X$, with $G$~acting on the left.  Prove that this
+  adjunction is monadic by appealing to the monadicity theorem.
 \end{exercise}
 
 \begin{proof}
-  
+  We show that the forgetful functor $\func{U}{\Set^{\sB G}}{\Set}$ is
+  strictly monadic by showing that it strictly creates coequalisers of
+  $U$-split pairs.  Assume that $\pfunc{p,q}{X}{Y}$ is a $U$-split
+  pair in $\Set^{\sB G}$, and that the underlying set functions admit
+  a split coequaliser diagram
+  $$
+  \begin{tikzcd}
+    X
+    \ar[r, shift left=0.5ex, "p"]
+    \ar[r, shift right=0.5ex, "q"']
+    & Y
+    \ar[r, twoheadrightarrow, "r"]
+    \ar[l, bend left=50, "t"]
+    & Z
+    \ar[l, bend left=30, "s"]
+  \end{tikzcd}
+  $$
+
+  For $Z$ to be a $G$-set, we need to define the action of $G$ on
+  $Z$.  For each $g\in G$, we have the diagram
+  $$
+  \begin{tikzcd}
+    X
+    \ar[r, shift left=0.5ex, "p"]
+    \ar[r, shift right=0.5ex, "q"']
+    \ar[d, "g"']
+    & Y
+    \ar[r, twoheadrightarrow, "r"]
+    \ar[d, "g"]
+    & Z
+    \ar[d, dashed, "\exists!\vphantom{g}"', "g\vphantom{!}"]
+    \\
+    X
+    \ar[r, shift left=0.5ex, "p"]
+    \ar[r, shift right=0.5ex, "q"']
+    & Y
+    \ar[r, twoheadrightarrow, "r"']
+    & Z    
+  \end{tikzcd}
+  $$
+  As both rows are coequaliser diagrams, there is a unique map
+  $\func{g}{Z}{Z}$ induced.  By uniqueness, this gives a $G$-action
+  on~$Z$ (i.e., $g\cdot(h\cdot z)=(gh)\cdot z$ and $1\cdot z=z$ for
+  all $g,h\in G$).  This gives~$Z$ the structure of a $G$-set and also
+  shows that $r$~is a $G$-set morphism.
+
+  To show that this defines the coequaliser of $p$ and $q$ in
+  $\Set^{\sB G}$, suppose that we have a fork 
+  $
+  \begin{tikzcd}
+    X
+    \ar[r, shift left=0.5ex, "p"]
+    \ar[r, shift right=0.5ex, "q"']
+    & Y
+    \ar[r, "s"]
+    & W
+  \end{tikzcd}
+  $
+  in $\Set^{\sB G}$.  Then there is a unique factorisation in $\Set$:
+  $$
+  \begin{tikzcd}
+    X
+    \ar[r, shift left=0.5ex, "p"]
+    \ar[r, shift right=0.5ex, "q"']
+    & Y
+    \ar[r, twoheadrightarrow, "r"]
+    \ar[dr, "s"']
+    & Z
+    \ar[d, dashed, "\exists!\vphantom{j}"', "j\vphantom{!}"]
+    \\
+    && W
+  \end{tikzcd}
+  $$
+  by the universal property of the coequaliser.  To show that $j$
+  lifts to a morphism in $\Set^{\sB G}$, we must show that for each
+  $g\in G$, we have $j\cdot g=g\cdot j$.  For each $y\in Y$, we have
+  $$j(g\cdot(ry)) = j(r(g\cdot y)) = s(g\cdot y) = g\cdot(sy) =
+  g\cdot(jry) = g\cdot(j(ry))$$
+  so $j(g\cdot(ry))=g\cdot(j(ry))$ for all $y\in Y$.  As $r$~is
+  surjective, it follows that $j(g\cdot z)=g\cdot(jz)$ for all $z\in
+  Z$, so $j\cdot g=g\cdot j$ as required.
 \end{proof}
 
 \end{document}

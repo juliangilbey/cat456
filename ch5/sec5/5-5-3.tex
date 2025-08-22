@@ -12,12 +12,99 @@
 
 \setexercise{5}{5}{3}
 \begin{exercise}
-  
+  Prove Proposition 5.5.8.
 \end{exercise}
 
 \begin{proof}
-  
+  The proof of Theorem 5.5.1 (in the version given
+  \hyperref[thm:5.5.1]{above}) only uses the assumption that
+  $U$~creates coequalisers of $U$-split pairs in three places; we can
+  replace these using the assumptions of this proposition.
+
+  The first occasion is to show that for any algebra
+  $(A,\alpha)\in\sC^T$, the parallel pair $F\alpha$, $\epsilon_{FA}$
+  has a coequaliser in~$\sD$.  Consider the diagram
+  $$
+  \begin{tikzcd}
+    FA
+    \ar[r, "F\eta_A"]
+    &
+    FUFA
+    \ar[r, shift left=0.5ex, "F\alpha"]
+    \ar[r, shift right=0.5ex, "\epsilon_{FA}"']
+    & FA
+  \end{tikzcd}
+  $$
+  We have $\epsilon_{FA}\cdot F\eta_A=1_{FA}$ by the triangle
+  identities for the adjunction $F\ladj U$, and $F\alpha\cdot F\eta_A=
+  F1_A=1_{FA}$ by the algebra laws, so $F\alpha$, $\epsilon_{FA}$ is a
+  reflexive pair.  By condition~(i) of the proposition, this pair has
+  a coequaliser in~$\sD$ as required.
+
+  The second use of the original assumption is that $U$~preserves
+  $U$-split pairs, but this is only used for the same specific
+  reflexive pair $F\alpha$, $\epsilon_{FA}$, so it follows that
+  $U$~preserves the coequaliser of this pair by condition~(ii) of the
+  proposition.
+
+  The third occasion is at the end of the proof, where
+  \hyperref[lemma:5.4.11]{Lemma 5.4.11} is used.  The pair considered
+  is reflexive:
+  $$
+  \begin{tikzcd}
+    FUD
+    \ar[r, "F\eta_{UD}"]
+    &
+    FUFUD
+    \ar[r, shift left=0.5ex, "FU\epsilon_D"]
+    \ar[r, shift right=0.5ex, "\epsilon_{FUD}"']
+    & FUD
+  \end{tikzcd}
+  $$
+  with both composites being identities by the triangle identities,
+  and so the conclusion of this lemma would follow if we can show that
+  $U$~reflects coequalisers of reflexive pairs.  But $\sD$~has
+  coequalisers of reflexive pairs and $U$~preserves them; $U$~also
+  reflects isomorphisms, and so by a simple adaptation of Exercise
+  3.3.iv, $U$~creates coequalisers of reflexive pairs, and in
+  particular, reflects them.  (Explicitly, if $x\rightrightarrows y$
+  is a reflexive pair in~$\sD$, then it has a coequaliser
+  $x\rightrightarrows y\twoheadrightarrow z$ by~(i), whose image
+  under~$U$ is a coequaliser by~(ii).  If $x\rightrightarrows y\to w$
+  is a fork whose image under~$U$ is a coequaliser, then there is a
+  unique morphism $\func{k}{z}{w}$ making the diagram on the left
+  $$
+  \begin{tikzcd}
+    x
+    \ar[r, shift left=0.5ex]
+    \ar[r, shift right=0.5ex]
+    & y
+    \ar[r, twoheadrightarrow]
+    \ar[dr]
+    & z
+    \ar[d, dashed, "\exists!\strut"', "k\strut"]
+    \\
+    && w
+  \end{tikzcd}
+  \qquad
+  \begin{tikzcd}
+    Ux
+    \ar[r, shift left=0.5ex]
+    \ar[r, shift right=0.5ex]
+    & Uy
+    \ar[r, twoheadrightarrow]
+    \ar[dr, twoheadrightarrow]
+    & Uz
+    \ar[d, "Uk"]
+    \\
+    && Uw
+  \end{tikzcd}  
+  $$
+  commute.  The image under~$U$ is shown on the right; as there is a
+  unique morphism between the two coequalisers making this diagram
+  commute, $Uk$~must be an isomorphism.  As $U$~reflects isomorphisms
+  by~(iii), $k$~is an isomorphism, and hence $y\to w$ is a coequaliser
+  of the original reflexive pair.)
 \end{proof}
 
 \end{document}
-
